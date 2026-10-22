@@ -10,7 +10,7 @@
 <br/>
 
 > [!NOTE]
-> 📅 **تاریخ:** ۳۰ مهر ۱۴۰۵ (2026-10-22) &nbsp;|&nbsp; ⏱ **ساعت آخرین بروزرسانی:** **۲۰:۵۰** (به وقت تهران)
+> 📅 **تاریخ:** ۳۰ مهر ۱۴۰۵ (2026-10-22) &nbsp;|&nbsp; ⏱ **ساعت آخرین بروزرسانی:** **۲۱:۲۲** (به وقت تهران)
 
 <br/>
 
@@ -42,7 +42,7 @@
 <tr>
 <td align="center">🇪🇺</td>
 <td><b>یورو اروپا</b></td>
-<td align="left"><b>۳۰۷،۸۰۰ تومان</b></td>
+<td align="left"><b>۳۰۷،۷۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇦🇪</td>
@@ -62,12 +62,12 @@
 <tr>
 <td align="center">🇨🇦</td>
 <td><b>دلار کانادا</b></td>
-<td align="left"><b>۱۹۵،۷۰۰ تومان</b></td>
+<td align="left"><b>۱۹۵،۸۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇦🇺</td>
 <td><b>دلار استرالیا</b></td>
-<td align="left"><b>۱۹۲،۵۰۰ تومان</b></td>
+<td align="left"><b>۱۹۲،۶۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇨🇳</td>
@@ -117,7 +117,7 @@
 <tr>
 <td align="center">🌐</td>
 <td><b>انس جهانی طلا</b></td>
-<td align="left"><b>۴،۰۳۸.۷۷ دلار</b></td>
+<td align="left"><b>۴،۰۴۳.۹۵ دلار</b></td>
 </tr>
 
 <!-- کامودیتی -->
@@ -127,7 +127,7 @@
 <tr>
 <td align="center">⛽</td>
 <td><b>نفت خام برنت / اوپک</b></td>
-<td align="left"><b>۹۹.۱۶ دلار</b></td>
+<td align="left"><b>۹۹.۴۷ دلار</b></td>
 </tr>
 
 </tbody>
