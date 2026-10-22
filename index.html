@@ -1,347 +1,257 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl" class="dark">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نرخ ارز، طلا و سکه | شبکه هزاره</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        hezareh: {
-                            orange: '#ea580c',
-                            dark: '#0b0f19',
-                            card: '#1e293b'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- Chart.js -->
+    <title>نرخ لحظه‌ای ارز، طلا و سکه | شبکه هزاره</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap');
-        body { font-family: 'Vazirmatn', sans-serif; background-color: #0b0f19; color: #f8fafc; }
-        .glass-card {
-            background: rgba(30, 41, 59, 0.75);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        :root {
+            --bg-dark: #0b0f19;
+            --card-bg: rgba(17, 24, 39, 0.7);
+            --border-color: rgba(255, 122, 0, 0.2);
+            --primary-orange: #ff7a00;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --success: #10b981;
+            --danger: #ef4444;
         }
-        .showcase-item {
-            background: linear-gradient(135deg, rgba(234, 88, 12, 0.12), rgba(30, 41, 59, 0.6));
-            border-right: 4px solid #ea580c;
-            transition: all 0.3s ease;
-        }
-        .showcase-item:hover {
-            transform: translateY(-4px);
-            background: linear-gradient(135deg, rgba(234, 88, 12, 0.22), rgba(30, 41, 59, 0.8));
-            border-color: #f97316;
-        }
-        .font-mono-custom { font-family: monospace; letter-spacing: -0.5px; }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Vazirmatn', sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; }
+        header { background: linear-gradient(135deg, #111827 0%, #1f2937 100%); border-bottom: 2px solid var(--primary-orange); padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        .logo-area { display: flex; align-items: center; gap: 20px; }
+        .logo-icon { width: 55px; height: 55px; border: 3px solid var(--primary-orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; }
+        .logo-icon::after { content: ''; width: 12px; height: 12px; background: var(--primary-orange); border-radius: 50%; position: absolute; }
+        .brand-title h1 { font-size: 24px; color: #fff; font-weight: 800; }
+        .brand-title span { font-size: 13px; color: var(--primary-orange); letter-spacing: 1px; font-weight: 600; }
+        .header-meta { text-align: left; }
+        .update-badge { background: rgba(16, 185, 129, 0.15); border: 1px solid var(--success); color: var(--success); padding: 8px 16px; border-radius: 30px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
+        .update-badge::before { content: ''; width: 8px; height: 8px; background: var(--success); border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        
+        .container { max-width: 1400px; margin: 30px auto; padding: 0 20px; width: 100%; flex: 1; display: flex; flex-direction: column; gap: 30px; }
+        
+        /* Showcase Grid (5 items side by side) */
+        .showcase-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+        .showcase-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 20px; backdrop-filter: blur(10px); transition: transform 0.3s, border-color 0.3s; cursor: pointer; position: pointer; }
+        .showcase-card:hover, .showcase-card.active { transform: translateY(-5px); border-color: var(--primary-orange); box-shadow: 0 8px 25px rgba(255, 122, 0, 0.15); }
+        .item-name { font-size: 14px; color: var(--text-muted); margin-bottom: 8px; font-weight: 500; }
+        .item-price { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px; direction: ltr; text-align: right; }
+        .item-change { font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 6px; }
+        .item-change.up { background: rgba(16, 185, 129, 0.15); color: var(--success); }
+        .item-change.down { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+
+        /* Main Section */
+        .main-content { display: grid; grid-template-columns: 350px 1fr; gap: 25px; }
+        .card-box { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 20px; backdrop-filter: blur(10px); }
+        .section-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
+        
+        .rates-list { display: flex; flex-direction: column; gap: 10px; max-height: 550px; overflow-y: auto; padding-left: 5px; }
+        .rates-list::-webkit-scrollbar { width: 5px; }
+        .rates-list::-webkit-scrollbar-thumb { background: var(--primary-orange); border-radius: 10px; }
+        .rate-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background: rgba(255,255,255,0.02); border-radius: 10px; transition: background 0.2s; cursor: pointer; border: 1px solid transparent; }
+        .rate-row:hover { background: rgba(255, 122, 0, 0.08); border-color: rgba(255, 122, 0, 0.2); }
+        
+        .chart-container { position: relative; height: 450px; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+
+        footer { background: #080b12; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; padding: 20px; color: var(--text-muted); font-size: 13px; margin-top: auto; }
+
+        @media(max-width: 1200px) { .showcase-grid { grid-template-columns: repeat(3, 1fr); } .main-content { grid-template-columns: 1fr; } }
+        @media(max-width: 768px) { .showcase-grid { grid-template-columns: repeat(1, 1fr); } header { flex-direction: column; gap: 15px; text-align: center; } .header-meta { text-align: center; } }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between">
+<body>
 
-    <!-- Header -->
-    <header class="glass-card sticky top-0 z-50 border-b border-slate-800 shadow-xl">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-5">
-                <img src="logo.png" onerror="this.src='https://1000network.github.io/1000Network_Rate/logo.png'" class="h-12 w-auto object-contain" alt="شبکه هزاره">
-                <div>
-                    <h1 class="text-xl font-black text-white tracking-wide">شبکه هزاره</h1>
-                    <p class="text-orange-500 text-[10px] font-bold tracking-widest uppercase">Network Hezareh Financial Lab</p>
-                </div>
+    <header>
+        <div class="logo-area">
+            <div class="logo-icon"></div>
+            <div class="brand-title">
+                <h1>شبکه هزاره</h1>
+                <span>NETWORK HEZAREH FINANCIAL LAB</span>
             </div>
-            
-            <div class="flex items-center gap-3 bg-slate-900/80 px-4 py-2 rounded-2xl border border-slate-700/60 shadow-inner">
-                <div class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></div>
-                <div class="text-left">
-                    <span class="block text-[9px] text-slate-400 font-bold">آخرین بروزرسانی</span>
-                    <div id="lastUpdated" class="text-sm font-black text-orange-400 font-mono-custom">در حال دریافت...</div>
-                </div>
-            </div>
+        </div>
+        <div class="header-meta">
+            <div id="updateTime" class="update-badge">در حال بارگذاری...</div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 py-8 flex-grow w-full">
-        
-        <!-- ویترین ۵ آیتم اصلی -->
-        <section class="mb-8">
-            <div class="flex items-center justify-between mb-4 px-1">
-                <h2 class="text-sm font-bold text-slate-400 flex items-center gap-2">
-                    <span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
-                    شاخص‌های اصلی بازار (شبکه هزاره)
-                </h2>
-            </div>
-            <div id="mainShowcase" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-                <!-- توسط جاوااسکریپت پر می‌شود -->
-            </div>
-        </section>
-
-        <!-- چیدمان دو ستونه -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            
-            <!-- ستون راست: نمودار و تب‌های انتخاب دارایی -->
-            <div class="lg:col-span-2 space-y-6">
-                <section class="glass-card rounded-3xl p-6 shadow-xl border border-slate-800">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-                        <div>
-                            <h3 id="chartTitle" class="text-lg font-bold text-white">نمودار روند قیمت</h3>
-                            <p class="text-xs text-slate-400">تغییرات ۷ روز گذشته</p>
-                        </div>
-                        <div id="assetSelector" class="flex flex-wrap gap-1.5 bg-slate-900/60 p-1.5 rounded-2xl border border-slate-800">
-                            <!-- دکمه‌های تعویض نمودار -->
-                        </div>
-                    </div>
-                    <div class="relative h-[320px] w-full">
-                        <canvas id="priceChart"></canvas>
-                    </div>
-                </section>
-            </div>
-
-            <!-- ستون چپ: لیست کامل فشرده سایر نرخ‌ها (۳۷+ قلم) -->
-            <div class="lg:col-span-1">
-                <section class="glass-card rounded-3xl p-6 shadow-xl border border-slate-800 flex flex-col h-full">
-                    <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-800">
-                        <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                            <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
-                            سایر نرخ‌های بازار
-                        </h3>
-                        <span class="text-[10px] text-slate-400 bg-slate-900 px-2 py-0.5 rounded-full">۳۷+ ارز و طلا</span>
-                    </div>
-                    <div id="marketList" class="space-y-2.5 overflow-y-auto max-h-[480px] pr-1">
-                        <!-- لیست فشرده سایر اقلام -->
-                    </div>
-                </section>
-            </div>
-
+    <div class="container">
+        <!-- 5 Showcase Items (USD, EUR, AED, Gold 18k, Emami Coin) -->
+        <div id="showcaseGrid" class="showcase-grid">
+            <div class="showcase-card">بارگذاری اطلاعات...</div>
         </div>
-    </main>
 
-    <!-- Footer -->
-    <footer class="glass-card border-t border-slate-800 py-6 mt-12 text-center text-xs text-slate-500">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p>تمامی حقوق محفوظ است | <strong class="text-slate-300">شبکه هزاره (Network Hezareh)</strong></p>
-            <div class="flex gap-4">
-                <a href="https://networkshop.ir" target="_blank" class="hover:text-orange-400 transition">وب‌سایت فروشگاه</a>
-                <a href="https://t.me/shabake_hezareh" target="_blank" class="hover:text-orange-400 transition">کانال تلگرام</a>
+        <div class="main-content">
+            <!-- Left Panel: All Rates -->
+            <div class="card-box">
+                <div class="section-title">
+                    <span>سایر نرخ‌های بازار</span>
+                    <span id="totalCount" style="font-size: 12px; color: var(--primary-orange);">موجودی: --</span>
+                </div>
+                <div id="ratesList" class="rates-list">
+                    <div style="text-align: center; color: var(--text-muted); padding: 20px;">در حال دریافت اطلاعات بازار...</div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Chart -->
+            <div class="card-box">
+                <div class="section-title">
+                    <span id="chartTitle">نمودار روند قیمت</span>
+                    <span style="font-size: 12px; color: var(--text-muted);">تغییرات ۷ روز گذشته</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="priceChart"></canvas>
+                </div>
             </div>
         </div>
+    </div>
+
+    <footer>
+        تمامی حقوق محفوظ است | شبکه هزاره (Network Hezareh) &copy; 2026
     </footer>
 
-    <!-- Scripts -->
     <script>
-        // متادیتا و نام‌های فارسی کامل برای تمام ۳۷+ دارایی
-        const ASSETS_META = {
-            usd: { title: 'دلار آمریکا', symbol: 'USD', icon: '🇺🇸' },
-            eur: { title: 'یورو', symbol: 'EUR', icon: '🇪🇺' },
-            aed: { title: 'درهم امارات', symbol: 'AED', icon: '🇦🇪' },
-            gbp: { title: 'پوند انگلیس', symbol: 'GBP', icon: '🇬🇧' },
-            try: { title: 'لیر ترکیه', symbol: 'TRY', icon: '🇹🇷' },
-            cad: { title: 'دلار کانادا', symbol: 'CAD', icon: '🇨🇦' },
-            aud: { title: 'دلار استرالیا', symbol: 'AUD', icon: '🇦🇺' },
-            cny: { title: 'یوان چین', symbol: 'CNY', icon: '🇨🇳' },
-            jpy: { title: 'ین ژاپن', symbol: 'JPY', icon: '🇯🇵' },
-            gold_18k: { title: 'طلای ۱۸ عیار', symbol: '18K', icon: '🪙' },
-            gold_24k: { title: 'طلای ۲۴ عیار', symbol: '24K', icon: '🪙' },
-            gold_mesghal: { title: 'مثقال طلا', symbol: 'MSGH', icon: '⚖️' },
-            coin_emami: { title: 'سکه امامی', symbol: 'EMAMI', icon: '🥇' },
-            coin_bahar: { title: 'سکه بهار آزادی', symbol: 'BAHAR', icon: '🥈' },
-            coin_ نیم: { title: 'نیم سکه', symbol: 'HALF', icon: '🪙' },
-            coin_ruba: { title: 'ربع سکه', symbol: 'QUARTER', icon: '🪙' },
-            coin_germi: { title: 'سکه گرمی', symbol: 'GRAM', icon: '🪙' }
-        };
-
-        const MAIN_SHOWCASE_KEYS = ['usd', 'eur', 'aed', 'gold_18k', 'coin_emami'];
         let marketData = {};
-        let priceChartInstance = null;
-        let currentSelectedAsset = 'usd';
+        let myChart = null;
+        let currentSelectedKey = 'usd';
 
-        function formatNumber(num) {
-            if (!num) return '---';
-            return new Intl.NumberFormat('fa-IR').format(num);
-        }
+        const showcaseKeys = ['usd', 'eur', 'aed', 'gold_18k', 'coin_emami'];
 
         async function loadMarketData() {
             try {
-                const res = await fetch('api/market.json');
-                marketData = await res.json();
+                const response = await fetch('api/market.json?' + new Date().getTime());
+                if (!response.ok) throw new Error('خطا در دریافت اطلاعات');
+                marketData = await response.json();
                 
-                const rates = marketData.rates || marketData;
-
-                if (marketData.updated_at) {
-                    document.getElementById('lastUpdated').innerText = marketData.updated_at;
-                }
-
-                renderShowcase(rates);
-                renderMarketList(rates);
-                renderAssetSelector(rates);
-                loadChartData(currentSelectedAsset);
-
+                renderUI();
             } catch (err) {
-                console.error('Error loading market data:', err);
+                console.error(err);
+                document.getElementById('updateTime').innerText = 'خطا در ارتباط با سرور داده';
             }
         }
 
-        function renderShowcase(rates) {
-            const container = document.getElementById('mainShowcase');
-            container.innerHTML = '';
+        function renderUI() {
+            // Update timestamp
+            if (marketData.last_update) {
+                document.getElementById('updateTime').innerText = `آخرین بروزرسانی: ${marketData.last_update}`;
+            }
 
-            MAIN_SHOWCASE_KEYS.forEach(key => {
-                const meta = ASSETS_META[key] || { title: key, symbol: key, icon: '💵' };
-                const val = rates[key];
-                
-                container.innerHTML += `
-                    <div onclick="switchChart('${key}')" class="showcase-item glass-card p-4 rounded-2xl shadow-lg flex flex-col justify-between cursor-pointer">
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-xl">${meta.icon}</span>
-                            <span class="text-[9px] font-bold text-slate-400 bg-slate-900/80 px-2 py-0.5 rounded">${meta.symbol}</span>
-                        </div>
+            const items = marketData.items || {};
+            const keys = Object.keys(items);
+            document.getElementById('totalCount').innerText = `${keys.length}+ ارز و طلا`;
+
+            // Render Showcase (5 items)
+            const showcaseHTML = showcaseKeys.map(key => {
+                const item = items[key];
+                if (!item) return '';
+                const changeClass = item.change >= 0 ? 'up' : 'down';
+                const changeSign = item.change >= 0 ? '+' : '';
+                return `
+                    <div class="showcase-card ${currentSelectedKey === key ? 'active' : ''}" onclick="selectAsset('${key}')">
+                        <div class="item-name">${item.title}</div>
+                        <div class="item-price">${formatPrice(item.price)} <span style="font-size:12px; font-weight:400; color:var(--text-muted);">تومان</span></div>
+                        <div><span class="item-change ${changeClass}">${changeSign}${item.change}%</span></div>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('showcaseGrid').innerHTML = showcaseHTML;
+
+            // Render Full List
+            const listHTML = keys.map(key => {
+                const item = items[key];
+                const changeClass = item.change >= 0 ? 'up' : 'down';
+                const changeSign = item.change >= 0 ? '+' : '';
+                return `
+                    <div class="rate-row" onclick="selectAsset('${key}')">
                         <div>
-                            <div class="text-slate-400 text-xs font-medium mb-1">${meta.title}</div>
-                            <div class="text-base font-black text-white font-mono-custom">
-                                ${formatNumber(val)} <span class="text-[10px] text-slate-400 font-normal">تومان</span>
-                            </div>
+                            <div style="font-weight: 600; font-size: 14px; color:#fff;">${item.title}</div>
+                            <div style="font-size: 11px; color: var(--text-muted);">${changeSign}${item.change}%</div>
+                        </div>
+                        <div style="text-align: left; direction: ltr;">
+                            <div style="font-weight: 700; font-size: 15px; color: var(--primary-orange);">${formatPrice(item.price)}</div>
+                            <div style="font-size: 11px; color: var(--text-muted);">تومان</div>
                         </div>
                     </div>
                 `;
-            });
+            }).join('');
+            document.getElementById('ratesList').innerHTML = listHTML;
+
+            // Load default or selected chart
+            loadChart(currentSelectedKey);
         }
 
-        function renderMarketList(rates) {
-            const container = document.getElementById('marketList');
-            container.innerHTML = '';
-
-            for (const [key, val] of Object.entries(rates)) {
-                if (MAIN_SHOWCASE_KEYS.includes(key)) continue;
-
-                const meta = ASSETS_META[key] || { title: key };
-                const titleText = meta.title || key;
-
-                container.innerHTML += `
-                    <div onclick="switchChart('${key}')" class="flex items-center justify-between p-3 rounded-xl bg-slate-900/40 hover:bg-slate-900/80 border border-slate-800/60 transition cursor-pointer">
-                        <span class="text-xs font-bold text-slate-300">${titleText}</span>
-                        <span class="text-xs font-black text-orange-400 font-mono-custom">${formatNumber(val)} <span class="text-[9px] text-slate-500">تومان</span></span>
-                    </div>
-                `;
-            }
+        function formatPrice(price) {
+            if (!price) return '۰';
+            return new Intl.NumberFormat('fa-IR').format(price);
         }
 
-        function renderAssetSelector(rates) {
-            const selector = document.getElementById('assetSelector');
-            selector.innerHTML = '';
-
-            // دکمه‌های پرکاربرد برای انتخاب سریع در نمودار
-            const quickKeys = ['usd', 'eur', 'aed', 'gold_18k', 'coin_emami'];
-            quickKeys.forEach(key => {
-                const meta = ASSETS_META[key] || { title: key };
-                const isActive = key === currentSelectedAsset;
-                
-                selector.innerHTML += `
-                    <button onclick="switchChart('${key}')" class="px-3 py-1.5 rounded-xl text-xs font-bold transition ${isActive ? 'bg-orange-600 text-white shadow-md' : 'text-slate-400 hover:text-white hover:bg-slate-800'}">
-                        ${meta.title}
-                    </button>
-                `;
-            });
+        async function selectAsset(key) {
+            currentSelectedKey = key;
+            // Update active states in showcase
+            document.querySelectorAll('.showcase-card').forEach(card => card.classList.remove('active'));
+            loadChart(key);
+            renderUI();
         }
 
-        async function loadChartData(assetKey) {
-            currentSelectedAsset = assetKey;
-            const meta = ASSETS_META[assetKey] || { title: assetKey };
-            document.getElementById('chartTitle').innerText = `نمودار روند قیمت (${meta.title})`;
+        async function loadChart(key) {
+            const item = marketData.items[key];
+            if (!item) return;
+
+            document.getElementById('chartTitle').innerText = `نمودار روند قیمت (${item.title})`;
 
             try {
-                // تلاش برای خواندن تاریخچه از پوشه api یا charts
-                const res = await fetch(`api/history_${assetKey}.json`).catch(() => null);
-                let historyData = null;
-                
-                if (res && res.ok) {
-                    historyData = await res.json();
-                }
+                const res = await fetch(`charts/${key}.json?` + new Date().getTime());
+                if (!res.ok) throw new Error('تاریخچه یافت نشد');
+                const history = await res.json();
 
-                // مقادیر پیش‌فرض اگر فایل تاریخچه موجود نبود
-                const labels = historyData ? historyData.labels : ['۶ روز پیش', '۵ روز پیش', '۴ روز پیش', '۳ روز پیش', 'دیروز', 'امروز'];
-                const rates = historyData ? historyData.values : [
-                    marketData.rates?.[assetKey] || 0,
-                    marketData.rates?.[assetKey] || 0,
-                    marketData.rates?.[assetKey] || 0,
-                    marketData.rates?.[assetKey] || 0,
-                    marketData.rates?.[assetKey] || 0,
-                    marketData.rates?.[assetKey] || 0
-                ];
+                const labels = history.map(h => h.date || h.time);
+                const data = history.map(h => h.price);
 
-                renderChart(labels, rates, meta.title);
-            } catch (err) {
-                console.error('Error loading chart:', err);
+                renderChart(labels, data, item.title);
+            } catch (e) {
+                // Fallback dummy chart if history file not yet generated
+                renderChart(['امروز'], [item.price], item.title);
             }
         }
 
-        function switchChart(assetKey) {
-            loadChartData(assetKey);
-            renderAssetSelector(marketData.rates || marketData);
-        }
-
-        function renderChart(labels, data, labelTitle) {
+        function renderChart(labels, data, title) {
             const ctx = document.getElementById('priceChart').getContext('2d');
-            
-            if (priceChartInstance) {
-                priceChartInstance.destroy();
-            }
+            if (myChart) myChart.destroy();
 
-            priceChartInstance = new Chart(ctx, {
+            myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: labelTitle,
+                        label: title,
                         data: data,
-                        borderColor: '#ea580c',
-                        backgroundColor: 'rgba(234, 88, 12, 0.1)',
+                        borderColor: '#ff7a00',
+                        backgroundColor: 'rgba(255, 122, 0, 0.1)',
                         borderWidth: 3,
                         fill: true,
-                        tension: 0.35,
-                        pointBackgroundColor: '#ea580c',
-                        pointBorderColor: '#ffffff',
-                        pointBorderWidth: 2,
+                        tension: 0.3,
                         pointRadius: 4,
-                        pointHoverRadius: 6
+                        pointBackgroundColor: '#ff7a00'
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return ' ' + formatNumber(context.raw) + ' تومان';
-                                }
-                            }
-                        }
+                        legend: { display: false }
                     },
                     scales: {
                         x: {
-                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                            ticks: { color: '#94a3b8', font: { family: 'Vazirmatn', size: 10 } }
+                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            ticks: { color: '#9ca3af', font: { family: 'Vazirmatn' } }
                         },
                         y: {
-                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            grid: { color: 'rgba(255,255,255,0.05)' },
                             ticks: { 
-                                color: '#94a3b8', 
-                                font: { family: 'Vazirmatn', size: 10 },
-                                callback: function(value) {
-                                    return formatNumber(value);
-                                }
+                                color: '#9ca3af', 
+                                font: { family: 'Vazirmatn' },
+                                callback: function(value) { return new Intl.NumberFormat('fa-IR').format(value); }
                             }
                         }
                     }
@@ -349,9 +259,8 @@
             });
         }
 
-        // راه‌اندازی اولیه
         loadMarketData();
-        setInterval(loadMarketData, 60000);
+        setInterval(loadMarketData, 60000); // Refresh every 1 min
     </script>
 </body>
 </html>
