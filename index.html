@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شبکه هزاره | نرخ لحظه‌ای ارز، طلا و مسکوکات</title>
+    <title>شبکه هزاره | نرخ لحظه‌ای و نمودار ارز، طلا و سکه</title>
     
     <meta property="og:type" content="website">
-    <meta property="og:title" content="شبکه هزاره | نرخ لحظه‌ای ارز، طلا و مسکوکات">
-    <meta property="og:description" content="نرخ آزاد و زنده ارزهای معتبر، انواع سکه و طلا به همراه نمودار و تاریخچه قیمت‌ها - شبکه هزاره">
+    <meta property="og:title" content="شبکه هزاره | قیمت لحظه‌ای ارز، طلا و سکه">
+    <meta property="og:description" content="مرجع آزاد و زنده قیمت ۳۷ ارز فیات، انواع سکه و طلا به همراه نمودار و تاریخچه قیمت‌ها - شبکه هزاره">
     
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
 
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
-                extend: {
+                extend: { 
+                    fontFamily: { sans: ['Vazirmatn', 'sans-serif'] },
                     colors: {
                         brand: {
                             50: '#fff7ed',
-                            100: '#ffedd5',
                             500: '#f97316',
                             600: '#ea580c',
                             700: '#c2410c'
@@ -31,510 +32,458 @@
             }
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
-        body {
-            font-family: 'Vazirmatn', sans-serif;
-        }
-        .asset-card {
-            transition: all 0.2s ease-in-out;
-        }
-        .asset-card:hover {
-            transform: translateY(-2px);
-        }
-        .asset-card.active {
-            border-color: #ea580c !important;
-            background-color: #fff7ed !important;
-            box-shadow: 0 4px 6px -1px rgba(234, 88, 12, 0.15);
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 3px;
-        }
+        body { font-family: 'Vazirmatn', sans-serif; background-color: #0b0f19; color: #f1f5f9; }
+        .glass-card { background: rgba(17, 24, 39, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .glass-card-hover:hover { border-color: rgba(234, 88, 12, 0.5); transform: translateY(-2px); transition: all 0.2s ease-in-out; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased selection:bg-orange-500 selection:text-white">
+<body class="min-h-screen flex flex-col selection:bg-orange-600 selection:text-white">
 
-    <!-- هدر سایت شبکه هزاره -->
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+    <!-- هدر شبکه هزاره -->
+    <header class="border-b border-slate-800 glass-card sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3 space-x-reverse">
-                <!-- لوگوی رسمی شبکه هزاره (حلقه‌های نارنجی و طوسی) -->
-                <svg class="w-9 h-9" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="38" stroke="#475569" stroke-width="12" fill="none"/>
-                    <ellipse cx="50" cy="50" rx="44" ry="24" stroke="#ea580c" stroke-width="12" fill="none" transform="rotate(-25 50 50)"/>
-                    <circle cx="50" cy="50" r="8" fill="#ea580c"/>
-                </svg>
-                <div class="flex flex-col">
-                    <span class="text-xl font-bold tracking-tight text-slate-900">شبکه هزاره</span>
-                    <span class="text-xs text-orange-600 font-medium">نرخ لحظه‌ای ارز و مسکوکات</span>
-                </div>
+            <div class="flex items-center gap-4">
+                <a href="#" class="flex items-center gap-2.5">
+                    <!-- لوگوی رسمی شبکه هزاره -->
+                    <svg class="w-9 h-9" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="38" stroke="#94a3b8" stroke-width="12" fill="none"/>
+                        <ellipse cx="50" cy="50" rx="44" ry="24" stroke="#ea580c" stroke-width="12" fill="none" transform="rotate(-25 50 50)"/>
+                        <circle cx="50" cy="50" r="8" fill="#ea580c"/>
+                    </svg>
+                    <div class="flex flex-col">
+                        <span class="text-base sm:text-lg font-black tracking-tight text-white">شبکه هزاره</span>
+                        <span class="text-[10px] text-orange-500 font-medium">نرخ لحظه‌ای ارز و مسکوکات</span>
+                    </div>
+                </a>
+
+                <nav class="hidden md:flex items-center gap-5 text-xs font-semibold text-slate-300">
+                    <a href="#" class="hover:text-orange-400 transition">خانه</a>
+                    <a href="#calculator" class="hover:text-orange-400 transition">ماشین‌حساب</a>
+                    <a href="#api-docs" class="hover:text-orange-400 transition">مستندات API</a>
+                    <a href="https://t.me/shabake_hezareh" target="_blank" rel="noopener" class="flex items-center gap-1.5 text-orange-400 hover:text-orange-300 transition">
+                        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18.718-1.545 6.471-2.247 9.421-.297 1.248-.87 1.442-1.42.923l-3.87-2.855-1.868 1.8c-.207.2-.38.37-.779.37l.278-3.945 7.18-6.49c.313-.278-.068-.433-.487-.155l-8.874 5.589-3.824-1.196c-.832-.26-.848-.832.174-1.233l14.938-5.759c.692-.25 1.298.165 1.056 1.43z"/></svg>
+                        کانال تلگرام
+                    </a>
+                </nav>
             </div>
 
-            <div class="flex items-center space-x-2 space-x-reverse">
-                <a href="https://t.me/shabake_hezareh" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-600 hover:text-orange-600 bg-slate-100 hover:bg-orange-50 rounded-lg transition-colors">
-                    <i class="fab fa-telegram text-sm text-sky-500"></i>
-                    <span>کانال تلگرام</span>
-                </a>
+            <!-- تاریخ و ساعت به‌روزرسانی فارسی و شمسی -->
+            <div class="text-left text-xs bg-slate-900/80 border border-slate-800 px-3 py-1.5 rounded-xl">
+                <div class="text-slate-400 text-[10px]">آخرین بروزرسانی:</div>
+                <div id="lastUpdated" class="text-orange-400 font-bold tracking-wide text-xs">در حال دریافت...</div>
             </div>
         </div>
     </header>
 
     <!-- محتوای اصلی -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-grow w-full">
-        
-        <!-- نوار وضعیت، تاریخ و ساعت به‌روزرسانی (بالای باکس نمودار) -->
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-3 bg-white border border-slate-200 rounded-xl px-4 py-3 mb-6 shadow-sm">
-            <div class="flex items-center gap-2 text-sm text-slate-600">
-                <span class="relative flex h-3 w-3">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-                </span>
-                <span class="font-medium text-slate-700">وضعیت اتصال: زنده</span>
-            </div>
-            
-            <div class="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3.5 py-1.5 rounded-lg text-xs sm:text-sm text-slate-700">
-                <i class="far fa-clock text-orange-600"></i>
-                <span class="text-slate-500">آخرین به‌روزرسانی نرخ‌ها:</span>
-                <span id="update-time" class="font-bold text-slate-800 dir-ltr inline-block">در حال دریافت...</span>
-            </div>
-        </div>
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
 
-        <!-- باکس بزرگ نمایش نرخ شاخص انتخابی و نمودار روند تغییرات -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-6 mb-8 shadow-sm">
-            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-5 mb-5 gap-4">
-                <div>
-                    <div class="flex items-center gap-3">
-                        <span id="selected-flag" class="text-3xl">🇺🇸</span>
-                        <div>
-                            <h1 id="selected-name" class="text-2xl font-black text-slate-900">دلار آمریکا</h1>
-                            <p id="selected-code" class="text-xs font-semibold text-slate-400 tracking-wider">USD / TOMAN</p>
+        <!-- باکس نمایش شاخص و نمودار -->
+        <section id="spotlightSection" class="glass-card rounded-2xl p-5 sm:p-7 shadow-2xl relative overflow-hidden">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5 border-b border-slate-800/80 pb-5">
+                <div class="flex items-center gap-3">
+                    <span id="activeIcon" class="text-3xl sm:text-4xl">🇺🇸</span>
+                    <div>
+                        <h2 id="activeTitle" class="text-xl sm:text-2xl font-black text-white">دلار آمریکا</h2>
+                        <span id="activeSymbol" class="text-xs font-mono text-orange-400 tracking-wider">USD / TOMAN</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-baseline gap-4">
+                    <div>
+                        <span class="text-[11px] text-slate-400 block">قیمت لحظه‌ای:</span>
+                        <div class="flex items-baseline gap-1.5">
+                            <span id="activePrice" class="text-3xl sm:text-4xl font-black text-white font-mono">---</span>
+                            <span id="activeUnit" class="text-sm font-medium text-slate-400">تومان</span>
                         </div>
                     </div>
                 </div>
-
-                <div class="flex flex-col md:items-end">
-                    <span class="text-xs text-slate-400 font-medium mb-1">قیمت لحظه‌ای</span>
-                    <div class="flex items-baseline gap-2">
-                        <span id="selected-price" class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">---</span>
-                        <span class="text-sm font-bold text-slate-500">تومان</span>
-                    </div>
-                </div>
             </div>
 
-            <!-- کنترل‌های نمودار -->
-            <div class="flex flex-col sm:flex-row items-center justify-between mb-4 gap-3">
-                <div class="text-sm font-bold text-slate-700 flex items-center gap-2">
-                    <i class="fas fa-chart-line text-orange-600"></i>
+            <!-- انتخاب‌گر بازه زمانی نمودار -->
+            <div class="flex flex-wrap items-center justify-between gap-3 mt-5">
+                <div class="text-xs font-bold text-slate-300 flex items-center gap-2">
                     <span>روند تغییرات قیمت</span>
+                    <span id="recordCountBadge" class="text-[11px] font-normal text-slate-400 bg-slate-800 px-2 py-0.5 rounded-full"></span>
                 </div>
-                <div class="flex items-center bg-slate-100 p-1 rounded-xl text-xs font-medium" id="chart-ranges">
-                    <button data-range="7d" class="range-btn px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900">۷ روز</button>
-                    <button data-range="1m" class="range-btn px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900">۱ ماه</button>
-                    <button data-range="6m" class="range-btn px-3 py-1.5 rounded-lg bg-white text-orange-600 font-bold shadow-sm">۶ ماه</button>
-                    <button data-range="1y" class="range-btn px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900">۱ سال</button>
-                    <button data-range="all" class="range-btn px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900">همه</button>
-                </div>
-            </div>
 
-            <!-- نمودار با Chart.js -->
-            <div class="relative w-full h-[280px] sm:h-[340px]">
-                <canvas id="marketChart"></canvas>
-            </div>
-        </div>
-
-        <!-- فیلترها و کادر جستجو -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-            <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 custom-scrollbar text-xs sm:text-sm font-medium">
-                <button data-cat="all" class="cat-tab px-4 py-2 rounded-xl bg-orange-600 text-white font-bold transition-all shadow-sm shadow-orange-200">همه شاخص‌ها</button>
-                <button data-cat="main" class="cat-tab px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition-all">ارزهای شاخص</button>
-                <button data-cat="gold" class="cat-tab px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition-all">طلا و سکه</button>
-                <button data-cat="other" class="cat-tab px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition-all">سایر ارزها</button>
-            </div>
-
-            <div class="relative w-full md:w-64">
-                <input type="text" id="search-input" placeholder="جستجوی نام یا نماد..." class="w-full pl-9 pr-4 py-2 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all">
-                <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-sm"></i>
-            </div>
-        </div>
-
-        <!-- شبکه کارت‌های دارایی (تمام ۳۷ شاخص) -->
-        <div id="assets-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 mb-10">
-            <!-- کارت‌ها به صورت پویا با جاوااسکریپت پر می‌شوند -->
-        </div>
-
-        <!-- ماشین‌حساب تبدیل سریع -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm mb-10">
-            <div class="flex items-center gap-2.5 mb-4">
-                <div class="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center text-orange-600 text-base">
-                    <i class="fas fa-calculator"></i>
-                </div>
-                <div>
-                    <h3 class="text-base font-bold text-slate-800">ماشین‌حساب تبدیل سریع</h3>
-                    <p class="text-xs text-slate-500">مبلغ خود را به تومان وارد کنید تا مقدار معادل در شاخص انتخابی بالا محاسبه شود:</p>
+                <div class="inline-flex p-1 rounded-xl bg-slate-900 border border-slate-800 text-xs font-medium">
+                    <button onclick="changeTimeframe(7)" data-days="7" class="tf-btn px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition">۷ روز</button>
+                    <button onclick="changeTimeframe(30)" data-days="30" class="tf-btn px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition">۱ ماه</button>
+                    <button onclick="changeTimeframe(180)" data-days="180" class="tf-btn px-2.5 py-1 rounded-lg bg-orange-600 text-white shadow transition">۶ ماه</button>
+                    <button onclick="changeTimeframe(365)" data-days="365" class="tf-btn px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition">۱ سال</button>
+                    <button onclick="changeTimeframe('all')" data-days="all" class="tf-btn px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition">همه</button>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-                <div class="relative">
-                    <input type="number" id="calc-input" placeholder="مثال: 100,000" class="w-full pr-4 pl-14 py-3 bg-slate-50 border border-slate-200 rounded-xl text-base font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                    <span class="absolute left-4 top-3.5 text-xs font-medium text-slate-400">تومان</span>
-                </div>
-                <div class="flex items-center gap-3 bg-orange-50/60 border border-orange-200/60 rounded-xl p-3">
-                    <span class="text-xs font-semibold text-slate-600">معادل دریافتی:</span>
-                    <span id="calc-result" class="text-lg font-black text-orange-600 tracking-tight">۰</span>
-                    <span id="calc-unit" class="text-xs font-bold text-slate-600">USD</span>
+            <!-- بوم نمودار -->
+            <div class="mt-3 relative h-[300px] sm:h-[360px] w-full">
+                <canvas id="mainChart"></canvas>
+                <div id="chartLoader" class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm rounded-xl flex items-center justify-center text-xs text-slate-300 font-medium">
+                    در حال بارگذاری تاریخچه...
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- فیلتر دسته‌ها و جستجو -->
+        <section class="space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="flex flex-wrap gap-1.5 text-xs font-semibold">
+                    <button onclick="setCategory('all')" id="cat-all" class="cat-btn px-3.5 py-2 rounded-xl bg-orange-600 text-white shadow">همه شاخص‌ها</button>
+                    <button onclick="setCategory('major')" id="cat-major" class="cat-btn px-3.5 py-2 rounded-xl bg-slate-800 text-slate-400 hover:text-white">ارزهای شاخص</button>
+                    <button onclick="setCategory('gold')" id="cat-gold" class="cat-btn px-3.5 py-2 rounded-xl bg-slate-800 text-slate-400 hover:text-white">طلا و سکه</button>
+                    <button onclick="setCategory('fiat')" id="cat-fiat" class="cat-btn px-3.5 py-2 rounded-xl bg-slate-800 text-slate-400 hover:text-white">سایر ارزها</button>
+                </div>
+
+                <div class="relative min-w-[240px]">
+                    <input type="text" id="searchInput" oninput="filterCards()" placeholder="جستجوی نام یا نماد..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-orange-500">
+                    <span class="absolute left-3 top-2.5 text-slate-500 text-xs">🔍</span>
+                </div>
+            </div>
+
+            <!-- شبکه کارت‌های نرخ -->
+            <div id="marketGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3"></div>
+        </section>
+
+        <!-- ماشین‌حساب -->
+        <section id="calculator" class="glass-card rounded-2xl p-6 border border-slate-800">
+            <h3 class="text-base font-extrabold text-white mb-2 flex items-center gap-2">
+                🧮 ماشین‌حساب تبدیل سریع
+            </h3>
+            <p class="text-xs text-slate-400 mb-4">مبلغ خود را به تومان وارد کنید تا مقدار معادل در شاخص انتخابی بالا محاسبه شود:</p>
+
+            <div class="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center max-w-xl">
+                <div class="relative flex-1">
+                    <input type="text" id="calcInput" value="100,000,000" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white font-mono text-base focus:outline-none focus:border-orange-500 text-left" dir="ltr">
+                    <span class="absolute right-3 top-3.5 text-xs text-slate-400 pointer-events-none">تومان</span>
+                </div>
+                <div class="bg-orange-600/10 border border-orange-500/20 rounded-xl px-5 py-3 flex items-center justify-between sm:justify-start gap-3 min-w-[200px]">
+                    <span class="text-xs text-slate-400">معادل دریافتی:</span>
+                    <span id="calcResult" class="text-base font-black text-orange-400 font-mono">---</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- مستندات API -->
+        <section id="api-docs" class="glass-card rounded-2xl p-6 border border-slate-800">
+            <h3 class="text-base font-extrabold text-white mb-2 flex items-center gap-2">
+                🚀 دسترسی وب‌سرویس و API رایگان
+            </h3>
+            <p class="text-xs text-slate-400 mb-4">تمامی داده‌ها در قالب فایل‌های JSON آماده فراخوانی بدون نیاز به کلید دسترسی هستند:</p>
+            <div id="apiList" class="flex flex-wrap gap-2 text-xs"></div>
+        </section>
 
     </main>
 
     <!-- فوتر شبکه هزاره -->
-    <footer class="bg-white border-t border-slate-200 py-6 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-            <div class="flex items-center gap-2">
-                <span class="font-bold text-slate-700">شبکه هزاره</span>
-                <span>|</span>
-                <span>تأمین‌کننده تجهیزات مخابراتی، رادیویی و شبکه</span>
+    <footer class="border-t border-slate-800 mt-12 py-8 bg-slate-950/50 text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-right">
+            <div>
+                <p class="font-bold text-slate-300 mb-1">شبکه هزاره | تأمین‌کننده تجهیزات مخابراتی و شبکه</p>
+                <p class="max-w-xl text-[11px] leading-relaxed text-slate-500">
+                    مرجع تخصصی نرخ‌های لحظه‌ای ارز، طلا و مسکوکات. به‌روزرسانی خودکار از طریق ربات‌های تحلیلی و گیت‌هاب.
+                </p>
             </div>
-            <div class="flex items-center gap-4">
-                <span>به‌روزرسانی خودکار هر ۵ دقیقه</span>
-                <span>•</span>
-                <a href="https://github.com/1000Network/1000Network_Rate" target="_blank" class="text-slate-600 hover:text-orange-600 transition-colors">مخزن گیت‌هاب</a>
+            <div class="text-center sm:text-left">
+                <a href="https://t.me/shabake_hezareh" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-orange-600/20 text-orange-400 border border-orange-500/30 font-semibold hover:bg-orange-600/30 transition">
+                    <span>تلگرام شبکه هزاره</span>
+                </a>
             </div>
         </div>
     </footer>
 
-    <!-- جاوااسکریپت داینامیک و هماهنگ با ساختار market.json -->
     <script>
-        let marketData = null;
-        let selectedAssetKey = 'usd';
-        let currentChartRange = '6m';
-        let chartInstance = null;
-        let currentCategory = 'all';
+        const ALL_ASSETS = {
+            "usd": { title: "دلار آمریکا", symbol: "USD", icon: "🇺🇸", category: "major", color: "#f97316", unit: "تومان" },
+            "eur": { title: "یورو اروپا", symbol: "EUR", icon: "🇪🇺", category: "major", color: "#10b981", unit: "تومان" },
+            "aed": { title: "درهم امارات", symbol: "AED", icon: "🇦🇪", category: "major", color: "#6366f1", unit: "تومان" },
+            "try": { title: "لیر ترکیه", symbol: "TRY", icon: "🇹🇷", category: "major", color: "#ef4444", unit: "تومان" },
+            "gbp": { title: "پوند انگلیس", symbol: "GBP", icon: "🇬🇧", category: "major", color: "#8b5cf6", unit: "تومان" },
+            "cad": { title: "دلار کانادا", symbol: "CAD", icon: "🇨🇦", category: "major", color: "#ec4899", unit: "تومان" },
+            "aud": { title: "دلار استرالیا", symbol: "AUD", icon: "🇦🇺", category: "major", color: "#06b6d4", unit: "تومان" },
+            "cny": { title: "یوان چین", symbol: "CNY", icon: "🇨🇳", category: "major", color: "#f59e0b", unit: "تومان" },
 
-        // نقشه جامع عناوین، پرچم‌ها، دسته‌بندی و نمادها
-        const assetMeta = {
-            'usd': { name: 'دلار آمریکا', flag: '🇺🇸', cat: 'main', symbol: 'US' },
-            'eur': { name: 'یورو اروپا', flag: '🇪🇺', cat: 'main', symbol: 'EU' },
-            'aed': { name: 'درهم امارات', flag: '🇦🇪', cat: 'main', symbol: 'AE' },
-            'try': { name: 'لیر ترکیه', flag: '🇹🇷', cat: 'main', symbol: 'TR' },
-            'gbp': { name: 'پوند انگلیس', flag: '🇬🇧', cat: 'main', symbol: 'GB' },
-            'cad': { name: 'دلار کانادا', flag: '🇨🇦', cat: 'main', symbol: 'CA' },
-            'aud': { name: 'دلار استرالیا', flag: '🇦🇺', cat: 'main', symbol: 'AU' },
-            'cny': { name: 'یوان چین', flag: '🇨🇳', cat: 'main', symbol: 'CN' },
-            'iqd': { name: '۱۰۰ دینار عراق', flag: '🇮🇶', cat: 'main', symbol: 'IQ' },
-            'rub': { name: 'روبل روسیه', flag: '🇷🇺', cat: 'main', symbol: 'RU' },
-            
-            'gold_18k': { name: 'طلای ۱۸ عیار', flag: '✨', cat: 'gold', symbol: 'GOLD' },
-            'mesghal': { name: 'مثقال طلا', flag: '⚖️', cat: 'gold', symbol: 'MESGHAL' },
-            'coin_emami': { name: 'سکه امامی', flag: '🪙', cat: 'gold', symbol: 'EMAMI' },
-            'coin_bahar': { name: 'سکه بهار آزادی', flag: '🪙', cat: 'gold', symbol: 'BAHAR' },
-            'coin_half': { name: 'نیم سکه', flag: '🪙', cat: 'gold', symbol: 'HALF' },
-            'coin_quarter': { name: 'ربع سکه', flag: '🪙', cat: 'gold', symbol: 'QUARTER' },
-            'coin_gram': { name: 'سکه گرمی', flag: '🪙', cat: 'gold', symbol: 'GRAM' },
-            'xau': { name: 'انس جهانی طلا', flag: '🌐', cat: 'gold', symbol: 'XAU' },
+            "gold_18k": { title: "طلای ۱۸ عیار", symbol: "GOLD_18K", icon: "✨", category: "gold", color: "#facc15", unit: "تومان" },
+            "gold_mesghal": { title: "مثقال طلا", symbol: "MESGHAL", icon: "⚖️", category: "gold", color: "#fbbf24", unit: "تومان" },
+            "coin_emami": { title: "سکه امامی", symbol: "COIN_EMAMI", icon: "🟡", category: "gold", color: "#f59e0b", unit: "تومان" },
+            "coin_bahar": { title: "سکه بهار آزادی", symbol: "COIN_BAHAR", icon: "🟡", category: "gold", color: "#d97706", unit: "تومان" },
+            "coin_half": { title: "نیم سکه", symbol: "COIN_HALF", icon: "🟡", category: "gold", color: "#eab308", unit: "تومان" },
+            "coin_quarter": { title: "ربع سکه", symbol: "COIN_QUARTER", icon: "🟡", category: "gold", color: "#ca8a04", unit: "تومان" },
+            "coin_gram": { title: "سکه گرمی", symbol: "COIN_GRAM", icon: "🟡", category: "gold", color: "#a16207", unit: "تومان" },
+            "usd_xau": { title: "انس جهانی طلا", symbol: "XAU", icon: "🌐", category: "gold", color: "#34d399", unit: "دلار" },
 
-            'chf': { name: 'فرانک سوئیس', flag: '🇨🇭', cat: 'other', symbol: 'CH' },
-            'kwd': { name: 'دینار کویت', flag: '🇰🇼', cat: 'other', symbol: 'KW' },
-            'sar': { name: 'ریال عربستان', flag: '🇸🇦', cat: 'other', symbol: 'SA' },
-            'qar': { name: 'ریال قطر', flag: '🇶🇦', cat: 'other', symbol: 'QA' },
-            'omr': { name: 'ریال عمان', flag: '🇴🇲', cat: 'other', symbol: 'OM' },
-            'bhd': { name: 'دینار بحرین', flag: '🇧🇭', cat: 'other', symbol: 'BH' },
-            'myr': { name: 'رینگیت مالزی', flag: '🇲🇾', cat: 'other', symbol: 'MY' },
-            'thb': { name: 'بات تایلند', flag: '🇹🇭', cat: 'other', symbol: 'TH' },
-            'sgd': { name: 'دلار سنگاپور', flag: '🇸🇬', cat: 'other', symbol: 'SG' },
-            'hkd': { name: 'دلار هنگ‌کنگ', flag: '🇭🇰', cat: 'other', symbol: 'HK' },
-            'jpy': { name: '۱۰۰ ین ژاپن', flag: '🇯🇵', cat: 'other', symbol: 'JP' },
-            'krw': { name: '۱۰۰ وون کره', flag: '🇰🇷', cat: 'other', symbol: 'KR' },
-            'inr': { name: 'روپیه هند', flag: '🇮🇳', cat: 'other', symbol: 'IN' },
-            'pkr': { name: 'روپیه پاکستان', flag: '🇵🇰', cat: 'other', symbol: 'PK' },
-            'gel': { name: 'لاری گرجستان', flag: '🇬🇪', cat: 'other', symbol: 'GE' },
-            'azn': { name: 'منات آذربایجان', flag: '🇦🇿', cat: 'other', symbol: 'AZ' },
-            'amd': { name: '۱۰۰ درام ارمنستان', flag: '🇦🇲', cat: 'other', symbol: 'AM' },
-            'sek': { name: 'کرون سوئد', flag: '🇸🇪', cat: 'other', symbol: 'SE' },
-            'nok': { name: 'کرون نروژ', flag: '🇳🇴', cat: 'other', symbol: 'NO' },
-            'dkk': { name: 'کرون دانمارک', flag: '🇩🇰', cat: 'other', symbol: 'DK' }
+            "rub": { title: "روبل روسیه", symbol: "RUB", icon: "🇷🇺", category: "fiat", color: "#64748b", unit: "تومان" },
+            "iqd": { title: "۱۰۰ دینار عراق", symbol: "IQD", icon: "🇮🇶", category: "fiat", color: "#64748b", unit: "تومان" },
+            "myr": { title: "رینگیت مالزی", symbol: "MYR", icon: "🇲🇾", category: "fiat", color: "#64748b", unit: "تومان" },
+            "gel": { title: "لاری گرجستان", symbol: "GEL", icon: "🇬🇪", category: "fiat", color: "#64748b", unit: "تومان" },
+            "azn": { title: "منات آذربایجان", symbol: "AZN", icon: "🇦🇿", category: "fiat", color: "#64748b", unit: "تومان" },
+            "amd": { title: "۱۰۰ درام ارمنستان", symbol: "AMD", icon: "🇦🇲", category: "fiat", color: "#64748b", unit: "تومان" },
+            "thb": { title: "بات تایلند", symbol: "THB", icon: "🇹🇭", category: "fiat", color: "#64748b", unit: "تومان" },
+            "omr": { title: "ریال عمان", symbol: "OMR", icon: "🇴🇲", category: "fiat", color: "#64748b", unit: "تومان" },
+            "inr": { title: "روپیه هند", symbol: "INR", icon: "🇮🇳", category: "fiat", color: "#64748b", unit: "تومان" },
+            "pkr": { title: "روپیه پاکستان", symbol: "PKR", icon: "🇵🇰", category: "fiat", color: "#64748b", unit: "تومان" },
+            "jpy": { title: "۱۰۰ ین ژاپن", symbol: "JPY", icon: "🇯🇵", category: "fiat", color: "#64748b", unit: "تومان" },
+            "sar": { title: "ریال عربستان", symbol: "SAR", icon: "🇸🇦", category: "fiat", color: "#64748b", unit: "تومان" },
+            "afn": { title: "افغانی افغانستان", symbol: "AFN", icon: "🇦🇫", category: "fiat", color: "#64748b", unit: "تومان" },
+            "sek": { title: "کرون سوئد", symbol: "SEK", icon: "🇸🇪", category: "fiat", color: "#64748b", unit: "تومان" },
+            "chf": { title: "فرانک سوئیس", symbol: "CHF", icon: "🇨🇭", category: "fiat", color: "#64748b", unit: "تومان" },
+            "qar": { title: "ریال قطر", symbol: "QAR", icon: "🇶🇦", category: "fiat", color: "#64748b", unit: "تومان" },
+            "krw": { title: "۱۰۰ وون کره", symbol: "KRW", icon: "🇰🇷", category: "fiat", color: "#64748b", unit: "تومان" },
+            "nok": { title: "کرون نروژ", symbol: "NOK", icon: "🇳🇴", category: "fiat", color: "#64748b", unit: "تومان" },
+            "nzd": { title: "دلار نیوزیلند", symbol: "NZD", icon: "🇳🇿", category: "fiat", color: "#64748b", unit: "تومان" },
+            "sgd": { title: "دلار سنگاپور", symbol: "SGD", icon: "🇸🇬", category: "fiat", color: "#64748b", unit: "تومان" },
+            "hkd": { title: "دلار هنگ کنگ", symbol: "HKD", icon: "🇭🇰", category: "fiat", color: "#64748b", unit: "تومان" },
+            "kwd": { title: "دینار کویت", symbol: "KWD", icon: "🇰🇼", category: "fiat", color: "#64748b", unit: "تومان" },
+            "dkk": { title: "کرون دانمارک", symbol: "DKK", icon: "🇩🇰", category: "fiat", color: "#64748b", unit: "تومان" },
+            "bhd": { title: "دینار بحرین", symbol: "BHD", icon: "🇧🇭", category: "fiat", color: "#64748b", unit: "تومان" },
+            "tjs": { title: "سامانی تاجیکستان", symbol: "TJS", icon: "🇹🇯", category: "fiat", color: "#64748b", unit: "تومان" },
+            "tmt": { title: "منات ترکمنستان", symbol: "TMT", icon: "🇹🇲", category: "fiat", color: "#64748b", unit: "تومان" },
+            "kgs": { title: "سام قرقیزستان", symbol: "KGS", icon: "🇰🇬", category: "fiat", color: "#64748b", unit: "تومان" },
+            "syp": { title: "۱۰۰ لیر سوریه", symbol: "SYP", icon: "🇸🇾", category: "fiat", color: "#64748b", unit: "تومان" },
+            "brl": { title: "رئال برزیل", symbol: "BRL", icon: "🇧🇷", category: "fiat", color: "#64748b", unit: "تومان" },
+            "ars": { title: "پزو آرژانتین", symbol: "ARS", icon: "🇦🇷", category: "fiat", color: "#64748b", unit: "تومان" }
         };
 
-        function formatNumber(num) {
-            if (!num && num !== 0) return '---';
-            return Number(num).toLocaleString('fa-IR');
-        }
+        let marketData = {};
+        let activeAssetKey = "usd";
+        let activeHistory = [];
+        let currentTimeframe = 180;
+        let currentCategory = "all";
+        let chartInstance = null;
 
-        async function initDashboard() {
-            try {
-                // دریافت داده‌های نرخ زنده از market.json در ریشه ریپازیتوری
-                const response = await fetch('./market.json?v=' + Date.now());
-                marketData = await response.json();
-                
-                // به‌روزرسانی تاریخ و ساعت در بالای نمودار
-                const lastUpdate = marketData.last_updated || marketData.date || 'لحظاتی پیش';
-                document.getElementById('update-time').innerText = lastUpdate;
+        const toPersianDigits = (n) => String(n).replace(/[0-9]/g, d => ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'][+d]);
+        const formatNumber = (num, isFloat = false) => {
+            if (num === null || num === undefined || isNaN(num)) return "---";
+            const formatted = isFloat ? Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : Number(num).toLocaleString('en-US');
+            return toPersianDigits(formatted);
+        };
 
-                // رندر کارت‌ها
-                renderCards();
+        async function initApp() {
+            const hash = window.location.hash.replace('#', '').trim();
+            if (hash && ALL_ASSETS[hash]) activeAssetKey = hash;
 
-                // بررسی هش URL یا انتخاب پیش‌فرض دلار
-                const hashKey = window.location.hash.replace('#', '').toLowerCase();
-                if (hashKey && (marketData.rates && marketData.rates[hashKey] || marketData[hashKey])) {
-                    selectAsset(hashKey);
-                } else {
-                    selectAsset('usd');
-                }
-
-                setupEvents();
-            } catch (err) {
-                console.error('Error fetching market data:', err);
-                document.getElementById('update-time').innerText = 'خطا در بارگذاری';
-            }
-        }
-
-        function getAssetPrice(key) {
-            if (!marketData) return null;
-            if (marketData.rates && marketData.rates[key]) {
-                const item = marketData.rates[key];
-                return typeof item === 'object' ? (item.price || item.rate) : item;
-            }
-            if (marketData[key]) {
-                const item = marketData[key];
-                return typeof item === 'object' ? (item.price || item.rate) : item;
-            }
-            return null;
-        }
-
-        function renderCards() {
-            const grid = document.getElementById('assets-grid');
-            grid.innerHTML = '';
-
-            const ratesObj = marketData.rates || marketData;
-            const keys = Object.keys(assetMeta);
-
-            // اضافه کردن سایر کلیدهای احتمالی که در مارکت هست ولی در لیست پیش‌فرض نیست
-            Object.keys(ratesObj).forEach(k => {
-                if (!['last_updated', 'date', 'rates'].includes(k) && !keys.includes(k)) {
-                    keys.push(k);
-                }
+            window.addEventListener('hashchange', () => {
+                const newHash = window.location.hash.replace('#', '').trim();
+                if (newHash && ALL_ASSETS[newHash] && newHash !== activeAssetKey) selectAsset(newHash, false);
             });
 
-            const searchTerm = document.getElementById('search-input').value.trim().toLowerCase();
+            await fetchMarketSummary();
+            renderMarketGrid();
+            renderApiDocs();
+            await loadActiveAssetHistory();
+            initCalculator();
+        }
 
-            keys.forEach(key => {
-                const meta = assetMeta[key] || { name: key.toUpperCase(), flag: '🌐', cat: 'other', symbol: key.toUpperCase() };
-                const price = getAssetPrice(key);
+        async function fetchMarketSummary() {
+            try {
+                const res = await fetch('./market.json?t=' + Date.now());
+                if (!res.ok) throw new Error("fetch error");
+                marketData = await res.json();
+                
+                // استفاده از فیلد date_shamsi_full یا ترکیب تاریخ شمسی و ساعت فارسی
+                const dateStr = marketData.date_shamsi_full || marketData.date_shamsi || '';
+                const timeStr = marketData.time ? toPersianDigits(marketData.time) : '';
+                document.getElementById('lastUpdated').textContent = `${dateStr} - ${timeStr}`;
+            } catch (err) {
+                document.getElementById('lastUpdated').textContent = "در حال بارگذاری...";
+            }
+        }
 
-                if (price === null) return;
+        function renderMarketGrid() {
+            const grid = document.getElementById('marketGrid');
+            grid.innerHTML = '';
+            const searchVal = document.getElementById('searchInput').value.trim().toLowerCase();
 
-                // فیلتر دسته‌بندی
-                if (currentCategory !== 'all' && meta.cat !== currentCategory) return;
+            for (const [key, cfg] of Object.entries(ALL_ASSETS)) {
+                if (currentCategory !== 'all' && cfg.category !== currentCategory) continue;
+                if (searchVal && !cfg.title.toLowerCase().includes(searchVal) && !cfg.symbol.toLowerCase().includes(searchVal)) continue;
 
-                // فیلتر جستجو
-                if (searchTerm) {
-                    const matchName = meta.name.toLowerCase().includes(searchTerm);
-                    const matchKey = key.toLowerCase().includes(searchTerm);
-                    if (!matchName && !matchKey) return;
-                }
+                const price = (key === "usd_xau") ? (marketData.usd_xau || marketData.gold_ounce) : marketData[key];
+                const unit = cfg.unit || "تومان";
+                const isSelected = (key === activeAssetKey);
 
                 const card = document.createElement('div');
-                card.className = `asset-card bg-white border border-slate-200 rounded-xl p-3 cursor-pointer flex flex-col justify-between ${key === selectedAssetKey ? 'active' : ''}`;
-                card.onclick = () => selectAsset(key);
+                card.id = `card-${key}`;
+                card.className = `glass-card glass-card-hover rounded-xl p-3 cursor-pointer relative overflow-hidden transition ${isSelected ? 'ring-2 ring-orange-500 bg-orange-950/20' : ''}`;
+                card.onclick = () => selectAsset(key, true);
 
                 card.innerHTML = `
                     <div class="flex items-center justify-between mb-2">
-                        <span class="text-xs font-black text-slate-400">${meta.symbol}</span>
-                        <span class="text-xl">${meta.flag}</span>
+                        <span class="text-xl">${cfg.icon}</span>
+                        <span class="text-[10px] font-mono text-slate-400 bg-slate-800/80 px-1.5 py-0.5 rounded">${cfg.symbol}</span>
                     </div>
-                    <div>
-                        <div class="text-xs font-bold text-slate-700 truncate mb-1">${meta.name}</div>
-                        <div class="text-sm font-extrabold text-slate-900 dir-ltr text-right">${formatNumber(price)} <span class="text-[10px] text-slate-400 font-normal">تومان</span></div>
+                    <div class="text-xs font-semibold text-slate-300 truncate mb-1">${cfg.title}</div>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-sm sm:text-base font-black text-white font-mono">${formatNumber(price, cfg.unit === 'دلار')}</span>
+                        <span class="text-[10px] text-slate-400">${unit}</span>
                     </div>
                 `;
                 grid.appendChild(card);
+            }
+        }
+
+        function setCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.className = "cat-btn px-3.5 py-2 rounded-xl bg-slate-800 text-slate-400 hover:text-white transition";
             });
+            document.getElementById(`cat-${cat}`).className = "cat-btn px-3.5 py-2 rounded-xl bg-orange-600 text-white shadow transition";
+            renderMarketGrid();
         }
 
-        function selectAsset(key) {
-            selectedAssetKey = key;
-            window.location.hash = key;
-
-            const meta = assetMeta[key] || { name: key.toUpperCase(), flag: '🌐', cat: 'other', symbol: key.toUpperCase() };
-            const price = getAssetPrice(key);
-
-            document.getElementById('selected-name').innerText = meta.name;
-            document.getElementById('selected-code').innerText = `${key.toUpperCase()} / TOMAN`;
-            document.getElementById('selected-flag').innerText = meta.flag;
-            document.getElementById('selected-price').innerText = formatNumber(price);
-            document.getElementById('calc-unit').innerText = key.toUpperCase();
-
-            // رفرش وضعیت فعال بودن کارت‌ها
-            document.querySelectorAll('.asset-card').forEach(el => el.classList.remove('active'));
-            renderCards();
-
-            // محاسبه ماشین‌حساب
-            calculate();
-
-            // دریافت و ترسیم نمودار
-            loadChart(key, currentChartRange);
+        function filterCards() {
+            renderMarketGrid();
         }
 
-        async function loadChart(key, range) {
+        async function selectAsset(key, updateHash = true) {
+            if (!ALL_ASSETS[key]) return;
+            activeAssetKey = key;
+            if (updateHash) window.location.hash = key;
+
+            document.querySelectorAll('#marketGrid > div').forEach(el => el.classList.remove('ring-2', 'ring-orange-500', 'bg-orange-950/20'));
+            const activeCard = document.getElementById(`card-${key}`);
+            if (activeCard) activeCard.classList.add('ring-2', 'ring-orange-500', 'bg-orange-950/20');
+
+            if (window.innerWidth < 1024) document.getElementById('spotlightSection').scrollIntoView({ behavior: 'smooth' });
+            await loadActiveAssetHistory();
+            updateCalculator();
+        }
+
+        async function loadActiveAssetHistory() {
+            const cfg = ALL_ASSETS[activeAssetKey];
+            const unit = cfg.unit || "تومان";
+            const currentPrice = (activeAssetKey === "usd_xau") ? (marketData.usd_xau || marketData.gold_ounce) : marketData[activeAssetKey];
+
+            document.getElementById('activeTitle').textContent = cfg.title;
+            document.getElementById('activeIcon').textContent = cfg.icon;
+            document.getElementById('activeSymbol').textContent = `${cfg.symbol} / ${unit.toUpperCase()}`;
+            document.getElementById('activeUnit').textContent = unit;
+            document.getElementById('activePrice').textContent = formatNumber(currentPrice, unit === "دلار");
+
+            const loader = document.getElementById('chartLoader');
+            loader.classList.remove('hidden');
+
             try {
-                // دریافت تاریخچه بر اساس ساختار nabz (api/history یا api/{key}.json)
-                let historyData = [];
-                const res = await fetch(`./api/${key}.json`).catch(() => null);
-                if (res && res.ok) {
-                    historyData = await res.json();
-                }
-
-                renderChart(historyData);
-            } catch (e) {
-                console.warn('History not found, fallback to simulated view', e);
-                renderChart([]);
+                const res = await fetch(`./api/history_${activeAssetKey}.json?t=` + Date.now());
+                if (!res.ok) throw new Error("History fetch error");
+                const json = await res.json();
+                activeHistory = json.history || [];
+                document.getElementById('recordCountBadge').textContent = `${toPersianDigits(activeHistory.length)} روز سابقه`;
+                renderChart();
+            } catch (err) {
+                activeHistory = [];
+                if (chartInstance) chartInstance.destroy();
+            } finally {
+                loader.classList.add('hidden');
             }
         }
 
-        function renderChart(history) {
-            const ctx = document.getElementById('marketChart').getContext('2d');
-            if (chartInstance) {
-                chartInstance.destroy();
-            }
+        function renderChart() {
+            if (!activeHistory.length) return;
+            const cfg = ALL_ASSETS[activeAssetKey];
+            const unit = cfg.unit || "تومان";
+            const ctx = document.getElementById('mainChart').getContext('2d');
 
-            let labels = [];
-            let values = [];
-
-            if (Array.isArray(history) && history.length > 0) {
-                // فیلتر بر اساس بازه انتخابی
-                let count = history.length;
-                if (currentChartRange === '7d') count = Math.min(7, history.length);
-                if (currentChartRange === '1m') count = Math.min(30, history.length);
-                if (currentChartRange === '6m') count = Math.min(180, history.length);
-                if (currentChartRange === '1y') count = Math.min(365, history.length);
-
-                const sliced = history.slice(-count);
-                labels = sliced.map(d => d.date || d.d || '');
-                values = sliced.map(d => d.price || d.p || 0);
-            } else {
-                // اگر هنوز فایل تاریخچه ساخته نشده، خط فرضی از قیمت فعلی ترسیم شود
-                const curPrice = getAssetPrice(selectedAssetKey) || 100000;
-                labels = ['۱', '۲', '۳', '۴', '۵', 'امروز'];
-                values = [curPrice * 0.98, curPrice * 0.99, curPrice * 0.995, curPrice * 1.01, curPrice * 0.998, curPrice];
-            }
+            let filtered = (currentTimeframe !== 'all') ? activeHistory.slice(-currentTimeframe) : [...activeHistory];
+            const labels = filtered.map(item => item.date);
+            const dataPoints = filtered.map(item => item.price);
 
             const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-            gradient.addColorStop(0, 'rgba(234, 88, 12, 0.25)');
-            gradient.addColorStop(1, 'rgba(234, 88, 12, 0.0)');
+            gradient.addColorStop(0, `${cfg.color || '#f97316'}40`);
+            gradient.addColorStop(1, `${cfg.color || '#f97316'}00`);
+
+            if (chartInstance) chartInstance.destroy();
 
             chartInstance = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'نرخ (تومان)',
-                        data: values,
-                        borderColor: '#ea580c',
-                        borderWidth: 2.5,
+                        label: cfg.title,
+                        data: dataPoints,
+                        borderColor: cfg.color || '#f97316',
+                        borderWidth: 2,
+                        pointRadius: filtered.length > 50 ? 0 : 3,
+                        pointHoverRadius: 5,
                         backgroundColor: gradient,
                         fill: true,
-                        tension: 0.35,
-                        pointRadius: values.length > 40 ? 0 : 3,
-                        pointHoverRadius: 6,
-                        pointBackgroundColor: '#ea580c'
+                        tension: 0.25
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
                     plugins: {
                         legend: { display: false },
                         tooltip: {
                             rtl: true,
-                            bodyFont: { family: 'Vazirmatn' },
+                            backgroundColor: '#0f172a',
                             titleFont: { family: 'Vazirmatn' },
-                            callbacks: {
-                                label: (context) => `${context.parsed.y.toLocaleString('fa-IR')} تومان`
-                            }
+                            bodyFont: { family: 'Vazirmatn', weight: 'bold' },
+                            padding: 10,
+                            displayColors: false,
+                            callbacks: { label: (ctx) => `${cfg.title}: ${formatNumber(ctx.parsed.y, unit === 'دلار')} ${unit}` }
                         }
                     },
                     scales: {
-                        x: {
-                            grid: { display: false },
-                            ticks: { font: { family: 'Vazirmatn', size: 10 } }
-                        },
-                        y: {
-                            position: 'right',
-                            grid: { color: '#f1f5f9' },
-                            ticks: {
-                                font: { family: 'Vazirmatn', size: 10 },
-                                callback: (v) => Number(v).toLocaleString('fa-IR')
-                            }
-                        }
+                        x: { grid: { display: false }, ticks: { color: '#64748b', font: { family: 'Vazirmatn', size: 10 }, maxTicksLimit: 7 } },
+                        y: { position: 'right', grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#64748b', font: { family: 'Vazirmatn', size: 10 }, callback: (val) => toPersianDigits(Number(val).toLocaleString()) } }
                     }
                 }
             });
         }
 
-        function calculate() {
-            const inputVal = parseFloat(document.getElementById('calc-input').value);
-            const price = getAssetPrice(selectedAssetKey);
-            const resEl = document.getElementById('calc-result');
+        function changeTimeframe(days) {
+            currentTimeframe = days;
+            document.querySelectorAll('.tf-btn').forEach(btn => {
+                btn.className = (btn.getAttribute('data-days') === String(days)) ? "tf-btn px-2.5 py-1 rounded-lg bg-orange-600 text-white shadow transition" : "tf-btn px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition";
+            });
+            renderChart();
+        }
 
-            if (!inputVal || !price || isNaN(inputVal)) {
-                resEl.innerText = '۰';
+        function initCalculator() {
+            const input = document.getElementById('calcInput');
+            input.addEventListener('input', () => {
+                const raw = input.value.replace(/[^0-9]/g, '');
+                input.value = raw ? Number(raw).toLocaleString('en-US') : '';
+                updateCalculator();
+            });
+            updateCalculator();
+        }
+
+        function updateCalculator() {
+            const inputVal = parseFloat(document.getElementById('calcInput').value.replace(/,/g, '')) || 0;
+            const currentPrice = (activeAssetKey === "usd_xau") ? (marketData.usd_xau || marketData.gold_ounce) : marketData[activeAssetKey];
+            const resultEl = document.getElementById('calcResult');
+            const cfg = ALL_ASSETS[activeAssetKey];
+
+            if (inputVal <= 0 || !currentPrice) {
+                resultEl.textContent = '---';
                 return;
             }
 
-            const converted = (inputVal / price).toFixed(4);
-            resEl.innerText = Number(converted).toLocaleString('fa-IR');
+            const amount = inputVal / currentPrice;
+            resultEl.textContent = `${toPersianDigits(amount.toLocaleString('en-US', { maximumFractionDigits: 3 }))} ${cfg.symbol}`;
         }
 
-        function setupEvents() {
-            // سرچ زنده
-            document.getElementById('search-input').addEventListener('input', renderCards);
-
-            // تب‌های دسته‌بندی
-            document.querySelectorAll('.cat-tab').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    document.querySelectorAll('.cat-tab').forEach(b => {
-                        b.classList.remove('bg-orange-600', 'text-white', 'shadow-orange-200');
-                        b.classList.add('bg-white', 'text-slate-600');
-                    });
-                    e.target.classList.add('bg-orange-600', 'text-white', 'shadow-orange-200');
-                    e.target.classList.remove('bg-white', 'text-slate-600');
-
-                    currentCategory = e.target.getAttribute('data-cat');
-                    renderCards();
-                });
-            });
-
-            // دکمه‌های بازه زمانی نمودار
-            document.querySelectorAll('.range-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    document.querySelectorAll('.range-btn').forEach(b => {
-                        b.classList.remove('bg-white', 'text-orange-600', 'font-bold', 'shadow-sm');
-                        b.classList.add('text-slate-600');
-                    });
-                    e.target.classList.add('bg-white', 'text-orange-600', 'font-bold', 'shadow-sm');
-                    e.target.classList.remove('text-slate-600');
-
-                    currentChartRange = e.target.getAttribute('data-range');
-                    loadChart(selectedAssetKey, currentChartRange);
-                });
-            });
-
-            // ورودی ماشین‌حساب
-            document.getElementById('calc-input').addEventListener('input', calculate);
+        function renderApiDocs() {
+            const list = document.getElementById('apiList');
+            list.innerHTML = '';
+            for (const [key, cfg] of Object.entries(ALL_ASSETS)) {
+                const a = document.createElement('a');
+                a.href = `./api/history_${key}.json`;
+                a.target = '_blank';
+                a.className = "px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition flex items-center gap-1";
+                a.innerHTML = `<span>${cfg.icon}</span> <span>${cfg.title}</span>`;
+                list.appendChild(a);
+            }
         }
 
-        // راه‌اندازی اولیه
-        initDashboard();
+        window.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
 </html>
