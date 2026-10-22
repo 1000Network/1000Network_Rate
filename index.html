@@ -28,9 +28,9 @@
         .update-badge { background: rgba(16, 185, 129, 0.15); border: 1px solid var(--success); color: var(--success); padding: 8px 18px; border-radius: 30px; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
         .update-badge::before { content: ''; width: 8px; height: 8px; background: var(--success); border-radius: 50%; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
-        
+
         .container { max-width: 1400px; margin: 25px auto; padding: 0 20px; width: 100%; flex: 1; display: flex; flex-direction: column; gap: 25px; }
-        
+
         .section-header-title { font-size: 16px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; }
         .section-header-title::before { content: ''; width: 8px; height: 8px; background: var(--primary-orange); border-radius: 50%; }
 
@@ -46,18 +46,38 @@
         .main-content { display: grid; grid-template-columns: 380px 1fr; gap: 20px; }
         .card-box { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 20px; backdrop-filter: blur(10px); }
         .box-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 10px; }
-        
+
         .rates-list { display: flex; flex-direction: column; gap: 8px; max-height: 520px; overflow-y: auto; padding-right: 2px; }
         .rates-list::-webkit-scrollbar { width: 4px; }
         .rates-list::-webkit-scrollbar-thumb { background: var(--primary-orange); border-radius: 10px; }
-        
+
         .rate-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: rgba(255,255,255,0.02); border-radius: 10px; transition: all 0.2s; cursor: pointer; border: 1px solid transparent; }
         .rate-row:hover, .rate-row.active { background: rgba(255, 122, 0, 0.1); border-color: rgba(255, 122, 0, 0.3); }
         .rate-row .r-title { font-weight: 600; font-size: 14px; color: #fff; }
         .rate-row .r-sub { font-size: 11px; color: var(--text-muted); }
         .rate-row .r-price { font-weight: 700; font-size: 15px; color: var(--primary-orange); direction: ltr; }
 
-        .chart-box { height: 480px; width: 100%; position: relative; }
+        .chart-box { height: 440px; width: 100%; position: relative; }
+
+        /* Timeframe Controls */
+        .tf-bar { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 12px 0; }
+        .tf-btn {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: var(--text-muted);
+            padding: 7px 10px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .tf-btn:hover { border-color: rgba(255, 122, 0, 0.45); color: #fff; }
+        .tf-btn.active {
+            background: rgba(255, 122, 0, 0.12);
+            border-color: rgba(255, 122, 0, 0.55);
+            color: #fff;
+        }
 
         footer { background: #080b12; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; padding: 18px; color: var(--text-muted); font-size: 13px; margin-top: auto; }
 
@@ -82,7 +102,7 @@
 
     <div class="container">
         <div class="section-header-title">شاخص‌های اصلی بازار (شبکه هزاره)</div>
-        
+
         <!-- Showcase (5 Items) -->
         <div id="showcaseGrid" class="showcase-grid"></div>
 
@@ -91,7 +111,7 @@
             <div class="card-box">
                 <div class="box-title">
                     <span>سایر نرخ‌های بازار</span>
-                    <span id="totalItems" style="font-size: 12px; color: var(--primary-orange);">۳۷+ شاخص</span>
+                    <span id="totalItems" style="font-size: 12px; color: var(--primary-orange);">-- شاخص</span>
                 </div>
                 <div id="ratesList" class="rates-list"></div>
             </div>
@@ -102,6 +122,16 @@
                     <span id="chartHeading">نمودار روند قیمت (دلار آمریکا)</span>
                     <span style="font-size: 12px; color: var(--text-muted);">تغییرات تاریخی</span>
                 </div>
+
+                <!-- Timeframe Filters -->
+                <div class="tf-bar" id="tfBar">
+                    <button class="tf-btn" data-tf="1d">۱ روز</button>
+                    <button class="tf-btn" data-tf="1w">۱ هفته</button>
+                    <button class="tf-btn active" data-tf="1m">۱ ماه</button>
+                    <button class="tf-btn" data-tf="6m">۶ ماه</button>
+                    <button class="tf-btn" data-tf="1y">۱ سال</button>
+                </div>
+
                 <div class="chart-box">
                     <canvas id="priceChart"></canvas>
                 </div>
@@ -158,20 +188,52 @@
         };
 
         const showcaseKeys = ['usd', 'eur', 'aed', 'gold_18k', 'coin_emami'];
+        const showcaseSet = new Set(showcaseKeys);
+
         let activeKey = 'usd';
+        let activeTf = '1m'; // 1d, 1w, 1m, 6m, 1y
+
         let marketRaw = {};
         let myChartInstance = null;
 
         function formatNum(num) {
-            if (!num && num !== 0) return '---';
+            if (num === null || num === undefined || Number.isNaN(num)) return '---';
             return new Intl.NumberFormat('fa-IR').format(num);
+        }
+
+        function toNumber(v) {
+            if (v === null || v === undefined) return null;
+            if (typeof v === 'number') return v;
+            const s = String(v).replace(/[,\s]/g, '');
+            const n = parseFloat(s);
+            return Number.isFinite(n) ? n : null;
+        }
+
+        function tfToDays(tf) {
+            switch (tf) {
+                case '1d': return 1;
+                case '1w': return 7;
+                case '1m': return 30;
+                case '6m': return 183;
+                case '1y': return 365;
+                default: return 30;
+            }
+        }
+
+        function sliceLastByTimeframe(items, tf) {
+            // items: [{ts:number, label:string, value:number}]
+            const days = tfToDays(tf);
+            const cutoff = Date.now() - days * 24 * 60 * 60 * 1000;
+            const filtered = items.filter(it => (it.ts && it.ts >= cutoff));
+            // اگر چیزی باقی نماند، حداقل آخرین 30 نقطه را بده که خالی نشود
+            if (filtered.length >= 2) return filtered;
+            return items.slice(-Math.min(items.length, 30));
         }
 
         async function fetchMarket() {
             try {
-                // Fetch directly from root market.json with cache bust
                 const res = await fetch('market.json?v=' + Date.now());
-                if (!res.ok) throw new Error('فایل یافت نشد');
+                if (!res.ok) throw new Error('market.json یافت نشد');
                 marketRaw = await res.json();
                 renderAll();
             } catch (err) {
@@ -188,7 +250,7 @@
                 document.getElementById('updateTime').innerText = `آخرین بروزرسانی: ${shamsi} - ساعت ${t}`;
             }
 
-            // 1. Render Showcase (5 items)
+            // 1) Render Showcase
             const showcaseEl = document.getElementById('showcaseGrid');
             showcaseEl.innerHTML = showcaseKeys.map(k => {
                 const info = assetMeta[k] || { name: k, unit: 'تومان' };
@@ -202,9 +264,11 @@
                 `;
             }).join('');
 
-            // 2. Render Full List
+            // 2) Render Full List (EXCLUDING showcase 5 items)
             const listEl = document.getElementById('ratesList');
-            const validKeys = Object.keys(marketRaw).filter(k => assetMeta[k] && !['updated_at', 'date', 'date_shamsi', 'date_shamsi_full', 'time'].includes(k));
+            const ignoreKeys = new Set(['updated_at', 'date', 'date_shamsi', 'date_shamsi_full', 'time']);
+
+            const validKeys = Object.keys(marketRaw).filter(k => assetMeta[k] && !ignoreKeys.has(k) && !showcaseSet.has(k));
             document.getElementById('totalItems').innerText = `${validKeys.length} شاخص`;
 
             listEl.innerHTML = validKeys.map(k => {
@@ -225,8 +289,9 @@
                 `;
             }).join('');
 
-            // 3. Render Chart
+            // 3) Render Chart
             renderChartFor(activeKey);
+            syncTfButtons();
         }
 
         function changeAsset(key) {
@@ -234,24 +299,99 @@
             renderAll();
         }
 
+        function setTimeframe(tf) {
+            activeTf = tf;
+            syncTfButtons();
+            renderChartFor(activeKey);
+        }
+
+        function syncTfButtons() {
+            document.querySelectorAll('.tf-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.tf === activeTf);
+            });
+        }
+
+        function parseHistoryPayload(payload) {
+            // قبول چند مدل مختلف:
+            // 1) Array مستقیم
+            // 2) {history: Array}
+            // 3) {data: Array}
+            if (Array.isArray(payload)) return payload;
+            if (payload && Array.isArray(payload.history)) return payload.history;
+            if (payload && Array.isArray(payload.data)) return payload.data;
+            return [];
+        }
+
+        function extractPoint(h) {
+            // تلاش برای استخراج زمان و قیمت از فیلدهای رایج
+            const value = toNumber(h.price ?? h.value ?? h.rate ?? h.last ?? h.close ?? h.p);
+            const label = (h.time || h.date || h.datetime || h.label || '').toString();
+
+            // timestamp:
+            // اگر ts داشت، همان
+            // اگر epoch ثانیه/میلی‌ثانیه داشت
+            // اگر ISO داشت
+            let ts = null;
+
+            if (h.ts) {
+                const n = toNumber(h.ts);
+                if (n) ts = (n < 10_000_000_000 ? n * 1000 : n);
+            } else if (h.timestamp) {
+                const n = toNumber(h.timestamp);
+                if (n) ts = (n < 10_000_000_000 ? n * 1000 : n);
+            } else if (h.datetime) {
+                const d = new Date(h.datetime);
+                if (!isNaN(d.getTime())) ts = d.getTime();
+            } else if (h.date && h.time) {
+                const d = new Date(`${h.date}T${h.time}`);
+                if (!isNaN(d.getTime())) ts = d.getTime();
+            } else if (h.date) {
+                const d = new Date(h.date);
+                if (!isNaN(d.getTime())) ts = d.getTime();
+            }
+
+            return { ts, label, value };
+        }
+
+        async function loadHistory(key) {
+            // مسیر درست بر اساس بک‌اند شما:
+            // api/history_<symbol>.json
+            const url = `api/history_${key}.json?v=${Date.now()}`;
+
+            const r = await fetch(url);
+            if (!r.ok) return [];
+
+            const payload = await r.json();
+            const arr = parseHistoryPayload(payload);
+            const points = arr.map(extractPoint).filter(p => (p.value !== null));
+
+            // مرتب‌سازی بر اساس زمان اگر ts داشتیم
+            points.sort((a, b) => {
+                if (a.ts && b.ts) return a.ts - b.ts;
+                return 0;
+            });
+
+            return points;
+        }
+
         async function renderChartFor(key) {
-            const meta = assetMeta[key] || { name: key };
+            const meta = assetMeta[key] || { name: key, unit: '' };
             document.getElementById('chartHeading').innerText = `نمودار روند قیمت (${meta.name})`;
 
-            let labels = ['امروز'];
-            let points = [marketRaw[key] || 0];
+            // پیش‌فرض اگر تاریخچه نبود
+            let labels = ['اکنون'];
+            let values = [toNumber(marketRaw[key]) ?? 0];
 
             try {
-                // Try reading history from api or charts directory if available
-                const r = await fetch(`api/${key}.json?v=` + Date.now());
-                if (r.ok) {
-                    const history = await r.json();
-                    if (Array.isArray(history) && history.length > 0) {
-                        labels = history.map(h => h.date || h.time || '');
-                        points = history.map(h => h.price || h.rate || 0);
-                    }
+                const points = await loadHistory(key);
+                if (points.length >= 2) {
+                    const sliced = sliceLastByTimeframe(points, activeTf);
+                    labels = sliced.map(p => p.label || '');
+                    values = sliced.map(p => p.value);
                 }
-            } catch(e) {}
+            } catch (e) {
+                console.warn('history load failed:', e);
+            }
 
             const ctx = document.getElementById('priceChart').getContext('2d');
             if (myChartInstance) myChartInstance.destroy();
@@ -262,14 +402,14 @@
                     labels: labels,
                     datasets: [{
                         label: meta.name,
-                        data: points,
+                        data: values,
                         borderColor: '#ff7a00',
                         backgroundColor: 'rgba(255, 122, 0, 0.12)',
                         borderWidth: 3,
                         fill: true,
                         tension: 0.35,
-                        pointRadius: 4,
-                        pointHoverRadius: 6,
+                        pointRadius: 2,
+                        pointHoverRadius: 5,
                         pointBackgroundColor: '#ff7a00'
                     }]
                 },
@@ -289,12 +429,12 @@
                     scales: {
                         x: {
                             grid: { color: 'rgba(255,255,255,0.05)' },
-                            ticks: { color: '#9ca3af', font: { family: 'Vazirmatn' } }
+                            ticks: { color: '#9ca3af', font: { family: 'Vazirmatn' }, maxRotation: 0, autoSkip: true }
                         },
                         y: {
                             grid: { color: 'rgba(255,255,255,0.05)' },
-                            ticks: { 
-                                color: '#9ca3af', 
+                            ticks: {
+                                color: '#9ca3af',
                                 font: { family: 'Vazirmatn' },
                                 callback: val => formatNum(val)
                             }
@@ -303,6 +443,13 @@
                 }
             });
         }
+
+        // Timeframe click handlers
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.tf-btn');
+            if (!btn) return;
+            setTimeframe(btn.dataset.tf);
+        });
 
         // Initialize
         fetchMarket();
