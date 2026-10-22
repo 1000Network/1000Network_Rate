@@ -280,6 +280,7 @@
         .rates-container::-webkit-scrollbar {
             width: 4px;
         }
+
         .rates-container::-webkit-scrollbar-thumb {
             background: var(--border-color);
             border-radius: 8px;
@@ -334,14 +335,44 @@
         }
 
         @media (max-width: 1024px) {
-            .showcase-grid { grid-template-columns: repeat(3, 1fr); }
-            .main-layout { grid-template-columns: 1fr; }
-            .sidebar { height: 380px; }
+            .showcase-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                height: 380px;
+            }
         }
 
         @media (max-width: 640px) {
-            .showcase-grid { grid-template-columns: repeat(2, 1fr); }
-            header { flex-direction: column; gap: 12px; text-align: center; }
+            .showcase-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            header {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+
+            .chart-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 14px;
+            }
+
+            .timeframe-bar {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .tf-btn {
+                padding: 5px 9px;
+            }
         }
     </style>
 </head>
@@ -400,28 +431,137 @@
         let currentDays = 7;
         let chartInstance = null;
 
-        // 5 شاخص ویترین بالا
+        // پنج شاخص ویترین بالا؛ این موارد در سایدبار نمایش داده نمی‌شوند.
         const showcaseKeys = ['usd', 'eur', 'aed', 'gold_18k', 'coin_emami'];
+
+        // نام نمایشی و واحد هر شاخص
+        const rateInfo = {
+            usd: ['دلار آمریکا', 'تومان'],
+            eur: ['یورو', 'تومان'],
+            aed: ['درهم امارات', 'تومان'],
+            gold_18k: ['طلای ۱۸ عیار', 'تومان'],
+            coin_emami: ['سکه امامی', 'تومان'],
+            coin_gram: ['سکه گرمی', 'تومان'],
+            coin_quarter: ['ربع سکه', 'تومان'],
+            coin_bahar: ['سکه بهار آزادی', 'تومان'],
+            coin_half: ['نیم سکه', 'تومان'],
+            gold_mesghal: ['مثقال طلا', 'تومان'],
+            gold_ounce: ['انس طلا', 'دلار'],
+            usd_xau: ['انس جهانی طلا', 'دلار'],
+            oil: ['نفت', 'دلار'],
+            gbp: ['پوند انگلیس', 'تومان'],
+            try: ['لیر ترکیه', 'تومان'],
+            cad: ['دلار کانادا', 'تومان'],
+            aud: ['دلار استرالیا', 'تومان'],
+            cny: ['یوان چین', 'تومان'],
+            iqd: ['دینار عراق', 'تومان'],
+            myr: ['رینگیت مالزی', 'تومان'],
+            rub: ['روبل روسیه', 'تومان'],
+            amd: ['درام ارمنستان', 'تومان'],
+            azn: ['منات آذربایجان', 'تومان'],
+            gel: ['لاری گرجستان', 'تومان'],
+            omr: ['ریال عمان', 'تومان'],
+            inr: ['روپیه هند', 'تومان'],
+            thb: ['بات تایلند', 'تومان'],
+            jpy: ['ین ژاپن', 'تومان'],
+            sar: ['ریال عربستان', 'تومان'],
+            chf: ['فرانک سوئیس', 'تومان'],
+            afn: ['افغانی افغانستان', 'تومان'],
+            krw: ['وون کره جنوبی', 'تومان'],
+            sek: ['کرون سوئد', 'تومان'],
+            qar: ['ریال قطر', 'تومان'],
+            nzd: ['دلار نیوزیلند', 'تومان'],
+            nok: ['کرون نروژ', 'تومان'],
+            sgd: ['دلار سنگاپور', 'تومان'],
+            bhd: ['دینار بحرین', 'تومان'],
+            hkd: ['دلار هنگ‌کنگ', 'تومان'],
+            kwd: ['دینار کویت', 'تومان'],
+            pkr: ['روپیه پاکستان', 'تومان'],
+            dkk: ['کرون دانمارک', 'تومان'],
+            tjs: ['سامانی تاجیکستان', 'تومان'],
+            tmt: ['منات ترکمنستان', 'تومان'],
+            kgs: ['سوم قرقیزستان', 'تومان'],
+            syp: ['لیره سوریه', 'تومان'],
+            ars: ['پزوی آرژانتین', 'تومان'],
+            brl: ['رئال برزیل', 'تومان']
+        };
+
+        const metadataKeys = [
+            'updated_at',
+            'date',
+            'date_shamsi',
+            'date_shamsi_full',
+            'time'
+        ];
+
+        function getRate(key) {
+            const value = allRates[key];
+
+            if (value === undefined || value === null || value === '') {
+                return null;
+            }
+
+            const numericValue = Number(value);
+            if (!Number.isFinite(numericValue)) {
+                return null;
+            }
+
+            const info = rateInfo[key] || [key.toUpperCase(), 'تومان'];
+
+            return {
+                title: info[0],
+                unit: info[1],
+                price: numericValue
+            };
+        }
+
+        async function fetchJson(paths) {
+            let lastError = null;
+
+            for (const path of paths) {
+                try {
+                    const response = await fetch(path, { cache: 'no-store' });
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status} برای ${path}`);
+                    }
+                    return await response.json();
+                } catch (error) {
+                    lastError = error;
+                }
+            }
+
+            throw lastError || new Error('فایل داده دریافت نشد');
+        }
 
         async function init() {
             try {
-                // تلاش اول از market.json و در صورت نیاز از api/market.json
-                let res = await fetch('market.json');
-                if (!res.ok) res = await fetch('api/market.json');
-                const data = await res.json();
+                const data = await fetchJson(['market.json', 'api/market.json']);
 
-                allRates = data.rates || data;
-                
-                if (data.updated_at) {
-                    document.getElementById('lastUpdate').textContent = `آخرین بروزرسانی: ${data.updated_at}`;
+                // پشتیبانی از ساختار تخت فعلی و ساختار قدیمی‌ترِ دارای rates
+                allRates = data && data.rates && typeof data.rates === 'object'
+                    ? { ...data, ...data.rates }
+                    : data;
+
+                if (!allRates || typeof allRates !== 'object') {
+                    throw new Error('ساختار market.json معتبر نیست');
+                }
+
+                const updatedAt = allRates.updated_at || allRates.time || '';
+                const updatedDate = allRates.date_shamsi_full || allRates.date || '';
+
+                if (updatedAt || updatedDate) {
+                    document.getElementById('lastUpdate').textContent =
+                        `آخرین بروزرسانی: ${updatedDate} ${updatedAt}`.trim();
+                } else {
+                    document.getElementById('lastUpdate').textContent = 'اطلاعات بازار دریافت شد';
                 }
 
                 buildShowcase();
                 buildSidebar();
-                loadChart(currentSymbol);
+                await loadChart(currentSymbol);
             } catch (err) {
-                console.error(err);
-                document.getElementById('lastUpdate').textContent = 'خطا در دریافت اطلاعات';
+                console.error('خطا در دریافت اطلاعات بازار:', err);
+                document.getElementById('lastUpdate').textContent = 'خطا در دریافت اطلاعات بازار';
             }
         }
 
@@ -430,7 +570,7 @@
             grid.innerHTML = '';
 
             showcaseKeys.forEach(key => {
-                const item = allRates[key];
+                const item = getRate(key);
                 if (!item) return;
 
                 const card = document.createElement('div');
@@ -441,8 +581,9 @@
                 card.innerHTML = `
                     <h3>${item.title}</h3>
                     <div class="price">${format(item.price)}</div>
-                    <div class="unit">${item.unit || 'تومان'}</div>
+                    <div class="unit">${item.unit}</div>
                 `;
+
                 grid.appendChild(card);
             });
         }
@@ -451,12 +592,17 @@
             const container = document.getElementById('ratesContainer');
             container.innerHTML = '';
 
-            // حذف ۵ مورد اصلی از سایدبار
-            const otherKeys = Object.keys(allRates).filter(k => !showcaseKeys.includes(k));
+            const otherKeys = Object.keys(allRates).filter(key => {
+                if (showcaseKeys.includes(key) || metadataKeys.includes(key)) {
+                    return false;
+                }
+                return getRate(key) !== null;
+            });
+
             document.getElementById('sidebarCount').textContent = `${otherKeys.length} شاخص`;
 
             otherKeys.forEach(key => {
-                const item = allRates[key];
+                const item = getRate(key);
                 if (!item) return;
 
                 const card = document.createElement('div');
@@ -471,60 +617,97 @@
                     </div>
                     <div class="rate-price">
                         <div>${format(item.price)}</div>
-                        <div class="rate-unit">${item.unit || 'تومان'}</div>
+                        <div class="rate-unit">${item.unit}</div>
                     </div>
                 `;
+
                 container.appendChild(card);
             });
         }
 
         function selectSymbol(key) {
             currentSymbol = key;
-            document.querySelectorAll('.showcase-card, .rate-card').forEach(el => el.classList.remove('active'));
-            const activeEl = document.getElementById(`card-${key}`);
-            if (activeEl) activeEl.classList.add('active');
+
+            document.querySelectorAll('.showcase-card, .rate-card').forEach(element => {
+                element.classList.remove('active');
+            });
+
+            const activeElement = document.getElementById(`card-${key}`);
+            if (activeElement) {
+                activeElement.classList.add('active');
+            }
+
             loadChart(key);
         }
 
-        function setTimeframe(days, btn) {
+        function setTimeframe(days, button) {
             currentDays = days;
-            document.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+
+            document.querySelectorAll('.tf-btn').forEach(element => {
+                element.classList.remove('active');
+            });
+
+            button.classList.add('active');
             loadChart(currentSymbol);
         }
 
         async function loadChart(symbol) {
-            const item = allRates[symbol];
-            const title = item ? item.title : symbol;
-            document.getElementById('chartTitle').textContent = `نمودار روند قیمت (${title})`;
+            const item = getRate(symbol);
+            const title = item ? item.title : symbol.toUpperCase();
+
+            document.getElementById('chartTitle').textContent =
+                `نمودار روند قیمت (${title})`;
 
             try {
-                let res = await fetch(`api/history_${symbol}.json`);
-                if (!res.ok) res = await fetch(`history_${symbol}.json`);
-                
-                const json = await res.json();
-                let history = Array.isArray(json) ? json : (json.history || []);
+                const json = await fetchJson([
+                    `api/history_${symbol}.json`,
+                    `history_${symbol}.json`
+                ]);
 
-                // فیلتر بر اساس بازه انتخابی
+                let history = Array.isArray(json)
+                    ? json
+                    : (Array.isArray(json.history) ? json.history : []);
+
+                // نگه داشتن نقاط معتبر و تبدیل قیمت به عدد
+                history = history
+                    .map(point => ({
+                        time: point.time || point.date || point.timestamp || '',
+                        price: Number(point.price ?? point.value)
+                    }))
+                    .filter(point => Number.isFinite(point.price));
+
                 let points = history;
-                if (currentDays === 1) points = history.slice(-5);
-                else if (currentDays === 7) points = history.slice(-15);
-                else if (currentDays === 30) points = history.slice(-30);
-                else if (currentDays === 180) points = history.slice(-60);
 
-                const labels = points.map(p => p.time || p.date || '');
-                const values = points.map(p => p.price);
+                // محدود کردن تعداد نقاط نمایشی برای بازه‌های مختلف
+                if (currentDays === 1) {
+                    points = history.slice(-5);
+                } else if (currentDays === 7) {
+                    points = history.slice(-15);
+                } else if (currentDays === 30) {
+                    points = history.slice(-30);
+                } else if (currentDays === 180) {
+                    points = history.slice(-180);
+                } else if (currentDays === 365) {
+                    points = history.slice(-365);
+                }
 
-                renderChart(labels, values, title);
-            } catch (e) {
-                console.warn('History not found for', symbol);
-                renderChart([], [], title);
+                const labels = points.map(point => point.time);
+                const values = points.map(point => point.price);
+
+                renderChart(labels, values, title, item ? item.unit : 'تومان');
+            } catch (error) {
+                console.warn(`تاریخچه برای ${symbol} دریافت نشد:`, error);
+                renderChart([], [], title, item ? item.unit : 'تومان');
             }
         }
 
-        function renderChart(labels, data, label) {
-            const ctx = document.getElementById('priceChart').getContext('2d');
-            if (chartInstance) chartInstance.destroy();
+        function renderChart(labels, data, label, unit) {
+            const canvas = document.getElementById('priceChart');
+            const ctx = canvas.getContext('2d');
+
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
 
             const gradient = ctx.createLinearGradient(0, 0, 0, 380);
             gradient.addColorStop(0, 'rgba(255, 122, 0, 0.35)');
@@ -552,8 +735,14 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
                     plugins: {
-                        legend: { display: false },
+                        legend: {
+                            display: false
+                        },
                         tooltip: {
                             mode: 'index',
                             intersect: false,
@@ -564,21 +753,29 @@
                             borderWidth: 1,
                             padding: 10,
                             callbacks: {
-                                label: (c) => ` ${format(c.parsed.y)} تومان`
+                                label: context =>
+                                    ` ${format(context.parsed.y)} ${unit}`
                             }
                         }
                     },
                     scales: {
                         x: {
-                            grid: { color: 'rgba(255, 255, 255, 0.03)' },
-                            ticks: { color: '#9ca3af', font: { family: 'Vazirmatn', size: 10 } }
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.03)'
+                            },
+                            ticks: {
+                                color: '#9ca3af',
+                                font: { family: 'Vazirmatn', size: 10 }
+                            }
                         },
                         y: {
-                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
                             ticks: {
                                 color: '#9ca3af',
                                 font: { family: 'Vazirmatn', size: 11 },
-                                callback: (v) => format(v)
+                                callback: value => format(value)
                             }
                         }
                     }
@@ -586,12 +783,19 @@
             });
         }
 
-        function format(n) {
-            if (!n && n !== 0) return '۰';
-            return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        function format(value) {
+            const number = Number(value);
+
+            if (!Number.isFinite(number)) {
+                return '۰';
+            }
+
+            return new Intl.NumberFormat('en-US', {
+                maximumFractionDigits: 2
+            }).format(number);
         }
 
-        window.onload = init;
+        window.addEventListener('load', init);
     </script>
 </body>
 </html>
