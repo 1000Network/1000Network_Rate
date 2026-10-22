@@ -109,6 +109,7 @@
             background: #10b981;
             border-radius: 50%;
             box-shadow: 0 0 8px #10b981;
+            flex: 0 0 auto;
         }
 
         /* Showcase Grid */
@@ -168,6 +169,8 @@
             font-size: 1.35rem;
             font-weight: 800;
             color: #ffffff;
+            direction: rtl;
+            unicode-bidi: plaintext;
         }
 
         .showcase-card .unit {
@@ -199,6 +202,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 18px;
+            gap: 12px;
         }
 
         .chart-title {
@@ -327,6 +331,8 @@
             font-size: 0.95rem;
             font-weight: 700;
             color: #fff;
+            direction: rtl;
+            unicode-bidi: plaintext;
         }
 
         .rate-unit {
@@ -430,6 +436,7 @@
         let currentSymbol = 'usd';
         let currentDays = 7;
         let chartInstance = null;
+        let isRefreshing = false;
 
         // پنج شاخص ویترین بالا؛ این موارد در سایدبار نمایش داده نمی‌شوند.
         const showcaseKeys = ['usd', 'eur', 'aed', 'gold_18k', 'coin_emami'];
@@ -488,11 +495,111 @@
 
         const metadataKeys = [
             'updated_at',
+            'timestamp',
             'date',
             'date_shamsi',
             'date_shamsi_full',
-            'time'
+            'time',
+            'source'
         ];
+
+        const persianNumberFormatter = new Intl.NumberFormat('fa-IR', {
+            maximumFractionDigits: 2
+        });
+
+        const jalaliDateFormatter = new Intl.DateTimeFormat('fa-IR-u-ca-persian', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            numberingSystem: 'arabext'
+        });
+
+        const jalaliDateTimeFormatter = new Intl.DateTimeFormat('fa-IR-u-ca-persian', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hourCycle: 'h23',
+            numberingSystem: 'arabext'
+        });
+
+        function toPersianDigits(value) {
+            return String(value ?? '').replace(/[0-9]/g, digit =>
+                String.fromCharCode(digit.charCodeAt(0) + 1728)
+            );
+        }
+
+        function format(value) {
+            const number = Number(value);
+
+            if (!Number.isFinite(number)) {
+                return '۰';
+            }
+
+            return persianNumberFormatter.format(number);
+        }
+
+        function parseDate(value) {
+            if (value === undefined || value === null || value === '') {
+                return null;
+            }
+
+            if (typeof value === 'number' || /^\d{10,13}$/.test(String(value))) {
+                let timestamp = Number(value);
+                if (String(Math.trunc(timestamp)).length === 10) {
+                    timestamp *= 1000;
+                }
+                const date = new Date(timestamp);
+                return Number.isNaN(date.getTime()) ? null : date;
+            }
+
+            const text = String(value).trim();
+
+            // پشتیبانی از تاریخ میلادی ISO، مانند 2026-10-22T16:34:21
+            const parsed = new Date(text);
+            if (!Number.isNaN(parsed.getTime())) {
+                return parsed;
+            }
+
+            // پشتیبانی از تاریخ شمسی رشته‌ای مانند 1405/07/30
+            // در صورت ناتوانی مرورگر در تفسیر، متن موجود حفظ می‌شود.
+            return null;
+        }
+
+        function formatDateLabel(value) {
+            const date = parseDate(value);
+
+            if (date) {
+                return jalaliDateFormatter.format(date);
+            }
+
+            // اگر تاریخ از قبل رشته‌ای/شمسی باشد، فقط رقم‌هایش فارسی می‌شوند.
+            return toPersianDigits(value);
+        }
+
+        function formatUpdateText(data) {
+            const rawTimestamp = data.updated_at || data.timestamp || '';
+            const rawDate = data.date_shamsi_full || data.date_shamsi || data.date || '';
+            const rawTime = data.time || '';
+
+            const parsed = parseDate(rawTimestamp);
+
+            if (parsed) {
+                return `آخرین بروزرسانی: ${jalaliDateTimeFormatter.format(parsed)}`;
+            }
+
+            const dateText = rawDate ? toPersianDigits(rawDate) : '';
+            const timeText = rawTime ? toPersianDigits(rawTime) : '';
+
+            if (dateText || timeText) {
+                return `آخرین بروزرسانی: ${dateText} ${timeText}`.trim();
+            }
+
+            // اگر market.json زمان ثبت‌شده نداشته باشد، زمان فعلی مرورگر به وقت محلی نمایش داده می‌شود.
+            return `آخرین بروزرسانی صفحه: ${jalaliDateTimeFormatter.format(new Date())}`;
+        }
 
         function getRate(key) {
             const value = allRates[key];
@@ -520,10 +627,15 @@
 
             for (const path of paths) {
                 try {
-                    const response = await fetch(path, { cache: 'no-store' });
+                    const separator = path.includes('?') ? '&' : '?';
+                    const response = await fetch(`${path}${separator}_=${Date.now()}`, {
+                        cache: 'no-store'
+                    });
+
                     if (!response.ok) {
                         throw new Error(`HTTP ${response.status} برای ${path}`);
                     }
+
                     return await response.json();
                 } catch (error) {
                     lastError = error;
@@ -534,34 +646,33 @@
         }
 
         async function init() {
+            if (isRefreshing) return;
+            isRefreshing = true;
+
+            const updateElement = document.getElementById('lastUpdate');
+
             try {
                 const data = await fetchJson(['market.json', 'api/market.json']);
 
-                // پشتیبانی از ساختار تخت فعلی و ساختار قدیمی‌ترِ دارای rates
+                // پشتیبانی از ساختار تخت فعلی و ساختار دارای rates
                 allRates = data && data.rates && typeof data.rates === 'object'
                     ? { ...data, ...data.rates }
                     : data;
 
-                if (!allRates || typeof allRates !== 'object') {
+                if (!allRates || typeof allRates !== 'object' || Array.isArray(allRates)) {
                     throw new Error('ساختار market.json معتبر نیست');
                 }
 
-                const updatedAt = allRates.updated_at || allRates.time || '';
-                const updatedDate = allRates.date_shamsi_full || allRates.date || '';
-
-                if (updatedAt || updatedDate) {
-                    document.getElementById('lastUpdate').textContent =
-                        `آخرین بروزرسانی: ${updatedDate} ${updatedAt}`.trim();
-                } else {
-                    document.getElementById('lastUpdate').textContent = 'اطلاعات بازار دریافت شد';
-                }
+                updateElement.textContent = formatUpdateText(allRates);
 
                 buildShowcase();
                 buildSidebar();
                 await loadChart(currentSymbol);
             } catch (err) {
                 console.error('خطا در دریافت اطلاعات بازار:', err);
-                document.getElementById('lastUpdate').textContent = 'خطا در دریافت اطلاعات بازار';
+                updateElement.textContent = 'خطا در دریافت اطلاعات بازار';
+            } finally {
+                isRefreshing = false;
             }
         }
 
@@ -599,7 +710,8 @@
                 return getRate(key) !== null;
             });
 
-            document.getElementById('sidebarCount').textContent = `${otherKeys.length} شاخص`;
+            document.getElementById('sidebarCount').textContent =
+                `${format(otherKeys.length)} شاخص`;
 
             otherKeys.forEach(key => {
                 const item = getRate(key);
@@ -613,7 +725,7 @@
                 card.innerHTML = `
                     <div>
                         <div class="rate-title">${item.title}</div>
-                        <div class="rate-code">${key.toUpperCase()}</div>
+                        <div class="rate-code">${toPersianDigits(key.toUpperCase())}</div>
                     </div>
                     <div class="rate-price">
                         <div>${format(item.price)}</div>
@@ -668,7 +780,6 @@
                     ? json
                     : (Array.isArray(json.history) ? json.history : []);
 
-                // نگه داشتن نقاط معتبر و تبدیل قیمت به عدد
                 history = history
                     .map(point => ({
                         time: point.time || point.date || point.timestamp || '',
@@ -676,9 +787,9 @@
                     }))
                     .filter(point => Number.isFinite(point.price));
 
+                // برای بازه‌های زمانی مختلف، تعداد نقاط آخر انتخاب می‌شود.
                 let points = history;
 
-                // محدود کردن تعداد نقاط نمایشی برای بازه‌های مختلف
                 if (currentDays === 1) {
                     points = history.slice(-5);
                 } else if (currentDays === 7) {
@@ -691,7 +802,7 @@
                     points = history.slice(-365);
                 }
 
-                const labels = points.map(point => point.time);
+                const labels = points.map(point => formatDateLabel(point.time));
                 const values = points.map(point => point.price);
 
                 renderChart(labels, values, title, item ? item.unit : 'تومان');
@@ -753,8 +864,11 @@
                             borderWidth: 1,
                             padding: 10,
                             callbacks: {
+                                title: items => items.length
+                                    ? toPersianDigits(items[0].label)
+                                    : '',
                                 label: context =>
-                                    ` ${format(context.parsed.y)} ${unit}`
+                                    ` قیمت: ${format(context.parsed.y)} ${unit}`
                             }
                         }
                     },
@@ -765,7 +879,10 @@
                             },
                             ticks: {
                                 color: '#9ca3af',
-                                font: { family: 'Vazirmatn', size: 10 }
+                                font: { family: 'Vazirmatn', size: 10 },
+                                callback: function(value) {
+                                    return toPersianDigits(this.getLabelForValue(value));
+                                }
                             }
                         },
                         y: {
@@ -783,19 +900,18 @@
             });
         }
 
-        function format(value) {
-            const number = Number(value);
-
-            if (!Number.isFinite(number)) {
-                return '۰';
-            }
-
-            return new Intl.NumberFormat('en-US', {
-                maximumFractionDigits: 2
-            }).format(number);
-        }
-
+        // بارگذاری هنگام باز شدن صفحه و هر بار رفرش مرورگر
         window.addEventListener('load', init);
+
+        // به‌روزرسانی خودکار داده‌های قابل مشاهده هر ۵ دقیقه
+        setInterval(init, 5 * 60 * 1000);
+
+        // اگر کاربر به تب سایت برگردد، نرخ‌ها را دوباره واکشی می‌کنیم.
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                init();
+            }
+        });
     </script>
 </body>
 </html>
