@@ -25,15 +25,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests beautifulsoup4 lxml cloudscraper matplotlib tzdata
 
+      # ---------------------------------------------------------
+      # این بخش برای اجرای اسکریپت پایتون و آپدیت فایل‌ها الزامی است
+      # ---------------------------------------------------------
+      - name: Run fetch script
+        run: python fetch_rates.py
+
       - name: Commit and push if changed
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.io'
           git add market.json README.md api/ charts/ share/
-          # بررسی اگر تغییری وجود داشت کامیت کن
           if ! git diff --staged --quiet; then
             git commit -m "chore(auto): update rates, API history and charts [skip ci]"
-            # دریافت تغییرات احتمالی شما از روی سرور و ترکیب با فایل‌های جدید
             git pull origin main --rebase
             git push
           else
