@@ -8,17 +8,13 @@
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
     <style>
         :root {
-            --bg-dark: #07090e;
-            --bg-gradient: radial-gradient(circle at top center, #111827 0%, #07090e 100%);
-            --card-bg: rgba(17, 24, 39, 0.75);
-            --card-hover-bg: rgba(26, 34, 52, 0.85);
-            --border-color: rgba(255, 122, 0, 0.22);
-            --border-hover: rgba(255, 122, 0, 0.5);
+            --bg-dark: #0b0f19;
+            --bg-card: rgba(17, 24, 39, 0.75);
+            --border-color: rgba(255, 122, 0, 0.25);
             --primary-orange: #ff7a00;
             --primary-orange-glow: rgba(255, 122, 0, 0.35);
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
-            --success-green: #10b981;
         }
 
         * {
@@ -29,34 +25,30 @@
 
         body {
             font-family: 'Vazirmatn', sans-serif;
-            background: var(--bg-dark);
-            background-image: var(--bg-gradient);
+            background: radial-gradient(circle at top center, #111827 0%, #07090e 100%);
+            background-color: var(--bg-dark);
             color: var(--text-main);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             padding: 20px;
         }
 
         .container {
-            width: 100%;
             max-width: 1400px;
             margin: 0 auto;
         }
 
-        /* Header Styling */
+        /* Header */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 20px 30px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-radius: 18px;
+            padding: 16px 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
         }
 
         .brand {
@@ -65,308 +57,291 @@
             gap: 15px;
         }
 
-        .brand img {
-            width: 55px;
-            height: 55px;
-            object-fit: contain;
-            filter: drop-shadow(0 0 8px rgba(255, 122, 0, 0.4));
+        .brand-logo-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 122, 0, 0.1);
+            border: 2px solid var(--primary-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 12px var(--primary-orange-glow);
+        }
+
+        .brand-logo-circle::after {
+            content: '';
+            width: 14px;
+            height: 14px;
+            background: var(--primary-orange);
+            border-radius: 50%;
         }
 
         .brand h1 {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 800;
             color: #fff;
-            letter-spacing: -0.5px;
         }
 
         .brand span {
+            font-size: 0.75rem;
+            color: var(--primary-orange);
+            letter-spacing: 1px;
             display: block;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 3px;
         }
 
         .last-update {
-            background: rgba(255, 122, 0, 0.08);
-            border: 1px solid var(--border-color);
-            padding: 10px 20px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #10b981;
+            padding: 8px 18px;
             border-radius: 30px;
-            font-size: 0.9rem;
-            color: var(--primary-orange);
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 0 15px rgba(255, 122, 0, 0.1);
         }
 
         .last-update::before {
             content: '';
-            width: 9px;
-            height: 9px;
-            background-color: var(--primary-orange);
+            width: 8px;
+            height: 8px;
+            background: #10b981;
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--primary-orange);
-            animation: pulse 2s infinite;
+            box-shadow: 0 0 8px #10b981;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(0.95); opacity: 0.8; }
-            50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 15px var(--primary-orange); }
-            100% { transform: scale(0.95); opacity: 0.8; }
+        /* Showcase Grid */
+        .showcase-title {
+            font-size: 0.95rem;
+            color: var(--primary-orange);
+            margin-bottom: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        /* Top 5 Showcase Grid */
+        .showcase-title::before {
+            content: '•';
+            font-size: 1.5rem;
+        }
+
         .showcase-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 18px;
-            margin-bottom: 25px;
+            gap: 16px;
+            margin-bottom: 24px;
         }
 
         .showcase-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
             border: 1px solid var(--border-color);
-            border-radius: 18px;
-            padding: 20px;
+            border-radius: 16px;
+            padding: 18px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
+            transition: all 0.25s ease;
         }
 
         .showcase-card:hover {
-            transform: translateY(-5px);
-            background: var(--card-hover-bg);
-            border-color: var(--border-hover);
-            box-shadow: 0 12px 30px var(--primary-orange-glow);
+            transform: translateY(-4px);
+            border-color: var(--primary-orange);
+            box-shadow: 0 8px 20px var(--primary-orange-glow);
         }
 
         .showcase-card.active {
-            border-color: var(--primary-orange);
+            border: 2px solid var(--primary-orange);
             background: rgba(255, 122, 0, 0.08);
-            box-shadow: 0 0 20px var(--primary-orange-glow);
+            box-shadow: 0 0 16px var(--primary-orange-glow);
         }
 
         .showcase-card h3 {
-            font-size: 0.95rem;
+            font-size: 0.88rem;
             color: var(--text-muted);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
+            font-weight: 500;
         }
 
         .showcase-card .price {
             font-size: 1.35rem;
-            font-weight: 700;
-            color: #fff;
+            font-weight: 800;
+            color: #ffffff;
         }
 
         .showcase-card .unit {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: var(--text-muted);
-            margin-top: 5px;
+            margin-top: 4px;
         }
 
-        /* Main Content Layout */
+        /* Layout */
         .main-layout {
             display: grid;
             grid-template-columns: 1fr 340px;
-            gap: 25px;
+            gap: 20px;
         }
 
         /* Chart Section */
         .chart-section {
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
             border-radius: 20px;
-            padding: 25px;
+            padding: 22px;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
 
         .chart-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
+            margin-bottom: 18px;
         }
 
         .chart-title {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 700;
             color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
-        .timeframe-buttons {
+        .timeframe-bar {
             display: flex;
-            background: rgba(11, 15, 25, 0.6);
+            background: rgba(11, 15, 25, 0.7);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 4px;
-            gap: 4px;
+            border-radius: 10px;
+            padding: 3px;
+            gap: 3px;
         }
 
         .tf-btn {
             background: transparent;
             border: none;
             color: var(--text-muted);
-            padding: 6px 14px;
             font-family: 'Vazirmatn', sans-serif;
-            font-size: 0.82rem;
-            font-weight: 500;
-            border-radius: 8px;
+            font-size: 0.8rem;
+            padding: 5px 12px;
+            border-radius: 7px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
         .tf-btn:hover {
             color: #fff;
-            background: rgba(255, 122, 0, 0.1);
         }
 
         .tf-btn.active {
             background: var(--primary-orange);
             color: #fff;
             font-weight: 700;
-            box-shadow: 0 0 12px var(--primary-orange-glow);
+            box-shadow: 0 0 10px var(--primary-orange-glow);
         }
 
-        .chart-container {
+        .chart-box {
             position: relative;
-            flex-grow: 1;
             height: 420px;
             width: 100%;
         }
 
-        /* Sidebar Rates List */
+        /* Sidebar */
         .sidebar {
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
             border-radius: 20px;
-            padding: 20px;
+            padding: 18px;
             display: flex;
             flex-direction: column;
-            height: 520px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            height: 500px;
         }
 
-        .sidebar-title {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        .sidebar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.95rem;
+            font-weight: 700;
         }
 
-        .rates-list {
+        .rates-container {
             overflow-y: auto;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            padding-left: 5px;
+            gap: 10px;
+            padding-left: 4px;
         }
 
-        /* Custom Scrollbar */
-        .rates-list::-webkit-scrollbar {
-            width: 5px;
+        .rates-container::-webkit-scrollbar {
+            width: 4px;
         }
-        .rates-list::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.1);
-        }
-        .rates-list::-webkit-scrollbar-thumb {
+        .rates-container::-webkit-scrollbar-thumb {
             background: var(--border-color);
-            border-radius: 10px;
-        }
-        .rates-list::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-orange);
+            border-radius: 8px;
         }
 
-        .rate-item {
+        .rate-card {
             background: rgba(11, 15, 25, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 14px;
-            padding: 14px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-right: 3px solid var(--primary-orange);
+            border-radius: 12px;
+            padding: 12px 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.2s ease;
         }
 
-        .rate-item:hover {
-            background: var(--card-hover-bg);
-            border-color: var(--border-hover);
+        .rate-card:hover {
+            background: rgba(255, 122, 0, 0.06);
             transform: translateX(-3px);
         }
 
-        .rate-item.active {
-            border-color: var(--primary-orange);
-            background: rgba(255, 122, 0, 0.08);
-            box-shadow: 0 0 15px rgba(255, 122, 0, 0.15);
+        .rate-card.active {
+            border: 1px solid var(--primary-orange);
+            border-right: 4px solid var(--primary-orange);
+            background: rgba(255, 122, 0, 0.12);
         }
 
-        .rate-info .name {
-            font-size: 0.9rem;
+        .rate-title {
+            font-size: 0.88rem;
             font-weight: 600;
             color: #fff;
         }
 
-        .rate-info .symbol {
+        .rate-code {
             font-size: 0.7rem;
             color: var(--text-muted);
             margin-top: 2px;
         }
 
-        .rate-values {
+        .rate-price {
             text-align: left;
-        }
-
-        .rate-values .price {
             font-size: 0.95rem;
             font-weight: 700;
             color: #fff;
         }
 
-        .rate-values .unit {
-            font-size: 0.7rem;
+        .rate-unit {
+            font-size: 0.68rem;
             color: var(--text-muted);
         }
 
-        /* Responsive Design */
         @media (max-width: 1024px) {
-            .showcase-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            .main-layout {
-                grid-template-columns: 1fr;
-            }
-            .sidebar {
-                height: 400px;
-            }
+            .showcase-grid { grid-template-columns: repeat(3, 1fr); }
+            .main-layout { grid-template-columns: 1fr; }
+            .sidebar { height: 380px; }
         }
 
-        @media (max-width: 768px) {
-            .showcase-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            header {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
+        @media (max-width: 640px) {
+            .showcase-grid { grid-template-columns: repeat(2, 1fr); }
+            header { flex-direction: column; gap: 12px; text-align: center; }
         }
     </style>
 </head>
@@ -376,201 +351,201 @@
         <!-- Header -->
         <header>
             <div class="brand">
-                <img src="logo.png" alt="لوگو شبکه هزاره" onerror="this.style.display='none'">
+                <div class="brand-logo-circle"></div>
                 <div>
                     <h1>شبکه هزاره</h1>
-                    <span>آزمایشگاه مالی و نرخ‌های لحظه‌ای بازار</span>
+                    <span>NETWORK HEZAREH FINANCIAL LAB</span>
                 </div>
             </div>
-            <div id="lastUpdate" class="last-update">در حال دریافت آخرین اطلاعات...</div>
+            <div id="lastUpdate" class="last-update">در حال دریافت داده‌ها...</div>
         </header>
 
-        <!-- Top 5 Showcase Grid -->
-        <div id="showcaseGrid" class="showcase-grid">
-            <!-- Dynamically populated -->
-        </div>
+        <!-- Showcase -->
+        <div class="showcase-title">شاخص‌های اصلی بازار (شبکه هزاره)</div>
+        <div id="showcaseGrid" class="showcase-grid"></div>
 
-        <!-- Main Dashboard Layout -->
+        <!-- Main Layout -->
         <div class="main-layout">
             <!-- Chart Section -->
             <div class="chart-section">
                 <div class="chart-header">
                     <div id="chartTitle" class="chart-title">نمودار روند قیمت</div>
-                    <div class="timeframe-buttons">
-                        <button class="tf-btn" data-days="1">۱ روز</button>
-                        <button class="tf-btn active" data-days="7">۱ هفته</button>
-                        <button class="tf-btn" data-days="30">۱ ماه</button>
-                        <button class="tf-btn" data-days="180">۶ ماه</button>
-                        <button class="tf-btn" data-days="365">۱ سال</button>
+                    <div class="timeframe-bar">
+                        <button class="tf-btn" onclick="setTimeframe(1, this)">۱ روز</button>
+                        <button class="tf-btn active" onclick="setTimeframe(7, this)">۱ هفته</button>
+                        <button class="tf-btn" onclick="setTimeframe(30, this)">۱ ماه</button>
+                        <button class="tf-btn" onclick="setTimeframe(180, this)">۶ ماه</button>
+                        <button class="tf-btn" onclick="setTimeframe(365, this)">۱ سال</button>
                     </div>
                 </div>
-                <div class="chart-container">
+                <div class="chart-box">
                     <canvas id="priceChart"></canvas>
                 </div>
             </div>
 
-            <!-- Sidebar Rates List (Excluding Top 5 Showcase items as requested) -->
+            <!-- Sidebar -->
             <div class="sidebar">
-                <div class="sidebar-title">
-                    <span>سایر نرخ‌های بازار</span>
-                    <span id="sidebarCount" style="font-size:0.8rem; color:var(--primary-orange);"></span>
+                <div class="sidebar-header">
+                    <span style="color:#fff;">سایر نرخ‌های بازار</span>
+                    <span id="sidebarCount" style="color:var(--primary-orange); font-size:0.85rem;"></span>
                 </div>
-                <div id="ratesList" class="rates-list">
-                    <!-- Dynamically populated -->
-                </div>
+                <div id="ratesContainer" class="rates-container"></div>
             </div>
         </div>
     </div>
 
     <script>
-        let allRatesData = {};
-        let currentSymbol = 'coin_emami'; // Default selected benchmark
+        let allRates = {};
+        let currentSymbol = 'usd';
         let currentDays = 7;
-        let priceChart = null;
+        let chartInstance = null;
 
-        // Top 5 showcase items to exclude from sidebar
+        // 5 شاخص ویترین بالا
         const showcaseKeys = ['usd', 'eur', 'aed', 'gold_18k', 'coin_emami'];
 
-        async function initDashboard() {
+        async function init() {
             try {
-                const response = await fetch('api/market.json');
-                const data = await response.json();
-                
-                allRatesData = data.rates || data;
+                // تلاش اول از market.json و در صورت نیاز از api/market.json
+                let res = await fetch('market.json');
+                if (!res.ok) res = await fetch('api/market.json');
+                const data = await res.json();
+
+                allRates = data.rates || data;
                 
                 if (data.updated_at) {
                     document.getElementById('lastUpdate').textContent = `آخرین بروزرسانی: ${data.updated_at}`;
                 }
 
-                renderShowcase();
-                renderSidebar();
-                loadChart(currentSymbol, currentDays);
-            } catch (error) {
-                console.error('Error loading market data:', error);
-                document.getElementById('lastUpdate').textContent = 'خطا در دریافت اطلاعات بازار';
+                buildShowcase();
+                buildSidebar();
+                loadChart(currentSymbol);
+            } catch (err) {
+                console.error(err);
+                document.getElementById('lastUpdate').textContent = 'خطا در دریافت اطلاعات';
             }
         }
 
-        function renderShowcase() {
+        function buildShowcase() {
             const grid = document.getElementById('showcaseGrid');
             grid.innerHTML = '';
 
             showcaseKeys.forEach(key => {
-                const item = allRatesData[key];
+                const item = allRates[key];
                 if (!item) return;
 
                 const card = document.createElement('div');
                 card.className = `showcase-card ${currentSymbol === key ? 'active' : ''}`;
-                card.onclick = () => {
-                    currentSymbol = key;
-                    document.querySelectorAll('.showcase-card').forEach(c => c.classList.remove('active'));
-                    document.querySelectorAll('.rate-item').forEach(r => r.classList.remove('active'));
-                    card.classList.add('active');
-                    loadChart(currentSymbol, currentDays);
-                };
+                card.id = `card-${key}`;
+                card.onclick = () => selectSymbol(key);
 
                 card.innerHTML = `
                     <h3>${item.title}</h3>
-                    <div class="price">${formatNumber(item.price)}</div>
+                    <div class="price">${format(item.price)}</div>
                     <div class="unit">${item.unit || 'تومان'}</div>
                 `;
                 grid.appendChild(card);
             });
         }
 
-        function renderSidebar() {
-            const list = document.getElementById('ratesList');
-            list.innerHTML = '';
+        function buildSidebar() {
+            const container = document.getElementById('ratesContainer');
+            container.innerHTML = '';
 
-            const remainingKeys = Object.keys(allRatesData).filter(key => !showcaseKeys.includes(key));
-            document.getElementById('sidebarCount').textContent = `${remainingKeys.length} شاخص`;
+            // حذف ۵ مورد اصلی از سایدبار
+            const otherKeys = Object.keys(allRates).filter(k => !showcaseKeys.includes(k));
+            document.getElementById('sidebarCount').textContent = `${otherKeys.length} شاخص`;
 
-            remainingKeys.forEach(key => {
-                const item = allRatesData[key];
+            otherKeys.forEach(key => {
+                const item = allRates[key];
                 if (!item) return;
 
-                const rateItem = document.createElement('div');
-                rateItem.className = `rate-item ${currentSymbol === key ? 'active' : ''}`;
-                rateItem.onclick = () => {
-                    currentSymbol = key;
-                    document.querySelectorAll('.showcase-card').forEach(c => c.classList.remove('active'));
-                    document.querySelectorAll('.rate-item').forEach(r => r.classList.remove('active'));
-                    rateItem.classList.add('active');
-                    loadChart(currentSymbol, currentDays);
-                };
+                const card = document.createElement('div');
+                card.className = `rate-card ${currentSymbol === key ? 'active' : ''}`;
+                card.id = `card-${key}`;
+                card.onclick = () => selectSymbol(key);
 
-                rateItem.innerHTML = `
-                    <div class="rate-info">
-                        <div class="name">${item.title}</div>
-                        <div class="symbol">${key.toUpperCase()}</div>
+                card.innerHTML = `
+                    <div>
+                        <div class="rate-title">${item.title}</div>
+                        <div class="rate-code">${key.toUpperCase()}</div>
                     </div>
-                    <div class="rate-values">
-                        <div class="price">${formatNumber(item.price)}</div>
-                        <div class="unit">${item.unit || 'تومان'}</div>
+                    <div class="rate-price">
+                        <div>${format(item.price)}</div>
+                        <div class="rate-unit">${item.unit || 'تومان'}</div>
                     </div>
                 `;
-                list.appendChild(rateItem);
+                container.appendChild(card);
             });
         }
 
-        async function loadChart(symbol, days) {
-            const itemMeta = allRatesData[symbol];
-            const title = itemMeta ? itemMeta.title : symbol;
-            document.getElementById('chartTitle').innerHTML = `نمودار روند قیمت (${title})`;
+        function selectSymbol(key) {
+            currentSymbol = key;
+            document.querySelectorAll('.showcase-card, .rate-card').forEach(el => el.classList.remove('active'));
+            const activeEl = document.getElementById(`card-${key}`);
+            if (activeEl) activeEl.classList.add('active');
+            loadChart(key);
+        }
+
+        function setTimeframe(days, btn) {
+            currentDays = days;
+            document.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            loadChart(currentSymbol);
+        }
+
+        async function loadChart(symbol) {
+            const item = allRates[symbol];
+            const title = item ? item.title : symbol;
+            document.getElementById('chartTitle').textContent = `نمودار روند قیمت (${title})`;
 
             try {
-                const res = await fetch(`api/history_${symbol}.json`);
-                if (!res.ok) throw new Error('History file not found');
-                const historyJson = await res.json();
+                let res = await fetch(`api/history_${symbol}.json`);
+                if (!res.ok) res = await fetch(`history_${symbol}.json`);
                 
-                // Support both direct array format and { history: [...] } format
-                let historyData = Array.isArray(historyJson) ? historyJson : (historyJson.history || []);
+                const json = await res.json();
+                let history = Array.isArray(json) ? json : (json.history || []);
 
-                // Filter by days if timestamp available
-                if (days < 365 && historyData.length > 0 && historyData[0].time) {
-                    const cutoff = Date.now() - (days * 24 * 60 * 60 * 1000);
-                    // If time is Persian string or timestamp, handle gracefully or slice approximate points
-                }
+                // فیلتر بر اساس بازه انتخابی
+                let points = history;
+                if (currentDays === 1) points = history.slice(-5);
+                else if (currentDays === 7) points = history.slice(-15);
+                else if (currentDays === 30) points = history.slice(-30);
+                else if (currentDays === 180) points = history.slice(-60);
 
-                const labels = historyData.map(h => h.time || h.date || '');
-                const prices = historyData.map(h => h.price);
+                const labels = points.map(p => p.time || p.date || '');
+                const values = points.map(p => p.price);
 
-                renderChart(labels, prices, title);
-            } catch (err) {
-                console.error('Could not load history for', symbol, err);
-                // Render empty chart or fallback
+                renderChart(labels, values, title);
+            } catch (e) {
+                console.warn('History not found for', symbol);
                 renderChart([], [], title);
             }
         }
 
-        function renderChart(labels, data, labelTitle) {
+        function renderChart(labels, data, label) {
             const ctx = document.getElementById('priceChart').getContext('2d');
-            
-            if (priceChart) {
-                priceChart.destroy();
-            }
+            if (chartInstance) chartInstance.destroy();
 
-            // Create gradient for line fill
-            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            const gradient = ctx.createLinearGradient(0, 0, 0, 380);
             gradient.addColorStop(0, 'rgba(255, 122, 0, 0.35)');
             gradient.addColorStop(1, 'rgba(255, 122, 0, 0.0)');
 
-            priceChart = new Chart(ctx, {
+            chartInstance = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: labelTitle,
+                        label: label,
                         data: data,
                         borderColor: '#ff7a00',
                         borderWidth: 2.5,
                         backgroundColor: gradient,
                         fill: true,
                         tension: 0.35,
-                        pointRadius: data.length > 30 ? 0 : 3,
+                        pointRadius: data.length > 25 ? 0 : 3.5,
                         pointHoverRadius: 6,
                         pointBackgroundColor: '#ff7a00',
-                        pointBorderColor: '#fff',
+                        pointBorderColor: '#ffffff',
                         pointBorderWidth: 1.5
                     }]
                 },
@@ -582,62 +557,41 @@
                         tooltip: {
                             mode: 'index',
                             intersect: false,
-                            backgroundColor: 'rgba(11, 15, 25, 0.9)',
-                            titleFont: { family: 'Vazirmatn', size: 13 },
-                            bodyFont: { family: 'Vazirmatn', size: 13, weight: 'bold' },
+                            backgroundColor: 'rgba(11, 15, 25, 0.95)',
+                            titleFont: { family: 'Vazirmatn' },
+                            bodyFont: { family: 'Vazirmatn', weight: 'bold' },
                             borderColor: 'rgba(255, 122, 0, 0.3)',
                             borderWidth: 1,
-                            padding: 12,
+                            padding: 10,
                             callbacks: {
-                                label: function(context) {
-                                    return ` قیمت: ${formatNumber(context.parsed.y)} تومان`;
-                                }
+                                label: (c) => ` ${format(c.parsed.y)} تومان`
                             }
                         }
                     },
                     scales: {
                         x: {
                             grid: { color: 'rgba(255, 255, 255, 0.03)' },
-                            ticks: { color: '#9ca3af', font: { family: 'Vazirmatn', size: 11 } }
+                            ticks: { color: '#9ca3af', font: { family: 'Vazirmatn', size: 10 } }
                         },
                         y: {
                             grid: { color: 'rgba(255, 255, 255, 0.05)' },
                             ticks: {
                                 color: '#9ca3af',
                                 font: { family: 'Vazirmatn', size: 11 },
-                                callback: function(value) {
-                                    return formatNumber(value);
-                                }
+                                callback: (v) => format(v)
                             }
                         }
-                    },
-                    interaction: {
-                        mode: 'nearest',
-                        axis: 'x',
-                        intersect: false
                     }
                 }
             });
         }
 
-        function formatNumber(num) {
-            if (!num && num !== 0) return '۰';
-            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        function format(n) {
+            if (!n && n !== 0) return '۰';
+            return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
-redundantListeners();
-        function redundantListeners() {
-            document.querySelectorAll('.tf-btn').forEach(btn => {
-                btn.onclick = (e) => {
-                    document.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('active'));
-                    e.target.classList.add('active');
-                    currentDays = parseInt(e.target.getAttribute('data-days'));
-                    loadChart(currentSymbol, currentDays);
-                };
-            });
-        }
-
-        window.onload = initDashboard;
+        window.onload = init;
     </script>
 </body>
 </html>
