@@ -8,409 +8,570 @@
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
     <style>
         :root {
-            --bg-dark: #0b0f19;
-            --card-bg: rgba(17, 24, 39, 0.7);
-            --border-color: rgba(255, 122, 0, 0.2);
+            --bg-dark: #07090e;
+            --bg-gradient: radial-gradient(circle at top center, #111827 0%, #07090e 100%);
+            --card-bg: rgba(17, 24, 39, 0.75);
+            --card-hover-bg: rgba(26, 34, 52, 0.85);
+            --border-color: rgba(255, 122, 0, 0.22);
+            --border-hover: rgba(255, 122, 0, 0.5);
             --primary-orange: #ff7a00;
+            --primary-orange-glow: rgba(255, 122, 0, 0.35);
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
-            --success: #10b981;
-            --danger: #ef4444;
+            --success-green: #10b981;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Vazirmatn', sans-serif; }
-        body { background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; }
-        header { background: linear-gradient(135deg, #111827 0%, #1f2937 100%); border-bottom: 2px solid var(--primary-orange); padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
-        .logo-area { display: flex; align-items: center; gap: 18px; }
-        .brand-logo { width: 52px; height: 52px; border-radius: 50%; border: 2px solid var(--primary-orange); display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, #ff7a00 25%, transparent 30%); }
-        .brand-title h1 { font-size: 24px; color: #fff; font-weight: 800; line-height: 1.2; }
-        .brand-title span { font-size: 13px; color: var(--primary-orange); letter-spacing: 1px; font-weight: 600; }
-        .header-meta { text-align: left; }
-        .update-badge { background: rgba(16, 185, 129, 0.15); border: 1px solid var(--success); color: var(--success); padding: 8px 18px; border-radius: 30px; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
-        .update-badge::before { content: ''; width: 8px; height: 8px; background: var(--success); border-radius: 50%; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        .container { max-width: 1400px; margin: 25px auto; padding: 0 20px; width: 100%; flex: 1; display: flex; flex-direction: column; gap: 25px; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-        .section-header-title { font-size: 16px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; }
-        .section-header-title::before { content: ''; width: 8px; height: 8px; background: var(--primary-orange); border-radius: 50%; }
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: var(--bg-dark);
+            background-image: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
 
-        /* Showcase Grid (5 items side by side) */
-        .showcase-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; }
-        .showcase-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 14px; padding: 18px; backdrop-filter: blur(10px); transition: all 0.3s ease; cursor: pointer; }
-        .showcase-card:hover, .showcase-card.active { transform: translateY(-4px); border-color: var(--primary-orange); box-shadow: 0 6px 20px rgba(255, 122, 0, 0.2); background: rgba(255, 122, 0, 0.05); }
-        .showcase-card .item-name { font-size: 14px; color: var(--text-muted); margin-bottom: 6px; font-weight: 500; }
-        .showcase-card .item-price { font-size: 21px; font-weight: 800; color: #fff; direction: ltr; text-align: right; }
-        .showcase-card .item-unit { font-size: 12px; font-weight: 400; color: var(--text-muted); margin-right: 4px; }
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
-        /* Main Section */
-        .main-content { display: grid; grid-template-columns: 380px 1fr; gap: 20px; }
-        .card-box { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 20px; backdrop-filter: blur(10px); }
-        .box-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 10px; }
+        /* Header Styling */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 20px 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
 
-        .rates-list { display: flex; flex-direction: column; gap: 8px; max-height: 520px; overflow-y: auto; padding-right: 2px; }
-        .rates-list::-webkit-scrollbar { width: 4px; }
-        .rates-list::-webkit-scrollbar-thumb { background: var(--primary-orange); border-radius: 10px; }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
-        .rate-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: rgba(255,255,255,0.02); border-radius: 10px; transition: all 0.2s; cursor: pointer; border: 1px solid transparent; }
-        .rate-row:hover, .rate-row.active { background: rgba(255, 122, 0, 0.1); border-color: rgba(255, 122, 0, 0.3); }
-        .rate-row .r-title { font-weight: 600; font-size: 14px; color: #fff; }
-        .rate-row .r-sub { font-size: 11px; color: var(--text-muted); }
-        .rate-row .r-price { font-weight: 700; font-size: 15px; color: var(--primary-orange); direction: ltr; }
+        .brand img {
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(255, 122, 0, 0.4));
+        }
 
-        .chart-box { height: 440px; width: 100%; position: relative; }
+        .brand h1 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
 
-        /* Timeframe Controls */
-        .tf-bar { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 12px 0; }
-        .tf-btn {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
+        .brand span {
+            display: block;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            padding: 7px 10px;
-            border-radius: 10px;
-            font-size: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.2s;
+            margin-top: 3px;
         }
-        .tf-btn:hover { border-color: rgba(255, 122, 0, 0.45); color: #fff; }
-        .tf-btn.active {
-            background: rgba(255, 122, 0, 0.12);
-            border-color: rgba(255, 122, 0, 0.55);
+
+        .last-update {
+            background: rgba(255, 122, 0, 0.08);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: var(--primary-orange);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 15px rgba(255, 122, 0, 0.1);
+        }
+
+        .last-update::before {
+            content: '';
+            width: 9px;
+            height: 9px;
+            background-color: var(--primary-orange);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--primary-orange);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 15px var(--primary-orange); }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
+        /* Top 5 Showcase Grid */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .showcase-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .showcase-card:hover {
+            transform: translateY(-5px);
+            background: var(--card-hover-bg);
+            border-color: var(--border-hover);
+            box-shadow: 0 12px 30px var(--primary-orange-glow);
+        }
+
+        .showcase-card.active {
+            border-color: var(--primary-orange);
+            background: rgba(255, 122, 0, 0.08);
+            box-shadow: 0 0 20px var(--primary-orange-glow);
+        }
+
+        .showcase-card h3 {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .showcase-card .price {
+            font-size: 1.35rem;
+            font-weight: 700;
             color: #fff;
         }
 
-        footer { background: #080b12; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; padding: 18px; color: var(--text-muted); font-size: 13px; margin-top: auto; }
+        .showcase-card .unit {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
 
-        @media(max-width: 1200px) { .showcase-grid { grid-template-columns: repeat(3, 1fr); } .main-content { grid-template-columns: 1fr; } }
-        @media(max-width: 768px) { .showcase-grid { grid-template-columns: repeat(2, 1fr); } header { flex-direction: column; gap: 15px; text-align: center; } .header-meta { text-align: center; } }
+        /* Main Content Layout */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 25px;
+        }
+
+        /* Chart Section */
+        .chart-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .chart-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .timeframe-buttons {
+            display: flex;
+            background: rgba(11, 15, 25, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 4px;
+            gap: 4px;
+        }
+
+        .tf-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 6px 14px;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tf-btn:hover {
+            color: #fff;
+            background: rgba(255, 122, 0, 0.1);
+        }
+
+        .tf-btn.active {
+            background: var(--primary-orange);
+            color: #fff;
+            font-weight: 700;
+            box-shadow: 0 0 12px var(--primary-orange-glow);
+        }
+
+        .chart-container {
+            position: relative;
+            flex-grow: 1;
+            height: 420px;
+            width: 100%;
+        }
+
+        /* Sidebar Rates List */
+        .sidebar {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 520px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .sidebar-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .rates-list {
+            overflow-y: auto;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-left: 5px;
+        }
+
+        /* Custom Scrollbar */
+        .rates-list::-webkit-scrollbar {
+            width: 5px;
+        }
+        .rates-list::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        .rates-list::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 10px;
+        }
+        .rates-list::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-orange);
+        }
+
+        .rate-item {
+            background: rgba(11, 15, 25, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 14px;
+            padding: 14px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .rate-item:hover {
+            background: var(--card-hover-bg);
+            border-color: var(--border-hover);
+            transform: translateX(-3px);
+        }
+
+        .rate-item.active {
+            border-color: var(--primary-orange);
+            background: rgba(255, 122, 0, 0.08);
+            box-shadow: 0 0 15px rgba(255, 122, 0, 0.15);
+        }
+
+        .rate-info .name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .rate-info .symbol {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .rate-values {
+            text-align: left;
+        }
+
+        .rate-values .price {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .rate-values .unit {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .showcase-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .showcase-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-area">
-            <div class="brand-logo"></div>
-            <div class="brand-title">
-                <h1>شبکه هزاره</h1>
-                <span>NETWORK HEZAREH FINANCIAL LAB</span>
-            </div>
-        </div>
-        <div class="header-meta">
-            <div id="updateTime" class="update-badge">در حال بارگذاری...</div>
-        </div>
-    </header>
-
     <div class="container">
-        <div class="section-header-title">شاخص‌های اصلی بازار (شبکه هزاره)</div>
-
-        <!-- Showcase (5 Items) -->
-        <div id="showcaseGrid" class="showcase-grid"></div>
-
-        <div class="main-content">
-            <!-- Left Side: All Rates -->
-            <div class="card-box">
-                <div class="box-title">
-                    <span>سایر نرخ‌های بازار</span>
-                    <span id="totalItems" style="font-size: 12px; color: var(--primary-orange);">-- شاخص</span>
+        <!-- Header -->
+        <header>
+            <div class="brand">
+                <img src="logo.png" alt="لوگو شبکه هزاره" onerror="this.style.display='none'">
+                <div>
+                    <h1>شبکه هزاره</h1>
+                    <span>آزمایشگاه مالی و نرخ‌های لحظه‌ای بازار</span>
                 </div>
-                <div id="ratesList" class="rates-list"></div>
+            </div>
+            <div id="lastUpdate" class="last-update">در حال دریافت آخرین اطلاعات...</div>
+        </header>
+
+        <!-- Top 5 Showcase Grid -->
+        <div id="showcaseGrid" class="showcase-grid">
+            <!-- Dynamically populated -->
+        </div>
+
+        <!-- Main Dashboard Layout -->
+        <div class="main-layout">
+            <!-- Chart Section -->
+            <div class="chart-section">
+                <div class="chart-header">
+                    <div id="chartTitle" class="chart-title">نمودار روند قیمت</div>
+                    <div class="timeframe-buttons">
+                        <button class="tf-btn" data-days="1">۱ روز</button>
+                        <button class="tf-btn active" data-days="7">۱ هفته</button>
+                        <button class="tf-btn" data-days="30">۱ ماه</button>
+                        <button class="tf-btn" data-days="180">۶ ماه</button>
+                        <button class="tf-btn" data-days="365">۱ سال</button>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="priceChart"></canvas>
+                </div>
             </div>
 
-            <!-- Right Side: Chart -->
-            <div class="card-box">
-                <div class="box-title">
-                    <span id="chartHeading">نمودار روند قیمت (دلار آمریکا)</span>
-                    <span style="font-size: 12px; color: var(--text-muted);">تغییرات تاریخی</span>
+            <!-- Sidebar Rates List (Excluding Top 5 Showcase items as requested) -->
+            <div class="sidebar">
+                <div class="sidebar-title">
+                    <span>سایر نرخ‌های بازار</span>
+                    <span id="sidebarCount" style="font-size:0.8rem; color:var(--primary-orange);"></span>
                 </div>
-
-                <!-- Timeframe Filters -->
-                <div class="tf-bar" id="tfBar">
-                    <button class="tf-btn" data-tf="1d">۱ روز</button>
-                    <button class="tf-btn" data-tf="1w">۱ هفته</button>
-                    <button class="tf-btn active" data-tf="1m">۱ ماه</button>
-                    <button class="tf-btn" data-tf="6m">۶ ماه</button>
-                    <button class="tf-btn" data-tf="1y">۱ سال</button>
-                </div>
-
-                <div class="chart-box">
-                    <canvas id="priceChart"></canvas>
+                <div id="ratesList" class="rates-list">
+                    <!-- Dynamically populated -->
                 </div>
             </div>
         </div>
     </div>
 
-    <footer>
-        تمامی حقوق محفوظ است | شبکه هزاره (Network Hezareh) &copy; 2026
-    </footer>
-
     <script>
-        const assetMeta = {
-            'usd': { name: 'دلار آمریکا', unit: 'تومان' },
-            'eur': { name: 'یورو اروپا', unit: 'تومان' },
-            'aed': { name: 'درهم امارات', unit: 'تومان' },
-            'gold_18k': { name: 'طلای ۱۸ عیار', unit: 'تومان / گرم' },
-            'coin_emami': { name: 'سکه امامی', unit: 'تومان' },
-            'coin_bahar': { name: 'سکه بهار آزادی', unit: 'تومان' },
-            'coin_half': { name: 'نیم سکه', unit: 'تومان' },
-            'coin_quarter': { name: 'ربع سکه', unit: 'تومان' },
-            'coin_gram': { name: 'سکه گرمی', unit: 'تومان' },
-            'gold_mesghal': { name: 'مثقال طلا', unit: 'تومان' },
-            'gold_ounce': { name: 'انس طلا', unit: 'دلار' },
-            'try': { name: 'لیر ترکیه', unit: 'تومان' },
-            'gbp': { name: 'پوند انگلیس', unit: 'تومان' },
-            'cad': { name: 'دلار کانادا', unit: 'تومان' },
-            'aud': { name: 'دلار استرالیا', unit: 'تومان' },
-            'cny': { name: 'یوآن چین', unit: 'تومان' },
-            'rub': { name: 'روبل روسیه', unit: 'تومان' },
-            'iqd': { name: 'دینار عراق (۱۰۰)', unit: 'تومان' },
-            'sar': { name: 'ریال عربستان', unit: 'تومان' },
-            'qar': { name: 'ریال قطر', unit: 'تومان' },
-            'omr': { name: 'ریال عمان', unit: 'تومان' },
-            'kwd': { name: 'دینار کویت', unit: 'تومان' },
-            'bhd': { name: 'دینار بحرین', unit: 'تومان' },
-            'chf': { name: 'فرانک سوئیس', unit: 'تومان' },
-            'jpy': { name: 'ین ژاپن (۱۰۰)', unit: 'تومان' },
-            'krw': { name: 'وون کره جنوبی', unit: 'تومان' },
-            'inr': { name: 'روپیه هند', unit: 'تومان' },
-            'pkr': { name: 'روپیه پاکستان', unit: 'تومان' },
-            'afn': { name: 'افغانی افغانستان', unit: 'تومان' },
-            'gel': { name: 'لاری گرجستان', unit: 'تومان' },
-            'azn': { name: 'منات آذربایجان', unit: 'تومان' },
-            'amd': { name: 'درام ارمنستان', unit: 'تومان' },
-            'myr': { name: 'رینگیت مالزی', unit: 'تومان' },
-            'thb': { name: 'بات تایلند', unit: 'تومان' },
-            'sgd': { name: 'دلار سنگاپور', unit: 'تومان' },
-            'hkd': { name: 'دلار هنگ‌کنگ', unit: 'تومان' },
-            'sek': { name: 'کرون سوئد', unit: 'تومان' },
-            'nok': { name: 'کرون نروژ', unit: 'تومان' },
-            'dkk': { name: 'کرون دانمارک', unit: 'تومان' },
-            'oil': { name: 'نفت برنت', unit: 'دلار' }
-        };
+        let allRatesData = {};
+        let currentSymbol = 'coin_emami'; // Default selected benchmark
+        let currentDays = 7;
+        let priceChart = null;
 
+        // Top 5 showcase items to exclude from sidebar
         const showcaseKeys = ['usd', 'eur', 'aed', 'gold_18k', 'coin_emami'];
-        const showcaseSet = new Set(showcaseKeys);
 
-        let activeKey = 'usd';
-        let activeTf = '1m'; // 1d, 1w, 1m, 6m, 1y
-
-        let marketRaw = {};
-        let myChartInstance = null;
-
-        function formatNum(num) {
-            if (num === null || num === undefined || Number.isNaN(num)) return '---';
-            return new Intl.NumberFormat('fa-IR').format(num);
-        }
-
-        function toNumber(v) {
-            if (v === null || v === undefined) return null;
-            if (typeof v === 'number') return v;
-            const s = String(v).replace(/[,\s]/g, '');
-            const n = parseFloat(s);
-            return Number.isFinite(n) ? n : null;
-        }
-
-        function tfToDays(tf) {
-            switch (tf) {
-                case '1d': return 1;
-                case '1w': return 7;
-                case '1m': return 30;
-                case '6m': return 183;
-                case '1y': return 365;
-                default: return 30;
-            }
-        }
-
-        function sliceLastByTimeframe(items, tf) {
-            // items: [{ts:number, label:string, value:number}]
-            const days = tfToDays(tf);
-            const cutoff = Date.now() - days * 24 * 60 * 60 * 1000;
-            const filtered = items.filter(it => (it.ts && it.ts >= cutoff));
-            // اگر چیزی باقی نماند، حداقل آخرین 30 نقطه را بده که خالی نشود
-            if (filtered.length >= 2) return filtered;
-            return items.slice(-Math.min(items.length, 30));
-        }
-
-        async function fetchMarket() {
+        async function initDashboard() {
             try {
-                const res = await fetch('market.json?v=' + Date.now());
-                if (!res.ok) throw new Error('market.json یافت نشد');
-                marketRaw = await res.json();
-                renderAll();
-            } catch (err) {
-                console.error(err);
-                document.getElementById('updateTime').innerText = 'خطا در ارتباط با سرور';
-            }
-        }
-
-        function renderAll() {
-            // Header time
-            const shamsi = marketRaw.date_shamsi_full || marketRaw.date_shamsi || '';
-            const t = marketRaw.time || '';
-            if (shamsi || t) {
-                document.getElementById('updateTime').innerText = `آخرین بروزرسانی: ${shamsi} - ساعت ${t}`;
-            }
-
-            // 1) Render Showcase
-            const showcaseEl = document.getElementById('showcaseGrid');
-            showcaseEl.innerHTML = showcaseKeys.map(k => {
-                const info = assetMeta[k] || { name: k, unit: 'تومان' };
-                const val = marketRaw[k];
-                const isActive = (k === activeKey) ? 'active' : '';
-                return `
-                    <div class="showcase-card ${isActive}" onclick="changeAsset('${k}')">
-                        <div class="item-name">${info.name}</div>
-                        <div class="item-price">${formatNum(val)} <span class="item-unit">${info.unit}</span></div>
-                    </div>
-                `;
-            }).join('');
-
-            // 2) Render Full List (EXCLUDING showcase 5 items)
-            const listEl = document.getElementById('ratesList');
-            const ignoreKeys = new Set(['updated_at', 'date', 'date_shamsi', 'date_shamsi_full', 'time']);
-
-            const validKeys = Object.keys(marketRaw).filter(k => assetMeta[k] && !ignoreKeys.has(k) && !showcaseSet.has(k));
-            document.getElementById('totalItems').innerText = `${validKeys.length} شاخص`;
-
-            listEl.innerHTML = validKeys.map(k => {
-                const info = assetMeta[k];
-                const val = marketRaw[k];
-                const isActive = (k === activeKey) ? 'active' : '';
-                return `
-                    <div class="rate-row ${isActive}" onclick="changeAsset('${k}')">
-                        <div>
-                            <div class="r-title">${info.name}</div>
-                            <div class="r-sub">${k.toUpperCase()}</div>
-                        </div>
-                        <div style="text-align: left;">
-                            <div class="r-price">${formatNum(val)}</div>
-                            <div class="r-sub">${info.unit}</div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-
-            // 3) Render Chart
-            renderChartFor(activeKey);
-            syncTfButtons();
-        }
-
-        function changeAsset(key) {
-            activeKey = key;
-            renderAll();
-        }
-
-        function setTimeframe(tf) {
-            activeTf = tf;
-            syncTfButtons();
-            renderChartFor(activeKey);
-        }
-
-        function syncTfButtons() {
-            document.querySelectorAll('.tf-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.tf === activeTf);
-            });
-        }
-
-        function parseHistoryPayload(payload) {
-            // قبول چند مدل مختلف:
-            // 1) Array مستقیم
-            // 2) {history: Array}
-            // 3) {data: Array}
-            if (Array.isArray(payload)) return payload;
-            if (payload && Array.isArray(payload.history)) return payload.history;
-            if (payload && Array.isArray(payload.data)) return payload.data;
-            return [];
-        }
-
-        function extractPoint(h) {
-            // تلاش برای استخراج زمان و قیمت از فیلدهای رایج
-            const value = toNumber(h.price ?? h.value ?? h.rate ?? h.last ?? h.close ?? h.p);
-            const label = (h.time || h.date || h.datetime || h.label || '').toString();
-
-            // timestamp:
-            // اگر ts داشت، همان
-            // اگر epoch ثانیه/میلی‌ثانیه داشت
-            // اگر ISO داشت
-            let ts = null;
-
-            if (h.ts) {
-                const n = toNumber(h.ts);
-                if (n) ts = (n < 10_000_000_000 ? n * 1000 : n);
-            } else if (h.timestamp) {
-                const n = toNumber(h.timestamp);
-                if (n) ts = (n < 10_000_000_000 ? n * 1000 : n);
-            } else if (h.datetime) {
-                const d = new Date(h.datetime);
-                if (!isNaN(d.getTime())) ts = d.getTime();
-            } else if (h.date && h.time) {
-                const d = new Date(`${h.date}T${h.time}`);
-                if (!isNaN(d.getTime())) ts = d.getTime();
-            } else if (h.date) {
-                const d = new Date(h.date);
-                if (!isNaN(d.getTime())) ts = d.getTime();
-            }
-
-            return { ts, label, value };
-        }
-
-        async function loadHistory(key) {
-            // مسیر درست بر اساس بک‌اند شما:
-            // api/history_<symbol>.json
-            const url = `api/history_${key}.json?v=${Date.now()}`;
-
-            const r = await fetch(url);
-            if (!r.ok) return [];
-
-            const payload = await r.json();
-            const arr = parseHistoryPayload(payload);
-            const points = arr.map(extractPoint).filter(p => (p.value !== null));
-
-            // مرتب‌سازی بر اساس زمان اگر ts داشتیم
-            points.sort((a, b) => {
-                if (a.ts && b.ts) return a.ts - b.ts;
-                return 0;
-            });
-
-            return points;
-        }
-
-        async function renderChartFor(key) {
-            const meta = assetMeta[key] || { name: key, unit: '' };
-            document.getElementById('chartHeading').innerText = `نمودار روند قیمت (${meta.name})`;
-
-            // پیش‌فرض اگر تاریخچه نبود
-            let labels = ['اکنون'];
-            let values = [toNumber(marketRaw[key]) ?? 0];
-
-            try {
-                const points = await loadHistory(key);
-                if (points.length >= 2) {
-                    const sliced = sliceLastByTimeframe(points, activeTf);
-                    labels = sliced.map(p => p.label || '');
-                    values = sliced.map(p => p.value);
+                const response = await fetch('api/market.json');
+                const data = await response.json();
+                
+                allRatesData = data.rates || data;
+                
+                if (data.updated_at) {
+                    document.getElementById('lastUpdate').textContent = `آخرین بروزرسانی: ${data.updated_at}`;
                 }
-            } catch (e) {
-                console.warn('history load failed:', e);
+
+                renderShowcase();
+                renderSidebar();
+                loadChart(currentSymbol, currentDays);
+            } catch (error) {
+                console.error('Error loading market data:', error);
+                document.getElementById('lastUpdate').textContent = 'خطا در دریافت اطلاعات بازار';
+            }
+        }
+
+        function renderShowcase() {
+            const grid = document.getElementById('showcaseGrid');
+            grid.innerHTML = '';
+
+            showcaseKeys.forEach(key => {
+                const item = allRatesData[key];
+                if (!item) return;
+
+                const card = document.createElement('div');
+                card.className = `showcase-card ${currentSymbol === key ? 'active' : ''}`;
+                card.onclick = () => {
+                    currentSymbol = key;
+                    document.querySelectorAll('.showcase-card').forEach(c => c.classList.remove('active'));
+                    document.querySelectorAll('.rate-item').forEach(r => r.classList.remove('active'));
+                    card.classList.add('active');
+                    loadChart(currentSymbol, currentDays);
+                };
+
+                card.innerHTML = `
+                    <h3>${item.title}</h3>
+                    <div class="price">${formatNumber(item.price)}</div>
+                    <div class="unit">${item.unit || 'تومان'}</div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function renderSidebar() {
+            const list = document.getElementById('ratesList');
+            list.innerHTML = '';
+
+            const remainingKeys = Object.keys(allRatesData).filter(key => !showcaseKeys.includes(key));
+            document.getElementById('sidebarCount').textContent = `${remainingKeys.length} شاخص`;
+
+            remainingKeys.forEach(key => {
+                const item = allRatesData[key];
+                if (!item) return;
+
+                const rateItem = document.createElement('div');
+                rateItem.className = `rate-item ${currentSymbol === key ? 'active' : ''}`;
+                rateItem.onclick = () => {
+                    currentSymbol = key;
+                    document.querySelectorAll('.showcase-card').forEach(c => c.classList.remove('active'));
+                    document.querySelectorAll('.rate-item').forEach(r => r.classList.remove('active'));
+                    rateItem.classList.add('active');
+                    loadChart(currentSymbol, currentDays);
+                };
+
+                rateItem.innerHTML = `
+                    <div class="rate-info">
+                        <div class="name">${item.title}</div>
+                        <div class="symbol">${key.toUpperCase()}</div>
+                    </div>
+                    <div class="rate-values">
+                        <div class="price">${formatNumber(item.price)}</div>
+                        <div class="unit">${item.unit || 'تومان'}</div>
+                    </div>
+                `;
+                list.appendChild(rateItem);
+            });
+        }
+
+        async function loadChart(symbol, days) {
+            const itemMeta = allRatesData[symbol];
+            const title = itemMeta ? itemMeta.title : symbol;
+            document.getElementById('chartTitle').innerHTML = `نمودار روند قیمت (${title})`;
+
+            try {
+                const res = await fetch(`api/history_${symbol}.json`);
+                if (!res.ok) throw new Error('History file not found');
+                const historyJson = await res.json();
+                
+                // Support both direct array format and { history: [...] } format
+                let historyData = Array.isArray(historyJson) ? historyJson : (historyJson.history || []);
+
+                // Filter by days if timestamp available
+                if (days < 365 && historyData.length > 0 && historyData[0].time) {
+                    const cutoff = Date.now() - (days * 24 * 60 * 60 * 1000);
+                    // If time is Persian string or timestamp, handle gracefully or slice approximate points
+                }
+
+                const labels = historyData.map(h => h.time || h.date || '');
+                const prices = historyData.map(h => h.price);
+
+                renderChart(labels, prices, title);
+            } catch (err) {
+                console.error('Could not load history for', symbol, err);
+                // Render empty chart or fallback
+                renderChart([], [], title);
+            }
+        }
+
+        function renderChart(labels, data, labelTitle) {
+            const ctx = document.getElementById('priceChart').getContext('2d');
+            
+            if (priceChart) {
+                priceChart.destroy();
             }
 
-            const ctx = document.getElementById('priceChart').getContext('2d');
-            if (myChartInstance) myChartInstance.destroy();
+            // Create gradient for line fill
+            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, 'rgba(255, 122, 0, 0.35)');
+            gradient.addColorStop(1, 'rgba(255, 122, 0, 0.0)');
 
-            myChartInstance = new Chart(ctx, {
+            priceChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: meta.name,
-                        data: values,
+                        label: labelTitle,
+                        data: data,
                         borderColor: '#ff7a00',
-                        backgroundColor: 'rgba(255, 122, 0, 0.12)',
-                        borderWidth: 3,
+                        borderWidth: 2.5,
+                        backgroundColor: gradient,
                         fill: true,
                         tension: 0.35,
-                        pointRadius: 2,
-                        pointHoverRadius: 5,
-                        pointBackgroundColor: '#ff7a00'
+                        pointRadius: data.length > 30 ? 0 : 3,
+                        pointHoverRadius: 6,
+                        pointBackgroundColor: '#ff7a00',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 1.5
                     }]
                 },
                 options: {
@@ -419,41 +580,64 @@
                     plugins: {
                         legend: { display: false },
                         tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            backgroundColor: 'rgba(11, 15, 25, 0.9)',
+                            titleFont: { family: 'Vazirmatn', size: 13 },
+                            bodyFont: { family: 'Vazirmatn', size: 13, weight: 'bold' },
+                            borderColor: 'rgba(255, 122, 0, 0.3)',
+                            borderWidth: 1,
+                            padding: 12,
                             callbacks: {
                                 label: function(context) {
-                                    return `${context.dataset.label}: ${formatNum(context.raw)} ${meta.unit || ''}`;
+                                    return ` قیمت: ${formatNumber(context.parsed.y)} تومان`;
                                 }
                             }
                         }
                     },
                     scales: {
                         x: {
-                            grid: { color: 'rgba(255,255,255,0.05)' },
-                            ticks: { color: '#9ca3af', font: { family: 'Vazirmatn' }, maxRotation: 0, autoSkip: true }
+                            grid: { color: 'rgba(255, 255, 255, 0.03)' },
+                            ticks: { color: '#9ca3af', font: { family: 'Vazirmatn', size: 11 } }
                         },
                         y: {
-                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
                             ticks: {
                                 color: '#9ca3af',
-                                font: { family: 'Vazirmatn' },
-                                callback: val => formatNum(val)
+                                font: { family: 'Vazirmatn', size: 11 },
+                                callback: function(value) {
+                                    return formatNumber(value);
+                                }
                             }
                         }
+                    },
+                    interaction: {
+                        mode: 'nearest',
+                        axis: 'x',
+                        intersect: false
                     }
                 }
             });
         }
 
-        // Timeframe click handlers
-        document.addEventListener('click', (e) => {
-            const btn = e.target.closest('.tf-btn');
-            if (!btn) return;
-            setTimeframe(btn.dataset.tf);
-        });
+        function formatNumber(num) {
+            if (!num && num !== 0) return '۰';
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
 
-        // Initialize
-        fetchMarket();
-        setInterval(fetchMarket, 60000);
+redundantListeners();
+        function redundantListeners() {
+            document.querySelectorAll('.tf-btn').forEach(btn => {
+                btn.onclick = (e) => {
+                    document.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    currentDays = parseInt(e.target.getAttribute('data-days'));
+                    loadChart(currentSymbol, currentDays);
+                };
+            });
+        }
+
+        window.onload = initDashboard;
     </script>
 </body>
 </html>
