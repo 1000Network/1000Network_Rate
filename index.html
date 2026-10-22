@@ -19,53 +19,57 @@
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Vazirmatn', sans-serif; }
         body { background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; }
-        header { background: linear-gradient(135deg, #111827 0%, #1f2937 100%); border-bottom: 2px solid var(--primary-orange); padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
-        .logo-area { display: flex; align-items: center; gap: 20px; }
-        .logo-icon { width: 55px; height: 55px; border: 3px solid var(--primary-orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; }
-        .logo-icon::after { content: ''; width: 12px; height: 12px; background: var(--primary-orange); border-radius: 50%; position: absolute; }
-        .brand-title h1 { font-size: 24px; color: #fff; font-weight: 800; }
+        header { background: linear-gradient(135deg, #111827 0%, #1f2937 100%); border-bottom: 2px solid var(--primary-orange); padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        .logo-area { display: flex; align-items: center; gap: 18px; }
+        .brand-logo { width: 52px; height: 52px; border-radius: 50%; border: 2px solid var(--primary-orange); display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, #ff7a00 25%, transparent 30%); }
+        .brand-title h1 { font-size: 24px; color: #fff; font-weight: 800; line-height: 1.2; }
         .brand-title span { font-size: 13px; color: var(--primary-orange); letter-spacing: 1px; font-weight: 600; }
         .header-meta { text-align: left; }
-        .update-badge { background: rgba(16, 185, 129, 0.15); border: 1px solid var(--success); color: var(--success); padding: 8px 16px; border-radius: 30px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
+        .update-badge { background: rgba(16, 185, 129, 0.15); border: 1px solid var(--success); color: var(--success); padding: 8px 18px; border-radius: 30px; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
         .update-badge::before { content: ''; width: 8px; height: 8px; background: var(--success); border-radius: 50%; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
         
-        .container { max-width: 1400px; margin: 30px auto; padding: 0 20px; width: 100%; flex: 1; display: flex; flex-direction: column; gap: 30px; }
+        .container { max-width: 1400px; margin: 25px auto; padding: 0 20px; width: 100%; flex: 1; display: flex; flex-direction: column; gap: 25px; }
         
+        .section-header-title { font-size: 16px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; }
+        .section-header-title::before { content: ''; width: 8px; height: 8px; background: var(--primary-orange); border-radius: 50%; }
+
         /* Showcase Grid (5 items side by side) */
-        .showcase-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
-        .showcase-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 20px; backdrop-filter: blur(10px); transition: transform 0.3s, border-color 0.3s; cursor: pointer; position: pointer; }
-        .showcase-card:hover, .showcase-card.active { transform: translateY(-5px); border-color: var(--primary-orange); box-shadow: 0 8px 25px rgba(255, 122, 0, 0.15); }
-        .item-name { font-size: 14px; color: var(--text-muted); margin-bottom: 8px; font-weight: 500; }
-        .item-price { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px; direction: ltr; text-align: right; }
-        .item-change { font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 6px; }
-        .item-change.up { background: rgba(16, 185, 129, 0.15); color: var(--success); }
-        .item-change.down { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+        .showcase-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; }
+        .showcase-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 14px; padding: 18px; backdrop-filter: blur(10px); transition: all 0.3s ease; cursor: pointer; }
+        .showcase-card:hover, .showcase-card.active { transform: translateY(-4px); border-color: var(--primary-orange); box-shadow: 0 6px 20px rgba(255, 122, 0, 0.2); background: rgba(255, 122, 0, 0.05); }
+        .showcase-card .item-name { font-size: 14px; color: var(--text-muted); margin-bottom: 6px; font-weight: 500; }
+        .showcase-card .item-price { font-size: 21px; font-weight: 800; color: #fff; direction: ltr; text-align: right; }
+        .showcase-card .item-unit { font-size: 12px; font-weight: 400; color: var(--text-muted); margin-right: 4px; }
 
         /* Main Section */
-        .main-content { display: grid; grid-template-columns: 350px 1fr; gap: 25px; }
+        .main-content { display: grid; grid-template-columns: 380px 1fr; gap: 20px; }
         .card-box { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 20px; backdrop-filter: blur(10px); }
-        .section-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
+        .box-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 10px; }
         
-        .rates-list { display: flex; flex-direction: column; gap: 10px; max-height: 550px; overflow-y: auto; padding-left: 5px; }
-        .rates-list::-webkit-scrollbar { width: 5px; }
+        .rates-list { display: flex; flex-direction: column; gap: 8px; max-height: 520px; overflow-y: auto; padding-right: 2px; }
+        .rates-list::-webkit-scrollbar { width: 4px; }
         .rates-list::-webkit-scrollbar-thumb { background: var(--primary-orange); border-radius: 10px; }
-        .rate-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background: rgba(255,255,255,0.02); border-radius: 10px; transition: background 0.2s; cursor: pointer; border: 1px solid transparent; }
-        .rate-row:hover { background: rgba(255, 122, 0, 0.08); border-color: rgba(255, 122, 0, 0.2); }
         
-        .chart-container { position: relative; height: 450px; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .rate-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: rgba(255,255,255,0.02); border-radius: 10px; transition: all 0.2s; cursor: pointer; border: 1px solid transparent; }
+        .rate-row:hover, .rate-row.active { background: rgba(255, 122, 0, 0.1); border-color: rgba(255, 122, 0, 0.3); }
+        .rate-row .r-title { font-weight: 600; font-size: 14px; color: #fff; }
+        .rate-row .r-sub { font-size: 11px; color: var(--text-muted); }
+        .rate-row .r-price { font-weight: 700; font-size: 15px; color: var(--primary-orange); direction: ltr; }
 
-        footer { background: #080b12; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; padding: 20px; color: var(--text-muted); font-size: 13px; margin-top: auto; }
+        .chart-box { height: 480px; width: 100%; position: relative; }
+
+        footer { background: #080b12; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; padding: 18px; color: var(--text-muted); font-size: 13px; margin-top: auto; }
 
         @media(max-width: 1200px) { .showcase-grid { grid-template-columns: repeat(3, 1fr); } .main-content { grid-template-columns: 1fr; } }
-        @media(max-width: 768px) { .showcase-grid { grid-template-columns: repeat(1, 1fr); } header { flex-direction: column; gap: 15px; text-align: center; } .header-meta { text-align: center; } }
+        @media(max-width: 768px) { .showcase-grid { grid-template-columns: repeat(2, 1fr); } header { flex-direction: column; gap: 15px; text-align: center; } .header-meta { text-align: center; } }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo-area">
-            <div class="logo-icon"></div>
+            <div class="brand-logo"></div>
             <div class="brand-title">
                 <h1>شبکه هزاره</h1>
                 <span>NETWORK HEZAREH FINANCIAL LAB</span>
@@ -77,30 +81,28 @@
     </header>
 
     <div class="container">
-        <!-- 5 Showcase Items (USD, EUR, AED, Gold 18k, Emami Coin) -->
-        <div id="showcaseGrid" class="showcase-grid">
-            <div class="showcase-card">بارگذاری اطلاعات...</div>
-        </div>
+        <div class="section-header-title">شاخص‌های اصلی بازار (شبکه هزاره)</div>
+        
+        <!-- Showcase (5 Items) -->
+        <div id="showcaseGrid" class="showcase-grid"></div>
 
         <div class="main-content">
-            <!-- Left Panel: All Rates -->
+            <!-- Left Side: All Rates -->
             <div class="card-box">
-                <div class="section-title">
+                <div class="box-title">
                     <span>سایر نرخ‌های بازار</span>
-                    <span id="totalCount" style="font-size: 12px; color: var(--primary-orange);">موجودی: --</span>
+                    <span id="totalItems" style="font-size: 12px; color: var(--primary-orange);">۳۷+ شاخص</span>
                 </div>
-                <div id="ratesList" class="rates-list">
-                    <div style="text-align: center; color: var(--text-muted); padding: 20px;">در حال دریافت اطلاعات بازار...</div>
-                </div>
+                <div id="ratesList" class="rates-list"></div>
             </div>
 
-            <!-- Right Panel: Chart -->
+            <!-- Right Side: Chart -->
             <div class="card-box">
-                <div class="section-title">
-                    <span id="chartTitle">نمودار روند قیمت</span>
-                    <span style="font-size: 12px; color: var(--text-muted);">تغییرات ۷ روز گذشته</span>
+                <div class="box-title">
+                    <span id="chartHeading">نمودار روند قیمت (دلار آمریکا)</span>
+                    <span style="font-size: 12px; color: var(--text-muted);">تغییرات تاریخی</span>
                 </div>
-                <div class="chart-container">
+                <div class="chart-box">
                     <canvas id="priceChart"></canvas>
                 </div>
             </div>
@@ -112,126 +114,162 @@
     </footer>
 
     <script>
-        let marketData = {};
-        let myChart = null;
-        let currentSelectedKey = 'usd';
+        const assetMeta = {
+            'usd': { name: 'دلار آمریکا', unit: 'تومان' },
+            'eur': { name: 'یورو اروپا', unit: 'تومان' },
+            'aed': { name: 'درهم امارات', unit: 'تومان' },
+            'gold_18k': { name: 'طلای ۱۸ عیار', unit: 'تومان / گرم' },
+            'coin_emami': { name: 'سکه امامی', unit: 'تومان' },
+            'coin_bahar': { name: 'سکه بهار آزادی', unit: 'تومان' },
+            'coin_half': { name: 'نیم سکه', unit: 'تومان' },
+            'coin_quarter': { name: 'ربع سکه', unit: 'تومان' },
+            'coin_gram': { name: 'سکه گرمی', unit: 'تومان' },
+            'gold_mesghal': { name: 'مثقال طلا', unit: 'تومان' },
+            'gold_ounce': { name: 'انس طلا', unit: 'دلار' },
+            'try': { name: 'لیر ترکیه', unit: 'تومان' },
+            'gbp': { name: 'پوند انگلیس', unit: 'تومان' },
+            'cad': { name: 'دلار کانادا', unit: 'تومان' },
+            'aud': { name: 'دلار استرالیا', unit: 'تومان' },
+            'cny': { name: 'یوآن چین', unit: 'تومان' },
+            'rub': { name: 'روبل روسیه', unit: 'تومان' },
+            'iqd': { name: 'دینار عراق (۱۰۰)', unit: 'تومان' },
+            'sar': { name: 'ریال عربستان', unit: 'تومان' },
+            'qar': { name: 'ریال قطر', unit: 'تومان' },
+            'omr': { name: 'ریال عمان', unit: 'تومان' },
+            'kwd': { name: 'دینار کویت', unit: 'تومان' },
+            'bhd': { name: 'دینار بحرین', unit: 'تومان' },
+            'chf': { name: 'فرانک سوئیس', unit: 'تومان' },
+            'jpy': { name: 'ین ژاپن (۱۰۰)', unit: 'تومان' },
+            'krw': { name: 'وون کره جنوبی', unit: 'تومان' },
+            'inr': { name: 'روپیه هند', unit: 'تومان' },
+            'pkr': { name: 'روپیه پاکستان', unit: 'تومان' },
+            'afn': { name: 'افغانی افغانستان', unit: 'تومان' },
+            'gel': { name: 'لاری گرجستان', unit: 'تومان' },
+            'azn': { name: 'منات آذربایجان', unit: 'تومان' },
+            'amd': { name: 'درام ارمنستان', unit: 'تومان' },
+            'myr': { name: 'رینگیت مالزی', unit: 'تومان' },
+            'thb': { name: 'بات تایلند', unit: 'تومان' },
+            'sgd': { name: 'دلار سنگاپور', unit: 'تومان' },
+            'hkd': { name: 'دلار هنگ‌کنگ', unit: 'تومان' },
+            'sek': { name: 'کرون سوئد', unit: 'تومان' },
+            'nok': { name: 'کرون نروژ', unit: 'تومان' },
+            'dkk': { name: 'کرون دانمارک', unit: 'تومان' },
+            'oil': { name: 'نفت برنت', unit: 'دلار' }
+        };
 
         const showcaseKeys = ['usd', 'eur', 'aed', 'gold_18k', 'coin_emami'];
+        let activeKey = 'usd';
+        let marketRaw = {};
+        let myChartInstance = null;
 
-        async function loadMarketData() {
+        function formatNum(num) {
+            if (!num && num !== 0) return '---';
+            return new Intl.NumberFormat('fa-IR').format(num);
+        }
+
+        async function fetchMarket() {
             try {
-                const response = await fetch('api/market.json?' + new Date().getTime());
-                if (!response.ok) throw new Error('خطا در دریافت اطلاعات');
-                marketData = await response.json();
-                
-                renderUI();
+                // Fetch directly from root market.json with cache bust
+                const res = await fetch('market.json?v=' + Date.now());
+                if (!res.ok) throw new Error('فایل یافت نشد');
+                marketRaw = await res.json();
+                renderAll();
             } catch (err) {
                 console.error(err);
-                document.getElementById('updateTime').innerText = 'خطا در ارتباط با سرور داده';
+                document.getElementById('updateTime').innerText = 'خطا در ارتباط با سرور';
             }
         }
 
-        function renderUI() {
-            // Update timestamp
-            if (marketData.last_update) {
-                document.getElementById('updateTime').innerText = `آخرین بروزرسانی: ${marketData.last_update}`;
+        function renderAll() {
+            // Header time
+            const shamsi = marketRaw.date_shamsi_full || marketRaw.date_shamsi || '';
+            const t = marketRaw.time || '';
+            if (shamsi || t) {
+                document.getElementById('updateTime').innerText = `آخرین بروزرسانی: ${shamsi} - ساعت ${t}`;
             }
 
-            const items = marketData.items || {};
-            const keys = Object.keys(items);
-            document.getElementById('totalCount').innerText = `${keys.length}+ ارز و طلا`;
-
-            // Render Showcase (5 items)
-            const showcaseHTML = showcaseKeys.map(key => {
-                const item = items[key];
-                if (!item) return '';
-                const changeClass = item.change >= 0 ? 'up' : 'down';
-                const changeSign = item.change >= 0 ? '+' : '';
+            // 1. Render Showcase (5 items)
+            const showcaseEl = document.getElementById('showcaseGrid');
+            showcaseEl.innerHTML = showcaseKeys.map(k => {
+                const info = assetMeta[k] || { name: k, unit: 'تومان' };
+                const val = marketRaw[k];
+                const isActive = (k === activeKey) ? 'active' : '';
                 return `
-                    <div class="showcase-card ${currentSelectedKey === key ? 'active' : ''}" onclick="selectAsset('${key}')">
-                        <div class="item-name">${item.title}</div>
-                        <div class="item-price">${formatPrice(item.price)} <span style="font-size:12px; font-weight:400; color:var(--text-muted);">تومان</span></div>
-                        <div><span class="item-change ${changeClass}">${changeSign}${item.change}%</span></div>
+                    <div class="showcase-card ${isActive}" onclick="changeAsset('${k}')">
+                        <div class="item-name">${info.name}</div>
+                        <div class="item-price">${formatNum(val)} <span class="item-unit">${info.unit}</span></div>
                     </div>
                 `;
             }).join('');
-            document.getElementById('showcaseGrid').innerHTML = showcaseHTML;
 
-            // Render Full List
-            const listHTML = keys.map(key => {
-                const item = items[key];
-                const changeClass = item.change >= 0 ? 'up' : 'down';
-                const changeSign = item.change >= 0 ? '+' : '';
+            // 2. Render Full List
+            const listEl = document.getElementById('ratesList');
+            const validKeys = Object.keys(marketRaw).filter(k => assetMeta[k] && !['updated_at', 'date', 'date_shamsi', 'date_shamsi_full', 'time'].includes(k));
+            document.getElementById('totalItems').innerText = `${validKeys.length} شاخص`;
+
+            listEl.innerHTML = validKeys.map(k => {
+                const info = assetMeta[k];
+                const val = marketRaw[k];
+                const isActive = (k === activeKey) ? 'active' : '';
                 return `
-                    <div class="rate-row" onclick="selectAsset('${key}')">
+                    <div class="rate-row ${isActive}" onclick="changeAsset('${k}')">
                         <div>
-                            <div style="font-weight: 600; font-size: 14px; color:#fff;">${item.title}</div>
-                            <div style="font-size: 11px; color: var(--text-muted);">${changeSign}${item.change}%</div>
+                            <div class="r-title">${info.name}</div>
+                            <div class="r-sub">${k.toUpperCase()}</div>
                         </div>
-                        <div style="text-align: left; direction: ltr;">
-                            <div style="font-weight: 700; font-size: 15px; color: var(--primary-orange);">${formatPrice(item.price)}</div>
-                            <div style="font-size: 11px; color: var(--text-muted);">تومان</div>
+                        <div style="text-align: left;">
+                            <div class="r-price">${formatNum(val)}</div>
+                            <div class="r-sub">${info.unit}</div>
                         </div>
                     </div>
                 `;
             }).join('');
-            document.getElementById('ratesList').innerHTML = listHTML;
 
-            // Load default or selected chart
-            loadChart(currentSelectedKey);
+            // 3. Render Chart
+            renderChartFor(activeKey);
         }
 
-        function formatPrice(price) {
-            if (!price) return '۰';
-            return new Intl.NumberFormat('fa-IR').format(price);
+        function changeAsset(key) {
+            activeKey = key;
+            renderAll();
         }
 
-        async function selectAsset(key) {
-            currentSelectedKey = key;
-            // Update active states in showcase
-            document.querySelectorAll('.showcase-card').forEach(card => card.classList.remove('active'));
-            loadChart(key);
-            renderUI();
-        }
+        async function renderChartFor(key) {
+            const meta = assetMeta[key] || { name: key };
+            document.getElementById('chartHeading').innerText = `نمودار روند قیمت (${meta.name})`;
 
-        async function loadChart(key) {
-            const item = marketData.items[key];
-            if (!item) return;
-
-            document.getElementById('chartTitle').innerText = `نمودار روند قیمت (${item.title})`;
+            let labels = ['امروز'];
+            let points = [marketRaw[key] || 0];
 
             try {
-                const res = await fetch(`charts/${key}.json?` + new Date().getTime());
-                if (!res.ok) throw new Error('تاریخچه یافت نشد');
-                const history = await res.json();
+                // Try reading history from api or charts directory if available
+                const r = await fetch(`api/${key}.json?v=` + Date.now());
+                if (r.ok) {
+                    const history = await r.json();
+                    if (Array.isArray(history) && history.length > 0) {
+                        labels = history.map(h => h.date || h.time || '');
+                        points = history.map(h => h.price || h.rate || 0);
+                    }
+                }
+            } catch(e) {}
 
-                const labels = history.map(h => h.date || h.time);
-                const data = history.map(h => h.price);
-
-                renderChart(labels, data, item.title);
-            } catch (e) {
-                // Fallback dummy chart if history file not yet generated
-                renderChart(['امروز'], [item.price], item.title);
-            }
-        }
-
-        function renderChart(labels, data, title) {
             const ctx = document.getElementById('priceChart').getContext('2d');
-            if (myChart) myChart.destroy();
+            if (myChartInstance) myChartInstance.destroy();
 
-            myChart = new Chart(ctx, {
+            myChartInstance = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: title,
-                        data: data,
+                        label: meta.name,
+                        data: points,
                         borderColor: '#ff7a00',
-                        backgroundColor: 'rgba(255, 122, 0, 0.1)',
+                        backgroundColor: 'rgba(255, 122, 0, 0.12)',
                         borderWidth: 3,
                         fill: true,
-                        tension: 0.3,
+                        tension: 0.35,
                         pointRadius: 4,
+                        pointHoverRadius: 6,
                         pointBackgroundColor: '#ff7a00'
                     }]
                 },
@@ -239,7 +277,14 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { display: false }
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${formatNum(context.raw)} ${meta.unit || ''}`;
+                                }
+                            }
+                        }
                     },
                     scales: {
                         x: {
@@ -251,7 +296,7 @@
                             ticks: { 
                                 color: '#9ca3af', 
                                 font: { family: 'Vazirmatn' },
-                                callback: function(value) { return new Intl.NumberFormat('fa-IR').format(value); }
+                                callback: val => formatNum(val)
                             }
                         }
                     }
@@ -259,8 +304,9 @@
             });
         }
 
-        loadMarketData();
-        setInterval(loadMarketData, 60000); // Refresh every 1 min
+        // Initialize
+        fetchMarket();
+        setInterval(fetchMarket, 60000);
     </script>
 </body>
 </html>
