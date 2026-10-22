@@ -675,7 +675,13 @@ def main():
     market_data["date_shamsi_full"] = f"{to_persian_digits(jd)} {persian_months[jm - 1]} {to_persian_digits(jy)}"
     market_data["time"] = now_tehran.strftime("%H:%M")
 
+    # ذخیره در ریشه مخزن
     with open("market.json", "w", encoding="utf-8") as f:
+        json.dump(market_data, f, ensure_ascii=False, indent=2)
+
+    # ذخیره دقیق در پوشه api برای خواندن توسط index.html
+    os.makedirs("api", exist_ok=True)
+    with open("api/market.json", "w", encoding="utf-8") as f:
         json.dump(market_data, f, ensure_ascii=False, indent=2)
 
     # 6. Generate social preview pages
