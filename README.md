@@ -10,7 +10,7 @@
 <br/>
 
 > [!NOTE]
-> 📅 **تاریخ:** ۲ آبان ۱۴۰۵ (2026-10-24) &nbsp;|&nbsp; ⏱ **ساعت آخرین بروزرسانی:** **۱۷:۱۳** (به وقت تهران)
+> 📅 **تاریخ:** ۲ آبان ۱۴۰۵ (2026-10-24) &nbsp;|&nbsp; ⏱ **ساعت آخرین بروزرسانی:** **۱۷:۳۸** (به وقت تهران)
 
 <br/>
 
@@ -37,42 +37,42 @@
 <tr>
 <td align="center">🇺🇸</td>
 <td><b>دلار آمریکا</b></td>
-<td align="left"><b>۲۶۹،۹۸۰ تومان</b></td>
+<td align="left"><b>۲۶۹،۶۸۶ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇪🇺</td>
 <td><b>یورو اروپا</b></td>
-<td align="left"><b>۳۰۲،۵۰۰ تومان</b></td>
+<td align="left"><b>۳۰۲،۱۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇦🇪</td>
 <td><b>درهم امارات</b></td>
-<td align="left"><b>۷۳،۵۱۰ تومان</b></td>
+<td align="left"><b>۷۳،۴۳۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇹🇷</td>
 <td><b>لیر ترکیه</b></td>
-<td align="left"><b>۵،۵۲۰ تومان</b></td>
+<td align="left"><b>۵،۵۱۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇬🇧</td>
 <td><b>پوند انگلیس</b></td>
-<td align="left"><b>۳۵۷،۵۰۰ تومان</b></td>
+<td align="left"><b>۳۵۷،۱۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇨🇦</td>
 <td><b>دلار کانادا</b></td>
-<td align="left"><b>۱۹۲،۸۰۰ تومان</b></td>
+<td align="left"><b>۱۹۲،۶۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇦🇺</td>
 <td><b>دلار استرالیا</b></td>
-<td align="left"><b>۱۹۰،۰۰۰ تومان</b></td>
+<td align="left"><b>۱۸۹،۷۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇨🇳</td>
 <td><b>یوان چین</b></td>
-<td align="left"><b>۴۰،۵۶۰ تومان</b></td>
+<td align="left"><b>۴۰،۵۲۰ تومان</b></td>
 </tr>
 
 <!-- بخش مسکوکات و طلا -->
@@ -107,17 +107,17 @@
 <tr>
 <td align="center">✨</td>
 <td><b>طلای ۱۸ عیار (هر گرم)</b></td>
-<td align="left"><b>۲۶،۱۷۸،۴۹۰ تومان</b></td>
+<td align="left"><b>۲۶،۱۵۵،۴۱۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">⚖️</td>
 <td><b>مثقال طلا (آبشده)</b></td>
-<td align="left"><b>۱۱۳،۴۰۰،۰۰۰ تومان</b></td>
+<td align="left"><b>۱۱۳،۳۰۰،۰۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🌐</td>
 <td><b>انس جهانی طلا</b></td>
-<td align="left"><b>۳،۹۹۶.۰۴ دلار</b></td>
+<td align="left"><b>۳،۹۹۵.۹۶ دلار</b></td>
 </tr>
 
 <!-- کامودیتی -->
