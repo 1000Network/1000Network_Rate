@@ -3,14 +3,14 @@
   "title": "رینگیت مالزی",
   "unit": "تومان",
   "timezone": "Asia/Tehran",
-  "updated_at": "2026-10-25 12:36:37",
+  "updated_at": "2026-10-25 13:06:47",
   "total_records": 1175,
   "latest": {
-    "timestamp": 1792919197,
+    "timestamp": 1792921007,
     "date": "2026-10-25",
-    "price": 66340,
-    "price_toman": 66340,
-    "price_irr": 663400
+    "price": 66380,
+    "price_toman": 66380,
+    "price_irr": 663800
   },
   "history": [
     {
@@ -8232,11 +8232,11 @@
       "price_irr": 658200
     },
     {
-      "timestamp": 1792919197,
+      "timestamp": 1792921007,
       "date": "2026-10-25",
-      "price": 66340,
-      "price_toman": 66340,
-      "price_irr": 663400
+      "price": 66380,
+      "price_toman": 66380,
+      "price_irr": 663800
     }
   ]
 }
