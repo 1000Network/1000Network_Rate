@@ -10,7 +10,7 @@
 <br/>
 
 > [!NOTE]
-> 📅 **تاریخ:** ۳ آبان ۱۴۰۵ (2026-10-25) &nbsp;|&nbsp; ⏱ **ساعت آخرین بروزرسانی:** **۱۸:۳۴** (به وقت تهران)
+> 📅 **تاریخ:** ۳ آبان ۱۴۰۵ (2026-10-25) &nbsp;|&nbsp; ⏱ **ساعت آخرین بروزرسانی:** **۱۹:۰۲** (به وقت تهران)
 
 <br/>
 
@@ -37,17 +37,17 @@
 <tr>
 <td align="center">🇺🇸</td>
 <td><b>دلار آمریکا</b></td>
-<td align="left"><b>۲۷۱،۰۸۹ تومان</b></td>
+<td align="left"><b>۲۷۱،۰۱۶ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇪🇺</td>
 <td><b>یورو اروپا</b></td>
-<td align="left"><b>۳۰۳،۷۰۰ تومان</b></td>
+<td align="left"><b>۳۰۳،۶۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇦🇪</td>
 <td><b>درهم امارات</b></td>
-<td align="left"><b>۷۳،۸۱۰ تومان</b></td>
+<td align="left"><b>۷۳،۷۹۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇹🇷</td>
@@ -57,17 +57,17 @@
 <tr>
 <td align="center">🇬🇧</td>
 <td><b>پوند انگلیس</b></td>
-<td align="left"><b>۳۵۹،۰۰۰ تومان</b></td>
+<td align="left"><b>۳۵۸،۸۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇨🇦</td>
 <td><b>دلار کانادا</b></td>
-<td align="left"><b>۱۹۳،۶۰۰ تومان</b></td>
+<td align="left"><b>۱۹۳،۵۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇦🇺</td>
 <td><b>دلار استرالیا</b></td>
-<td align="left"><b>۱۹۰،۷۰۰ تومان</b></td>
+<td align="left"><b>۱۹۰،۶۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇨🇳</td>
@@ -117,7 +117,7 @@
 <tr>
 <td align="center">🌐</td>
 <td><b>انس جهانی طلا</b></td>
-<td align="left"><b>۳،۹۹۵.۹۱ دلار</b></td>
+<td align="left"><b>۳،۹۹۵.۸۶ دلار</b></td>
 </tr>
 
 <!-- کامودیتی -->
