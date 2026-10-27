@@ -3,10 +3,10 @@
   "title": "مثقال طلا (آبشده)",
   "unit": "تومان",
   "timezone": "Asia/Tehran",
-  "updated_at": "2026-10-28 02:44:01",
+  "updated_at": "2026-10-28 03:16:47",
   "total_records": 1175,
   "latest": {
-    "timestamp": 1793142841,
+    "timestamp": 1793144807,
     "date": "2026-10-28",
     "price": 113320000,
     "price_toman": 113320000,
@@ -10568,7 +10568,7 @@
       "price_irr": 1133200000
     },
     {
-      "timestamp": 1793142841,
+      "timestamp": 1793144807,
       "date": "2026-10-28",
       "price": 113320000,
       "price_toman": 113320000,
