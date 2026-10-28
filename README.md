@@ -10,7 +10,7 @@
 <br/>
 
 > [!NOTE]
-> 📅 **تاریخ:** ۶ آبان ۱۴۰۵ (2026-10-28) &nbsp;|&nbsp; ⏱ **ساعت آخرین بروزرسانی:** **۱۸:۲۵** (به وقت تهران)
+> 📅 **تاریخ:** ۶ آبان ۱۴۰۵ (2026-10-28) &nbsp;|&nbsp; ⏱ **ساعت آخرین بروزرسانی:** **۱۹:۱۲** (به وقت تهران)
 
 <br/>
 
@@ -37,17 +37,17 @@
 <tr>
 <td align="center">🇺🇸</td>
 <td><b>دلار آمریکا</b></td>
-<td align="left"><b>۲۷۰،۲۱۵ تومان</b></td>
+<td align="left"><b>۲۷۰،۳۰۳ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇪🇺</td>
 <td><b>یورو اروپا</b></td>
-<td align="left"><b>۳۰۰،۸۰۰ تومان</b></td>
+<td align="left"><b>۳۰۱،۰۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇦🇪</td>
 <td><b>درهم امارات</b></td>
-<td align="left"><b>۷۳،۵۷۰ تومان</b></td>
+<td align="left"><b>۷۳،۵۹۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇹🇷</td>
@@ -57,17 +57,17 @@
 <tr>
 <td align="center">🇬🇧</td>
 <td><b>پوند انگلیس</b></td>
-<td align="left"><b>۳۵۵،۶۰۰ تومان</b></td>
+<td align="left"><b>۳۵۵،۹۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇨🇦</td>
 <td><b>دلار کانادا</b></td>
-<td align="left"><b>۱۹۲،۳۰۰ تومان</b></td>
+<td align="left"><b>۱۹۲،۵۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇦🇺</td>
 <td><b>دلار استرالیا</b></td>
-<td align="left"><b>۱۹۰،۱۰۰ تومان</b></td>
+<td align="left"><b>۱۹۰،۳۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇨🇳</td>
@@ -107,17 +107,17 @@
 <tr>
 <td align="center">✨</td>
 <td><b>طلای ۱۸ عیار (هر گرم)</b></td>
-<td align="left"><b>۲۶،۳۲۸،۵۵۰ تومان</b></td>
+<td align="left"><b>۲۶،۴۰۷،۰۴۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">⚖️</td>
 <td><b>مثقال طلا (آبشده)</b></td>
-<td align="left"><b>۱۱۴،۰۵۰،۰۰۰ تومان</b></td>
+<td align="left"><b>۱۱۴،۳۹۰،۰۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🌐</td>
 <td><b>انس جهانی طلا</b></td>
-<td align="left"><b>۴،۰۴۱.۲۹ دلار</b></td>
+<td align="left"><b>۴،۰۴۴.۲۶ دلار</b></td>
 </tr>
 
 <!-- کامودیتی -->
@@ -127,7 +127,7 @@
 <tr>
 <td align="center">⛽</td>
 <td><b>نفت خام برنت / اوپک</b></td>
-<td align="left"><b>۱۰۲.۳۴ دلار</b></td>
+<td align="left"><b>۱۰۲.۶۰ دلار</b></td>
 </tr>
 
 </tbody>
