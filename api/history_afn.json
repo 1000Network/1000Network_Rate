@@ -3,10 +3,10 @@
   "title": "افغانی افغانستان",
   "unit": "تومان",
   "timezone": "Asia/Tehran",
-  "updated_at": "2026-10-30 02:35:08",
+  "updated_at": "2026-10-30 03:11:07",
   "total_records": 1180,
   "latest": {
-    "timestamp": 1793315108,
+    "timestamp": 1793317267,
     "date": "2026-10-30",
     "price": 4250,
     "price_toman": 4250,
@@ -8267,7 +8267,7 @@
       "price_irr": 42500
     },
     {
-      "timestamp": 1793315108,
+      "timestamp": 1793317267,
       "date": "2026-10-30",
       "price": 4250,
       "price_toman": 4250,
