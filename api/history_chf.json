@@ -3,10 +3,10 @@
   "title": "فرانک سوئیس",
   "unit": "تومان",
   "timezone": "Asia/Tehran",
-  "updated_at": "2026-10-31 02:27:02",
+  "updated_at": "2026-10-31 02:58:41",
   "total_records": 1181,
   "latest": {
-    "timestamp": 1793401022,
+    "timestamp": 1793402921,
     "date": "2026-10-31",
     "price": 334100,
     "price_toman": 334100,
@@ -8274,7 +8274,7 @@
       "price_irr": 3343000
     },
     {
-      "timestamp": 1793401022,
+      "timestamp": 1793402921,
       "date": "2026-10-31",
       "price": 334100,
       "price_toman": 334100,
