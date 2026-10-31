@@ -3,10 +3,10 @@
   "title": "پزو آرژانتین",
   "unit": "تومان",
   "timezone": "Asia/Tehran",
-  "updated_at": "2026-11-01 01:27:33",
+  "updated_at": "2026-11-01 01:59:57",
   "total_records": 1182,
   "latest": {
-    "timestamp": 1793483853,
+    "timestamp": 1793485797,
     "date": "2026-11-01",
     "price": 177,
     "price_toman": 177,
@@ -8281,7 +8281,7 @@
       "price_irr": 1770
     },
     {
-      "timestamp": 1793483853,
+      "timestamp": 1793485797,
       "date": "2026-11-01",
       "price": 177,
       "price_toman": 177,
