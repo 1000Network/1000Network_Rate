@@ -10,7 +10,7 @@
 <br/>
 
 > [!NOTE]
-> 📅 **تاریخ:** ۹ آبان ۱۴۰۵ (2026-10-31) &nbsp;|&nbsp; ⏱ **ساعت آخرین بروزرسانی:** **۰۹:۳۹** (به وقت تهران)
+> 📅 **تاریخ:** ۹ آبان ۱۴۰۵ (2026-10-31) &nbsp;|&nbsp; ⏱ **ساعت آخرین بروزرسانی:** **۱۰:۲۸** (به وقت تهران)
 
 <br/>
 
@@ -42,7 +42,7 @@
 <tr>
 <td align="center">🇪🇺</td>
 <td><b>یورو اروپا</b></td>
-<td align="left"><b>۳۰۷،۸۰۰ تومان</b></td>
+<td align="left"><b>۳۰۷،۹۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇦🇪</td>
@@ -57,7 +57,7 @@
 <tr>
 <td align="center">🇬🇧</td>
 <td><b>پوند انگلیس</b></td>
-<td align="left"><b>۳۶۵،۳۰۰ تومان</b></td>
+<td align="left"><b>۳۶۵،۲۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇨🇦</td>
@@ -107,12 +107,12 @@
 <tr>
 <td align="center">✨</td>
 <td><b>طلای ۱۸ عیار (هر گرم)</b></td>
-<td align="left"><b>۲۵،۵۵۵،۲۰۰ تومان</b></td>
+<td align="left"><b>۲۵،۴۶۲،۸۶۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">⚖️</td>
 <td><b>مثقال طلا (آبشده)</b></td>
-<td align="left"><b>۱۱۰،۷۰۰،۰۰۰ تومان</b></td>
+<td align="left"><b>۱۱۰،۳۰۰،۰۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🌐</td>
