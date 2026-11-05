@@ -3,11 +3,11 @@
   "title": "دلار هنگ کنگ",
   "unit": "تومان",
   "timezone": "Asia/Tehran",
-  "updated_at": "2026-11-05 23:51:20",
-  "total_records": 1186,
+  "updated_at": "2026-11-06 00:42:13",
+  "total_records": 1187,
   "latest": {
-    "timestamp": 1793910080,
-    "date": "2026-11-05",
+    "timestamp": 1793913133,
+    "date": "2026-11-06",
     "price": 34300,
     "price_toman": 34300,
     "price_irr": 343000
@@ -8311,6 +8311,13 @@
     {
       "timestamp": 1793910080,
       "date": "2026-11-05",
+      "price": 34300,
+      "price_toman": 34300,
+      "price_irr": 343000
+    },
+    {
+      "timestamp": 1793913133,
+      "date": "2026-11-06",
       "price": 34300,
       "price_toman": 34300,
       "price_irr": 343000
