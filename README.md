@@ -10,7 +10,7 @@
 <br/>
 
 > [!NOTE]
-> 📅 **تاریخ:** ۱۶ آبان ۱۴۰۵ (2026-11-07) &nbsp;|&nbsp; ⏱ **ساعت آخرین بروزرسانی:** **۰۹:۰۴** (به وقت تهران)
+> 📅 **تاریخ:** ۱۶ آبان ۱۴۰۵ (2026-11-07) &nbsp;|&nbsp; ⏱ **ساعت آخرین بروزرسانی:** **۰۹:۵۴** (به وقت تهران)
 
 <br/>
 
@@ -82,22 +82,22 @@
 <tr>
 <td align="center">🟡</td>
 <td><b>سکه تمام امامی (طرح جدید)</b></td>
-<td align="left"><b>۲۶۷،۰۰۰،۰۰۰ تومان</b></td>
+<td align="left"><b>۲۶۵،۰۰۰،۰۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🟡</td>
 <td><b>سکه بهار آزادی (طرح قدیم)</b></td>
-<td align="left"><b>۲۵۶،۰۰۰،۰۰۰ تومان</b></td>
+<td align="left"><b>۲۵۵،۰۰۰،۰۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🟡</td>
 <td><b>نیم سکه بهار آزادی</b></td>
-<td align="left"><b>۱۴۰،۵۰۰،۰۰۰ تومان</b></td>
+<td align="left"><b>۱۴۰،۰۰۰،۰۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🟡</td>
 <td><b>ربع سکه بهار آزادی</b></td>
-<td align="left"><b>۷۶،۰۰۰،۰۰۰ تومان</b></td>
+<td align="left"><b>۷۵،۰۰۰،۰۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🟡</td>
@@ -107,17 +107,17 @@
 <tr>
 <td align="center">✨</td>
 <td><b>طلای ۱۸ عیار (هر گرم)</b></td>
-<td align="left"><b>۲۵،۸۸۹،۹۳۰ تومان</b></td>
+<td align="left"><b>۲۶،۰۱۶،۹۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">⚖️</td>
 <td><b>مثقال طلا (آبشده)</b></td>
-<td align="left"><b>۱۱۲،۱۵۰،۰۰۰ تومان</b></td>
+<td align="left"><b>۱۱۲،۷۰۰،۰۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🌐</td>
 <td><b>انس جهانی طلا</b></td>
-<td align="left"><b>۴،۰۶۸.۸۲ دلار</b></td>
+<td align="left"><b>۴،۰۶۸.۷۶ دلار</b></td>
 </tr>
 
 <!-- کامودیتی -->
