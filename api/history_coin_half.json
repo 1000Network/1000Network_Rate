@@ -3,10 +3,10 @@
   "title": "نیم سکه",
   "unit": "تومان",
   "timezone": "Asia/Tehran",
-  "updated_at": "2026-11-07 15:27:30",
+  "updated_at": "2026-11-07 16:12:13",
   "total_records": 1181,
   "latest": {
-    "timestamp": 1794052650,
+    "timestamp": 1794055333,
     "date": "2026-11-07",
     "price": 138000000,
     "price_toman": 138000000,
@@ -10602,7 +10602,7 @@
       "price_irr": 1405000000
     },
     {
-      "timestamp": 1794052650,
+      "timestamp": 1794055333,
       "date": "2026-11-07",
       "price": 138000000,
       "price_toman": 138000000,
