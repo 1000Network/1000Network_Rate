@@ -10,7 +10,7 @@
 <br/>
 
 > [!NOTE]
-> 📅 **تاریخ:** ۲۰ آبان ۱۴۰۵ (2026-11-11) &nbsp;|&nbsp; ⏱ **ساعت آخرین بروزرسانی:** **۱۸:۵۹** (به وقت تهران)
+> 📅 **تاریخ:** ۲۰ آبان ۱۴۰۵ (2026-11-11) &nbsp;|&nbsp; ⏱ **ساعت آخرین بروزرسانی:** **۱۹:۵۷** (به وقت تهران)
 
 <br/>
 
@@ -37,42 +37,42 @@
 <tr>
 <td align="center">🇺🇸</td>
 <td><b>دلار آمریکا</b></td>
-<td align="left"><b>۲۶۳،۳۸۶ تومان</b></td>
+<td align="left"><b>۲۶۴،۷۸۱ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇪🇺</td>
 <td><b>یورو اروپا</b></td>
-<td align="left"><b>۲۹۲،۲۰۰ تومان</b></td>
+<td align="left"><b>۲۹۳،۹۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇦🇪</td>
 <td><b>درهم امارات</b></td>
-<td align="left"><b>۷۱،۷۲۰ تومان</b></td>
+<td align="left"><b>۷۲،۱۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇹🇷</td>
 <td><b>لیر ترکیه</b></td>
-<td align="left"><b>۵،۳۲۰ تومان</b></td>
+<td align="left"><b>۵،۳۵۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇬🇧</td>
 <td><b>پوند انگلیس</b></td>
-<td align="left"><b>۳۴۶،۳۰۰ تومان</b></td>
+<td align="left"><b>۳۴۸،۲۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇨🇦</td>
 <td><b>دلار کانادا</b></td>
-<td align="left"><b>۱۸۵،۰۰۰ تومان</b></td>
+<td align="left"><b>۱۸۶،۰۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇦🇺</td>
 <td><b>دلار استرالیا</b></td>
-<td align="left"><b>۱۸۰،۵۰۰ تومان</b></td>
+<td align="left"><b>۱۸۱،۵۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇨🇳</td>
 <td><b>یوان چین</b></td>
-<td align="left"><b>۳۹،۵۸۰ تومان</b></td>
+<td align="left"><b>۳۹،۷۸۰ تومان</b></td>
 </tr>
 
 <!-- بخش مسکوکات و طلا -->
@@ -97,7 +97,7 @@
 <tr>
 <td align="center">🟡</td>
 <td><b>ربع سکه بهار آزادی</b></td>
-<td align="left"><b>۷۱،۹۰۰،۰۰۰ تومان</b></td>
+<td align="left"><b>۷۳،۰۰۰،۰۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🟡</td>
@@ -117,7 +117,7 @@
 <tr>
 <td align="center">🌐</td>
 <td><b>انس جهانی طلا</b></td>
-<td align="left"><b>۴،۰۱۸.۲۳ دلار</b></td>
+<td align="left"><b>۴،۰۰۴.۵۵ دلار</b></td>
 </tr>
 
 <!-- کامودیتی -->
@@ -127,7 +127,7 @@
 <tr>
 <td align="center">⛽</td>
 <td><b>نفت خام برنت / اوپک</b></td>
-<td align="left"><b>۸۷.۶۱ دلار</b></td>
+<td align="left"><b>۸۷.۹۴ دلار</b></td>
 </tr>
 
 </tbody>
