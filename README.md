@@ -10,7 +10,7 @@
 <br/>
 
 > [!NOTE]
-> 📅 **تاریخ:** ۲۱ آبان ۱۴۰۵ (2026-11-12) &nbsp;|&nbsp; ⏱ **ساعت آخرین بروزرسانی:** **۲۲:۰۰** (به وقت تهران)
+> 📅 **تاریخ:** ۲۱ آبان ۱۴۰۵ (2026-11-12) &nbsp;|&nbsp; ⏱ **ساعت آخرین بروزرسانی:** **۲۲:۵۹** (به وقت تهران)
 
 <br/>
 
@@ -67,7 +67,7 @@
 <tr>
 <td align="center">🇦🇺</td>
 <td><b>دلار استرالیا</b></td>
-<td align="left"><b>۱۸۳،۹۰۰ تومان</b></td>
+<td align="left"><b>۱۸۳،۸۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇨🇳</td>
@@ -87,7 +87,7 @@
 <tr>
 <td align="center">🟡</td>
 <td><b>سکه بهار آزادی (طرح قدیم)</b></td>
-<td align="left"><b>۲۴۷،۰۰۰،۰۰۰ تومان</b></td>
+<td align="left"><b>نامشخص</b></td>
 </tr>
 <tr>
 <td align="center">🟡</td>
@@ -102,7 +102,7 @@
 <tr>
 <td align="center">🟡</td>
 <td><b>سکه گرمی</b></td>
-<td align="left"><b>۳۷،۰۰۰،۰۰۰ تومان</b></td>
+<td align="left"><b>نامشخص</b></td>
 </tr>
 <tr>
 <td align="center">✨</td>
@@ -112,12 +112,12 @@
 <tr>
 <td align="center">⚖️</td>
 <td><b>مثقال طلا (آبشده)</b></td>
-<td align="left"><b>۱۰۸،۳۴۰،۰۰۰ تومان</b></td>
+<td align="left"><b>نامشخص</b></td>
 </tr>
 <tr>
 <td align="center">🌐</td>
 <td><b>انس جهانی طلا</b></td>
-<td align="left"><b>۳،۸۸۲.۲۳ دلار</b></td>
+<td align="left"><b>۳،۸۸۰.۴۱ دلار</b></td>
 </tr>
 
 <!-- کامودیتی -->
@@ -127,7 +127,7 @@
 <tr>
 <td align="center">⛽</td>
 <td><b>نفت خام برنت / اوپک</b></td>
-<td align="left"><b>۸۸.۰۷ دلار</b></td>
+<td align="left"><b>۸۸.۵۷ دلار</b></td>
 </tr>
 
 </tbody>
