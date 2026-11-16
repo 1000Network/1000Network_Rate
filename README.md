@@ -10,7 +10,7 @@
 <br/>
 
 > [!NOTE]
-> 📅 **تاریخ:** ۲۵ آبان ۱۴۰۵ (2026-11-16) &nbsp;|&nbsp; ⏱ **ساعت آخرین بروزرسانی:** **۱۹:۵۱** (به وقت تهران)
+> 📅 **تاریخ:** ۲۵ آبان ۱۴۰۵ (2026-11-16) &nbsp;|&nbsp; ⏱ **ساعت آخرین بروزرسانی:** **۲۱:۰۷** (به وقت تهران)
 
 <br/>
 
@@ -37,7 +37,7 @@
 <tr>
 <td align="center">🇺🇸</td>
 <td><b>دلار آمریکا</b></td>
-<td align="left"><b>۲۶۹،۳۷۲ تومان</b></td>
+<td align="left"><b>۲۶۹،۲۶۲ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇪🇺</td>
@@ -47,7 +47,7 @@
 <tr>
 <td align="center">🇦🇪</td>
 <td><b>درهم امارات</b></td>
-<td align="left"><b>۷۳،۳۵۰ تومان</b></td>
+<td align="left"><b>۷۳،۳۲۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇹🇷</td>
@@ -57,22 +57,22 @@
 <tr>
 <td align="center">🇬🇧</td>
 <td><b>پوند انگلیس</b></td>
-<td align="left"><b>۳۵۱،۷۰۰ تومان</b></td>
+<td align="left"><b>۳۵۱،۸۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇨🇦</td>
 <td><b>دلار کانادا</b></td>
-<td align="left"><b>۱۸۸،۳۰۰ تومان</b></td>
+<td align="left"><b>۱۸۸،۴۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇦🇺</td>
 <td><b>دلار استرالیا</b></td>
-<td align="left"><b>۱۸۱،۹۰۰ تومان</b></td>
+<td align="left"><b>۱۸۱،۸۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇨🇳</td>
 <td><b>یوان چین</b></td>
-<td align="left"><b>۴۰،۵۰۰ تومان</b></td>
+<td align="left"><b>۴۰،۴۸۰ تومان</b></td>
 </tr>
 
 <!-- بخش مسکوکات و طلا -->
@@ -107,17 +107,17 @@
 <tr>
 <td align="center">✨</td>
 <td><b>طلای ۱۸ عیار (هر گرم)</b></td>
-<td align="left"><b>۲۴،۵۶۲،۵۴۰ تومان</b></td>
+<td align="left"><b>۲۴،۵۶۷،۱۵۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">⚖️</td>
 <td><b>مثقال طلا (آبشده)</b></td>
-<td align="left"><b>۱۰۶،۴۰۰،۰۰۰ تومان</b></td>
+<td align="left"><b>۱۰۶،۴۵۰،۰۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🌐</td>
 <td><b>انس جهانی طلا</b></td>
-<td align="left"><b>۳،۸۶۱.۰۴ دلار</b></td>
+<td align="left"><b>نامشخص</b></td>
 </tr>
 
 <!-- کامودیتی -->
@@ -127,7 +127,7 @@
 <tr>
 <td align="center">⛽</td>
 <td><b>نفت خام برنت / اوپک</b></td>
-<td align="left"><b>۸۶.۷۳ دلار</b></td>
+<td align="left"><b>۸۶.۳۰ دلار</b></td>
 </tr>
 
 </tbody>
