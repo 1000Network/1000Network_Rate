@@ -3,14 +3,14 @@
   "title": "درهم امارات",
   "unit": "تومان",
   "timezone": "Asia/Tehran",
-  "updated_at": "2026-11-18 13:20:55",
+  "updated_at": "2026-11-18 14:17:45",
   "total_records": 1199,
   "latest": {
-    "timestamp": 1794995455,
+    "timestamp": 1794998865,
     "date": "2026-11-18",
-    "price": 73110,
-    "price_toman": 73110,
-    "price_irr": 731100
+    "price": 72770,
+    "price_toman": 72770,
+    "price_irr": 727700
   },
   "history": [
     {
@@ -8400,11 +8400,11 @@
       "price_irr": 728100
     },
     {
-      "timestamp": 1794995455,
+      "timestamp": 1794998865,
       "date": "2026-11-18",
-      "price": 73110,
-      "price_toman": 73110,
-      "price_irr": 731100
+      "price": 72770,
+      "price_toman": 72770,
+      "price_irr": 727700
     }
   ]
 }
