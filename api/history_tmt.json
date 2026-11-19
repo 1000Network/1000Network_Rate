@@ -3,10 +3,10 @@
   "title": "منات ترکمنستان",
   "unit": "تومان",
   "timezone": "Asia/Tehran",
-  "updated_at": "2026-11-20 01:52:33",
+  "updated_at": "2026-11-20 02:40:43",
   "total_records": 1201,
   "latest": {
-    "timestamp": 1795126953,
+    "timestamp": 1795129843,
     "date": "2026-11-20",
     "price": 77320,
     "price_toman": 77320,
@@ -8414,7 +8414,7 @@
       "price_irr": 775400
     },
     {
-      "timestamp": 1795126953,
+      "timestamp": 1795129843,
       "date": "2026-11-20",
       "price": 77320,
       "price_toman": 77320,
