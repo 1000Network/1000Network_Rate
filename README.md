@@ -10,7 +10,7 @@
 <br/>
 
 > [!NOTE]
-> 📅 **تاریخ:** ۲۸ آبان ۱۴۰۵ (2026-11-19) &nbsp;|&nbsp; ⏱ **ساعت آخرین بروزرسانی:** **۰۷:۵۴** (به وقت تهران)
+> 📅 **تاریخ:** ۲۸ آبان ۱۴۰۵ (2026-11-19) &nbsp;|&nbsp; ⏱ **ساعت آخرین بروزرسانی:** **۰۹:۰۰** (به وقت تهران)
 
 <br/>
 
@@ -42,7 +42,7 @@
 <tr>
 <td align="center">🇪🇺</td>
 <td><b>یورو اروپا</b></td>
-<td align="left"><b>۲۹۲،۶۰۰ تومان</b></td>
+<td align="left"><b>۲۹۲،۸۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇦🇪</td>
@@ -57,22 +57,22 @@
 <tr>
 <td align="center">🇬🇧</td>
 <td><b>پوند انگلیس</b></td>
-<td align="left"><b>۳۴۷،۰۰۰ تومان</b></td>
+<td align="left"><b>۳۴۷،۲۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇨🇦</td>
 <td><b>دلار کانادا</b></td>
-<td align="left"><b>۱۸۶،۰۰۰ تومان</b></td>
+<td align="left"><b>۱۸۶،۲۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇦🇺</td>
 <td><b>دلار استرالیا</b></td>
-<td align="left"><b>۱۷۸،۴۰۰ تومان</b></td>
+<td align="left"><b>۱۷۸،۳۰۰ تومان</b></td>
 </tr>
 <tr>
 <td align="center">🇨🇳</td>
 <td><b>یوان چین</b></td>
-<td align="left"><b>۴۰،۱۶۰ تومان</b></td>
+<td align="left"><b>۴۰،۱۴۰ تومان</b></td>
 </tr>
 
 <!-- بخش مسکوکات و طلا -->
@@ -117,7 +117,7 @@
 <tr>
 <td align="center">🌐</td>
 <td><b>انس جهانی طلا</b></td>
-<td align="left"><b>۳،۷۲۵.۶۹ دلار</b></td>
+<td align="left"><b>۳،۷۲۸.۶۸ دلار</b></td>
 </tr>
 
 <!-- کامودیتی -->
@@ -127,7 +127,7 @@
 <tr>
 <td align="center">⛽</td>
 <td><b>نفت خام برنت / اوپک</b></td>
-<td align="left"><b>۸۳.۰۳ دلار</b></td>
+<td align="left"><b>۸۳.۱۵ دلار</b></td>
 </tr>
 
 </tbody>
