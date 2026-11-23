@@ -3,10 +3,10 @@
   "title": "کرون سوئد",
   "unit": "تومان",
   "timezone": "Asia/Tehran",
-  "updated_at": "2026-11-23 01:08:08",
+  "updated_at": "2026-11-23 05:28:10",
   "total_records": 1204,
   "latest": {
-    "timestamp": 1795383488,
+    "timestamp": 1795399090,
     "date": "2026-11-23",
     "price": 26300,
     "price_toman": 26300,
@@ -8435,7 +8435,7 @@
       "price_irr": 262200
     },
     {
-      "timestamp": 1795383488,
+      "timestamp": 1795399090,
       "date": "2026-11-23",
       "price": 26300,
       "price_toman": 26300,
